@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="GetYourPlaceApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:GetYourPlaceApp"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:views="clr-namespace:GetYourPlaceApp.Views"
+    FlyoutBackgroundColor="{StaticResource GreenGYP}"
+    FlyoutBehavior="Flyout">
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid Padding="0,10" ColumnDefinitions="0.25*,0.75*">
+                <Image
+                    Margin="5"
+                    HeightRequest="32"
+                    HorizontalOptions="Center"
+                    Source="{Binding Icon}">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource White}" />
+                    </Image.Behaviors>
+                </Image>
+                <Label
+                    Grid.Column="1"
+                    FontAttributes="Bold"
+                    FontSize="Small"
+                    Text="{Binding Title}"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="Center" />
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+    <Shell.FlyoutHeader>
+        <HorizontalStackLayout
+            Padding="0,16,0,16"
+            HorizontalOptions="FillAndExpand"
+            Spacing="0">
+            <Image
+                Margin="10,0,10,0"
+                Aspect="AspectFit"
+                HeightRequest="48"
+                HorizontalOptions="CenterAndExpand"
+                Source="getyourplaceicon.png"
+                VerticalOptions="Center"
+                WidthRequest="48" />
+
+            <Label
+                FontAttributes="Bold"
+                FontSize="Body"
+                HorizontalOptions="CenterAndExpand"
+                HorizontalTextAlignment="Center"
+                Text="Welcome"
+                TextColor="{StaticResource White}"
+                VerticalOptions="Center" />
+
+        </HorizontalStackLayout>
+    </Shell.FlyoutHeader>
+    <FlyoutItem Title="Search Properties" Icon="search.svg">
+        <ShellContent
+            Title="Search Properties"
+            ContentTemplate="{DataTemplate views:MainPage}"
+            Icon="search.png"
+            Route="MainPage"
+            Shell.NavBarIsVisible="true" />
+    </FlyoutItem>
+    <FlyoutItem Title="Account" Icon="login.png">
+        <ShellContent
+            Title="Account"
+            ContentTemplate="{DataTemplate views:BlankPage}"
+            Icon="login.png"
+            Route="LoginPage"
+            Shell.NavBarIsVisible="true" />
+    </FlyoutItem>
+    <FlyoutItem
+        Title="Favorites"
+        Icon="favorite.png"
+        IsVisible="{Binding IsLogged}">
+        <ShellContent
+            Title="Favorites"
+            ContentTemplate="{DataTemplate views:BlankPage}"
+            Icon="favorite.png"
+            Route="BlankPage"
+            Shell.NavBarIsVisible="true" />
+    </FlyoutItem>
+    <FlyoutItem Title="Configuration" Icon="config.png">
+        <ShellContent
+            Title="Configuration"
+            ContentTemplate="{DataTemplate views:BlankPage}"
+            Icon="config.png"
+            Route="BlankPage"
+            Shell.NavBarIsVisible="true" />
+    </FlyoutItem>
+    <Shell.FlyoutFooter>
+        <StackLayout
+            Padding="0,0,0,8"
+            IsVisible="{Binding IsLogged}"
+            VerticalOptions="EndAndExpand">
+            <BoxView
+                Margin="0,8"
+                BackgroundColor="{StaticResource White}"
+                HeightRequest="1" />
+            <Label
+                Margin="16,0"
+                FontSize="Medium"
+                HorizontalOptions="Center"
+                Text="Exit"
+                TextColor="{StaticResource White}">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding LogoffCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+        </StackLayout>
+    </Shell.FlyoutFooter>
+</Shell>

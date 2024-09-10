@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GetYourPlaceApp.Views.LoginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    BackgroundColor="{StaticResource GreenGYP}"
+    Title="LoginPage">
+    <ContentPage.Resources>
+        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Red" />
+        </Style>
+        <Style x:Key="ValidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Green" />
+        </Style>
+    </ContentPage.Resources>
+    <Grid
+        Padding="16,64,16,16"
+        RowDefinitions="auto,auto"
+        RowSpacing="128"
+        VerticalOptions="StartAndExpand">
+        <Image
+            HeightRequest="160"
+            Source="getyourplaceicon.svg"
+            VerticalOptions="StartAndExpand"
+            WidthRequest="160" />
+        <Grid
+            Grid.Row="1"
+            Margin="0,16,0,0"
+            RowDefinitions="auto,auto,auto"
+            RowSpacing="16"
+            VerticalOptions="EndAndExpand">
+            <Entry Placeholder="Cpf Ou Cnpj" Text="{Binding Email}">
+                <Entry.Behaviors>
+                    <toolkit:EmailValidationBehavior
+                        Flags="ValidateOnValueChanged"
+                        InvalidStyle="{StaticResource InvalidEntryStyle}"
+                        ValidStyle="{StaticResource ValidEntryStyle}" />
+                </Entry.Behaviors>
+            </Entry>
+            <Entry
+                Grid.Row="1"
+                IsPassword="True"
+                Placeholder="Senha"
+                Text="{Binding Password}" />
+            <Button
+                Grid.Row="2"
+                Command="{Binding LoginCommand}"
+                Text="Entrar" />
+        </Grid>
+    </Grid>
+</ContentPage>
