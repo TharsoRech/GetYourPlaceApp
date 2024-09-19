@@ -5,4 +5,33 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:GetYourPlaceApp.ViewModels"
     x:DataType="vm:MainViewModel"
-    BackgroundColor="{StaticResource GreenLightGYP}" />
+    BackgroundColor="{StaticResource GreenLightGYP}">
+    <ScrollView>
+        <Grid>
+            <Grid
+                Margin="16,8,0,0"
+                ColumnDefinitions="*,*"
+                RowDefinitions="auto,auto"
+                VerticalOptions="StartAndExpand">
+                <Button
+                    Margin="4,0,8,8"
+                    BackgroundColor="{StaticResource GreenGYP}"
+                    Clicked="{Binding ShowFilter}"
+                    Text="Add Filter" />
+                <Entry
+                    Grid.Row="1"
+                    FontSize="18"
+                    Placeholder="Find your propertie" />
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="8,0,8,8"
+                    BackgroundColor="{StaticResource GreenGYP}"
+                    Text="Search" />
+            </Grid>
+        </Grid>
+    </ScrollView>
+</ContentPage>
+
+
+

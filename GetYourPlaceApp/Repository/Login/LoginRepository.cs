@@ -1,4 +1,5 @@
-﻿using GetYourPlaceApp.Models;
+﻿using GetYourPlaceApp.Helpers;
+using GetYourPlaceApp.Models;
 using GetYourPlaceApp.Models.Requests;
 using RestSharp;
 
@@ -32,7 +33,7 @@ namespace GetYourPlaceApp.Repository.Login
             {
                 var client = new RestClient(Urls.GetYourPlaceURL);
                 var request = new RestRequest("Establishment/authenticate", Method.Post);
-                request.AddJsonBody(new { email = loginRequest.Email, passwordHash = loginRequest.PasswordHash });
+                request.AddJsonBody(new { email = loginRequest.Email, passwordHash = loginRequest.PasswordHash.MD5Hash() });
 
                 var response = await client.ExecuteAsync(request);
 

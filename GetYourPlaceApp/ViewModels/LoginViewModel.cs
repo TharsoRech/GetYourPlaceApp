@@ -19,26 +19,24 @@ namespace GetYourPlaceApp.ViewModels
 
         #endregion
 
-        #region Variables
-        ILoginRepository _loginRepository;
-        #endregion
+
         public LoginViewModel()
         {
-            _loginRepository = ServiceHelper.GetService<ILoginRepository>();
+         
         }
         public void Dispose()
         {
-            _loginRepository = null;
+
         }
 
 
         [RelayCommand]
         public async Task Login()
         {
-            var loginRequest = new LoginRequest(Email.RemoveSpecialCharacters(), SessionHelper.MD5Hash(Password));
+            var loginRequest = new LoginRequest(Email,Password);
 
             var contract = new LoginContract(loginRequest);
-
+            
             if (!contract.IsValid)
             {
                 var messages = contract.Notifications.Select(x => x.Message);
@@ -51,7 +49,7 @@ namespace GetYourPlaceApp.ViewModels
                 return;
             }
 
-            var result = await _loginRepository.LoginAsync(loginRequest);
+            var result = await SessionHelper.Instance.LoginAsync(loginRequest);
 
             if (result is null || string.IsNullOrEmpty(result.Token))
             {
@@ -60,10 +58,11 @@ namespace GetYourPlaceApp.ViewModels
                 return;
             }
 
-            SessionHelper.User = result;
-            SessionHelper.SaveToken();
+            SessionHelper.Instance.User = result;
+            SessionHelper.Instance.SaveToken();
 
-            await Shell.Current.Navigation.PopAsync(true);
+            await RouteHelpers.GoToPage($"//{nameof(MainPage)}");
+
         }
     }
 }

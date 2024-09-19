@@ -1,17 +1,19 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     x:Class="GetYourPlaceApp.Views.LoginPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    BackgroundColor="{StaticResource GreenGYP}"
-    Title="LoginPage">
+    xmlns:vm="clr-namespace:GetYourPlaceApp.ViewModels"
+    Title="LoginPage"
+    x:DataType="vm:LoginViewModel"
+    BackgroundColor="{StaticResource GreenGYP}">
     <ContentPage.Resources>
         <Style x:Key="InvalidEntryStyle" TargetType="Entry">
-            <Setter Property="TextColor" Value="Red" />
+            <Setter Property="TextColor" Value="red" />
         </Style>
         <Style x:Key="ValidEntryStyle" TargetType="Entry">
-            <Setter Property="TextColor" Value="Green" />
+            <Setter Property="TextColor" Value="{StaticResource White}" />
         </Style>
     </ContentPage.Resources>
     <Grid
@@ -20,17 +22,20 @@
         RowSpacing="128"
         VerticalOptions="StartAndExpand">
         <Image
-            HeightRequest="160"
+            HeightRequest="120"
             Source="getyourplaceicon.svg"
             VerticalOptions="StartAndExpand"
-            WidthRequest="160" />
+            WidthRequest="120" />
         <Grid
             Grid.Row="1"
             Margin="0,16,0,0"
             RowDefinitions="auto,auto,auto"
             RowSpacing="16"
             VerticalOptions="EndAndExpand">
-            <Entry Placeholder="Cpf Ou Cnpj" Text="{Binding Email}">
+            <Entry
+                Placeholder="Email"
+                Text="{Binding Email}"
+                TextColor="{StaticResource White}">
                 <Entry.Behaviors>
                     <toolkit:EmailValidationBehavior
                         Flags="ValidateOnValueChanged"
@@ -41,12 +46,12 @@
             <Entry
                 Grid.Row="1"
                 IsPassword="True"
-                Placeholder="Senha"
+                Placeholder="Password"
                 Text="{Binding Password}" />
             <Button
                 Grid.Row="2"
                 Command="{Binding LoginCommand}"
-                Text="Entrar" />
+                Text="Login" />
         </Grid>
     </Grid>
 </ContentPage>

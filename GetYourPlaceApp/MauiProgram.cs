@@ -1,4 +1,6 @@
 ﻿using CommunityToolkit.Maui;
+using GetYourPlaceApp.Helpers;
+using GetYourPlaceApp.Repository.Filter;
 using GetYourPlaceApp.Repository.Login;
 namespace GetYourPlaceApp;
 
@@ -21,6 +23,7 @@ public static class MauiProgram
 
 		builder.Services.AddSingleton<BlankViewModel>();
 
+        builder.Services.AddSingleton<AppShell>();
         builder.Services.AddSingleton<AppShellViewModel>();
 
         builder.Services.AddSingleton<BlankPage>();
@@ -31,6 +34,11 @@ public static class MauiProgram
 
         builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 
-        return builder.Build();
+        builder.Services.AddScoped<IFilterRepository, FilterRepository>();
+
+        var app = builder.Build();
+        ServiceHelper.Initialize(app.Services);
+
+        return app;
 	}
 }

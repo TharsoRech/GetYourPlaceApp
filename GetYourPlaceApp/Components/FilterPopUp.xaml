@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<mct:Popup
+    x:Class="GetYourPlaceApp.Components.FilterPopUp"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+    xmlns:models="clr-namespace:GetYourPlaceApp.Models"
+    xmlns:vm="clr-namespace:GetYourPlaceApp.Components.ViewModels"
+    x:DataType="vm:FilterPopUpViewModel">
+    <Grid
+        BackgroundColor="{StaticResource GreenGYP}"
+        ColumnDefinitions="*,auto"
+        RowDefinitions="auto,auto">
+        <ScrollView>
+            <Grid ColumnDefinitions="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto">
+                <CollectionView x:DataType="vm:FilterPopUpViewModel" ItemsSource="{Binding PickerList}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Picker
+                                Title="{Binding Description}"
+                                ItemDisplayBinding="{Binding Description}"
+                                ItemsSource="{Binding Items}" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </ScrollView>
+        <Grid Grid.Row="1">
+            <Button Clicked="{Binding Cancel}" Text="Cancel" />
+            <Button Clicked="{Binding ApplyFilters}" Text="Aplicar" />
+        </Grid>
+    </Grid>
+</mct:Popup>

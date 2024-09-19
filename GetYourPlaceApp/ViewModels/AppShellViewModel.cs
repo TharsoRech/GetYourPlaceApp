@@ -1,4 +1,5 @@
 ﻿using GetYourPlaceApp.Helpers;
+using Microsoft.Extensions.Logging;
 
 namespace GetYourPlaceApp.ViewModels
 {
@@ -12,7 +13,8 @@ namespace GetYourPlaceApp.ViewModels
 
         public AppShellViewModel()
         {
-            SessionHelper.SessionChanged += SessionChanged;
+            SessionHelper.Instance.SessionChanged += SessionChanged;
+            IsLogged = SessionHelper.Instance.User is null ? false : SessionHelper.Instance.User.IsLogged;
         }
 
         private void SessionChanged(object? sender, bool e)
@@ -23,12 +25,12 @@ namespace GetYourPlaceApp.ViewModels
         [RelayCommand]
         public async Task Logoff()
         {
-            SessionHelper.ResetToken();
+            SessionHelper.Instance.LogoffAsync();
         }
 
         public void Dispose()
         {
-            SessionHelper.SessionChanged -= SessionChanged;
+            SessionHelper.Instance.SessionChanged -= SessionChanged;
         }
     }
 }

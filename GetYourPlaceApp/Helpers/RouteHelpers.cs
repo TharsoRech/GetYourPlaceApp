@@ -2,17 +2,9 @@
 {
     public static class RouteHelpers
     {
-        public static async Task LogoffAsync()
+        public static async Task GoToPage(string page)
         {
-            try
-            {
-                SessionHelper.ResetToken();
-                await Application.Current.MainPage.Navigation.PushModalAsync(new MainPage(new MainViewModel()));
-            }
-            catch (Exception ex)
-            {
-
-            }
+            await Shell.Current.GoToAsync(page);
         }
     }
 }

@@ -1,40 +1,76 @@
 ﻿using GetYourPlaceApp.Models;
+using GetYourPlaceApp.Models.Requests;
+using GetYourPlaceApp.Repository.Login;
 using System.Security.Cryptography;
 using System.Text;
 
 namespace GetYourPlaceApp.Helpers
 {
-    public static class SessionHelper
+    public sealed class SessionHelper
     {
-        public static event EventHandler<bool> SessionChanged;
-        public static GYPUser User;
-        public static bool Login(string username, string password)
-        {
-            if(User is null)
-                return false;
+        #region Variables
+        public event EventHandler<bool> SessionChanged;
+        public GYPUser User;
+        private static ILoginRepository _loginRepository;
+        private static SessionHelper instance = null;
+        #endregion
 
-            Preferences.Set("token", User?.Token);
-            Preferences.Set("ExpireDateTimeKey", User?.RefreshToken);
-            User.IsLogged = true;
-            SessionChanged?.Invoke(null, true);
-            return true;
+        public static SessionHelper Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new SessionHelper();
+                }
+                return instance;
+            }
         }
 
-        public static async Task<string> GetTokenAsync()
+        private SessionHelper()
+        {
+            
+        }
+        public async Task<GYPUser> LoginAsync(LoginRequest loginRequest)
+        {
+            GYPUser user = null;
+            try
+            {
+                if(_loginRepository is null)
+                    _loginRepository = ServiceHelper.GetService<ILoginRepository>();
+
+               user = await _loginRepository.LoginAsync(loginRequest);
+
+                Preferences.Set("token", User?.Token);
+                Preferences.Set("ExpireDateTimeKey", User?.RefreshToken);
+
+                if(User != null)
+                    User.IsLogged = true;
+
+                SessionChanged?.Invoke(null, true);
+            }
+            catch (Exception ex)
+            {
+                return user;
+            }
+            return user;
+        }
+
+        public async Task<string> GetTokenAsync()
         {
             var expireDateTime = Preferences.Get("ExpireDateTimeKey", DateTime.MinValue);
             string token = Preferences.Get("token", string.Empty);
 
             if (expireDateTime <= DateTime.Now)
             {
-                await RouteHelpers.LogoffAsync();
+                LogoffAsync();
                 return string.Empty;
             }
 
             return token;
         }
 
-        public static void ResetToken()
+        public  void ResetToken()
         {
             Preferences.Set("token", null);
             Preferences.Set("ExpireDateTimeKey", null);
@@ -42,45 +78,23 @@ namespace GetYourPlaceApp.Helpers
             SessionChanged?.Invoke(null, false);
         } 
 
-        public static void SaveToken()
+        public  void SaveToken()
         {
             Preferences.Set("token", User.Token);
             Preferences.Set("ExpireDateTimeKey", User.RefreshToken);
         }
 
-        public static string MD5Hash(string text)
+        public void LogoffAsync()
         {
-            MD5 md5 = new MD5CryptoServiceProvider();
-
-            //compute hash from the bytes of text  
-            md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(text));
-
-
-            //get hash result after compute it  
-            byte[] result = md5.Hash;
-
-            StringBuilder strBuilder = new StringBuilder();
-            for (int i = 0; i < result.Length; i++)
+            try
             {
-                //change it into 2 hexadecimal digits  
-                //for each byte  
-                strBuilder.Append(result[i].ToString("x2"));
+                ResetToken();
             }
+            catch (Exception ex)
+            {
 
-            return strBuilder.ToString();
+            }
         }
 
-        public static string RemoveSpecialCharacters(this string str)
-        {
-            StringBuilder sb = new StringBuilder();
-            foreach (char c in str)
-            {
-                if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
-                {
-                    sb.Append(c);
-                }
-            }
-            return sb.ToString();
-        }
     }
 }
