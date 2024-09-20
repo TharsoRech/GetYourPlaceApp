@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <mct:Popup
     x:Class="GetYourPlaceApp.Components.FilterPopUp"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -8,16 +8,18 @@
     xmlns:vm="clr-namespace:GetYourPlaceApp.Components.ViewModels"
     x:DataType="vm:FilterPopUpViewModel">
     <Grid
+        Padding="8"
         BackgroundColor="{StaticResource GreenGYP}"
-        ColumnDefinitions="*,auto"
+        ColumnDefinitions="auto,auto"
         RowDefinitions="auto,auto">
         <ScrollView>
             <Grid ColumnDefinitions="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto">
-                <CollectionView x:DataType="vm:FilterPopUpViewModel" ItemsSource="{Binding PickerList}">
+                <CollectionView ItemsSource="{Binding PickerList}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Picker
                                 Title="{Binding Description}"
+                                x:DataType="models:GYPFilter"
                                 ItemDisplayBinding="{Binding Description}"
                                 ItemsSource="{Binding Items}" />
                         </DataTemplate>
@@ -26,8 +28,8 @@
             </Grid>
         </ScrollView>
         <Grid Grid.Row="1">
-            <Button Clicked="{Binding Cancel}" Text="Cancel" />
-            <Button Clicked="{Binding ApplyFilters}" Text="Aplicar" />
+            <Button Command="{Binding CancelCommand}" Text="Cancel" />
+            <Button Command="{Binding ApplyFiltersCommand}" Text="Aplicar" />
         </Grid>
     </Grid>
 </mct:Popup>

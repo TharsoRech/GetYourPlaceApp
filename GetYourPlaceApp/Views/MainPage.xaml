@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
     x:Class="GetYourPlaceApp.Views.MainPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -16,7 +16,7 @@
                 <Button
                     Margin="4,0,8,8"
                     BackgroundColor="{StaticResource GreenGYP}"
-                    Clicked="{Binding ShowFilter}"
+                    Command="{Binding ShowFilterCommand}"
                     Text="Add Filter" />
                 <Entry
                     Grid.Row="1"
