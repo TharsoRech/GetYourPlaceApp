@@ -1,8 +1,8 @@
 ﻿using CommunityToolkit.Maui.Views;
 using GetYourPlaceApp.Helpers;
+using GetYourPlaceApp.Managers;
 using GetYourPlaceApp.Models;
 using GetYourPlaceApp.Repository.Filter;
-using System.Collections.ObjectModel;
 
 namespace GetYourPlaceApp.Components.ViewModels
 {
@@ -12,12 +12,19 @@ namespace GetYourPlaceApp.Components.ViewModels
         #region variables
         Popup _popup;
         IFilterRepository _filterRepository;
+
+        ObservableCollection<GYPFilterItem> filterList;
         #endregion
 
         #region Properties
         [ObservableProperty]
         ObservableCollection<GYPFilter> pickerList;
+        
+        [ObservableProperty]
+        GYPFilter filterItemSelected;
+
         #endregion
+
 
         public FilterPopUpViewModel(Popup popup)
         {
@@ -30,6 +37,7 @@ namespace GetYourPlaceApp.Components.ViewModels
         [RelayCommand]
         public async Task ApplyFilters()
         {
+            FilterManager.Instance.ApplyFilters(filterList?.ToList());
             await _popup.CloseAsync();
 
         }
@@ -39,5 +47,24 @@ namespace GetYourPlaceApp.Components.ViewModels
         {
             await _popup.CloseAsync();
         }
+
+        public void UpdateFilters(GYPFilterItem filterItem)
+        {
+            if(filterItem != null)
+            {
+                var filterFound = filterList?.FirstOrDefault(f => 
+                f.GYPFilterType == filterItem.GYPFilterType);
+
+                if (filterFound != null)
+                    filterList?.Remove(filterFound);
+
+                if(filterList is null)
+                   filterList = new ObservableCollection<GYPFilterItem> { filterItem };   
+                else
+                    filterList.Add(filterItem);
+;
+            }
+        }
+
     }
 }

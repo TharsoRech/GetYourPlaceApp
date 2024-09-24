@@ -53,6 +53,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\close.svg" />
 	  <None Remove="Resources\Images\config.png" />
 	  <None Remove="Resources\Images\exit.png" />
 	  <None Remove="Resources\Images\favorite.png" />
@@ -75,6 +76,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Components\FilterAppliedList.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Components\FilterPopUp.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -4,31 +4,35 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:GetYourPlaceApp.ViewModels"
+    xmlns:cm="clr-namespace:GetYourPlaceApp.Components"
+    xmlns:models="clr-namespace:GetYourPlaceApp.Models"
     x:DataType="vm:MainViewModel"
     BackgroundColor="{StaticResource GreenLightGYP}">
     <ScrollView>
-        <Grid>
+        <Grid RowDefinitions="auto,auto">
             <Grid
                 Margin="16,8,0,0"
                 ColumnDefinitions="*,*"
                 RowDefinitions="auto,auto"
                 VerticalOptions="StartAndExpand">
+                <Entry FontSize="18" Placeholder="Find your propertie" />
                 <Button
-                    Margin="4,0,8,8"
-                    BackgroundColor="{StaticResource GreenGYP}"
-                    Command="{Binding ShowFilterCommand}"
-                    Text="Add Filter" />
-                <Entry
-                    Grid.Row="1"
-                    FontSize="18"
-                    Placeholder="Find your propertie" />
-                <Button
-                    Grid.Row="1"
                     Grid.Column="1"
                     Margin="8,0,8,8"
                     BackgroundColor="{StaticResource GreenGYP}"
                     Text="Search" />
+                <Button
+                    Grid.Row="1"
+                    Margin="4,0,8,8"
+                    BackgroundColor="{StaticResource GreenGYP}"
+                    Command="{Binding ShowFilterCommand}"
+                    Text="Add Filter" />
+                
             </Grid>
+            <cm:FilterAppliedList 
+                Grid.Row="1"
+                FilterItems="{Binding Filters}">
+            </cm:FilterAppliedList>
         </Grid>
     </ScrollView>
 </ContentPage>

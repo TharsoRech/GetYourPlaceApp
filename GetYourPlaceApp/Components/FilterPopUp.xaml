@@ -5,31 +5,67 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
     xmlns:models="clr-namespace:GetYourPlaceApp.Models"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:vm="clr-namespace:GetYourPlaceApp.Components.ViewModels"
-    x:DataType="vm:FilterPopUpViewModel">
-    <Grid
-        Padding="8"
-        BackgroundColor="{StaticResource GreenGYP}"
-        ColumnDefinitions="auto,auto"
-        RowDefinitions="auto,auto">
-        <ScrollView>
-            <Grid ColumnDefinitions="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto">
-                <CollectionView ItemsSource="{Binding PickerList}">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Picker
-                                Title="{Binding Description}"
-                                x:DataType="models:GYPFilter"
-                                ItemDisplayBinding="{Binding Description}"
-                                ItemsSource="{Binding Items}" />
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+    x:Name="popupFilterPage"
+    x:DataType="vm:FilterPopUpViewModel"
+    CanBeDismissedByTappingOutsideOfPopup="true"
+    HorizontalOptions="Fill"
+    VerticalOptions="Center"
+    Color="Transparent">
+    <Border
+        Margin="16"
+        Padding="0"
+        BackgroundColor="Transparent"
+        Stroke="Transparent"
+        StrokeThickness="0">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="28" />
+        </Border.StrokeShape>
+        <Grid
+            Padding="8"
+            BackgroundColor="{StaticResource GreenGYP}"
+            ColumnDefinitions="auto,auto"
+            HorizontalOptions="FillAndExpand"
+            RowDefinitions="auto,auto,auto"
+            RowSpacing="8"
+            VerticalOptions="FillAndExpand">
+            <Label
+                Padding="8"
+                Text="Apply a filter for finding your place"
+                TextColor="{StaticResource White}" />
+            <ScrollView Grid.Row="1">
+                <Grid RowSpacing="8">
+                    <CollectionView ItemsSource="{Binding PickerList}">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:GYPFilterItem">
+                                <Grid Padding="8" RowDefinitions="auto,auto">
+                                    <Label Text="{Binding Description}" TextColor="{StaticResource White}" />
+                                    <Picker
+                                        Title="{Binding Description, StringFormat='Select {0}'}"
+                                        Grid.Row="1"
+                                        x:DataType="models:GYPFilter"
+                                        ItemDisplayBinding="{Binding Description}"
+                                        ItemsSource="{Binding Items}"
+                                        SelectedIndexChanged="OnPickerSelectedIndexChanged"
+                                        TextColor="{StaticResource White}" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+            </ScrollView>
+            <Grid
+                Grid.Row="2"
+                Padding="8,0,0,16"
+                ColumnDefinitions="auto,Auto"
+                ColumnSpacing="16">
+                <Button Command="{Binding ApplyFiltersCommand}" Text="Apply" />
+                <Button
+                    Grid.Column="1"
+                    Command="{Binding CancelCommand}"
+                    Text="Cancel" />
             </Grid>
-        </ScrollView>
-        <Grid Grid.Row="1">
-            <Button Command="{Binding CancelCommand}" Text="Cancel" />
-            <Button Command="{Binding ApplyFiltersCommand}" Text="Aplicar" />
         </Grid>
-    </Grid>
+    </Border>
 </mct:Popup>

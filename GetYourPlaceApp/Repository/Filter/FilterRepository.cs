@@ -20,9 +20,9 @@ namespace GetYourPlaceApp.Repository.Filter
             Description = "Property Type",
             Items = new List<GYPFilterItem>
             {
-                new GYPFilterItem { Id = 1, Description = "Apartment" },
-                new GYPFilterItem { Id = 2, Description = "House" },
-                new GYPFilterItem { Id = 3, Description = "Site" }
+                new GYPFilterItem { Id = 1, Description = "Apartment" , GYPFilterType = GYPFilterType.PropertyType},
+                new GYPFilterItem { Id = 2, Description = "House" , GYPFilterType = GYPFilterType.PropertyType },
+                new GYPFilterItem { Id = 3, Description = "Site" , GYPFilterType = GYPFilterType.PropertyType}
             }
         },
         new GYPFilter
@@ -31,16 +31,10 @@ namespace GetYourPlaceApp.Repository.Filter
             Description = "City",
             Items = new List<GYPFilterItem>
             {
-                new GYPFilterItem { Id = 1, Description = "São Paulo" },
-                new GYPFilterItem { Id = 2, Description = "Rio de Janeiro" },
-                new GYPFilterItem { Id = 3, Description = "Belo Horizonte" }
+                new GYPFilterItem { Id = 1, Description = "São Paulo" ,  GYPFilterType = GYPFilterType.City },
+                new GYPFilterItem { Id = 2, Description = "Rio de Janeiro" ,  GYPFilterType = GYPFilterType.City },
+                new GYPFilterItem { Id = 3, Description = "Belo Horizonte" ,  GYPFilterType = GYPFilterType.City }
             }
-        },
-        new GYPFilter
-        {
-            GYPFilterType = GYPFilterType.Code,
-            Description = "Code",
-            Items = new List<GYPFilterItem>() // No items for this filter
         },
         new GYPFilter
         {
@@ -48,9 +42,9 @@ namespace GetYourPlaceApp.Repository.Filter
             Description = "Bedrooms",
             Items = new List<GYPFilterItem>
             {
-                new GYPFilterItem { Id = 1, Description = "1 bedroom" },
-                new GYPFilterItem { Id = 2, Description = "2 bedrooms" },
-                new GYPFilterItem { Id = 3, Description = "3 bedrooms" }
+                new GYPFilterItem { Id = 1, Description = "1 bedroom", GYPFilterType = GYPFilterType.Bedrooms },
+                new GYPFilterItem { Id = 2, Description = "2 bedrooms", GYPFilterType = GYPFilterType.Bedrooms },
+                new GYPFilterItem { Id = 3, Description = "3 bedrooms" , GYPFilterType = GYPFilterType.Bedrooms }
             }
         },
         new GYPFilter
@@ -59,9 +53,9 @@ namespace GetYourPlaceApp.Repository.Filter
             Description = "Bathrooms",
             Items = new List<GYPFilterItem>
             {
-                new GYPFilterItem { Id = 1, Description = "1 bathroom" },
-                new GYPFilterItem { Id = 2, Description = "2 bathrooms" },
-                new GYPFilterItem { Id = 3, Description = "3 bathrooms" }
+                new GYPFilterItem { Id = 1, Description = "1 bathroom" , GYPFilterType = GYPFilterType.Bathrooms },
+                new GYPFilterItem { Id = 2, Description = "2 bathrooms" , GYPFilterType = GYPFilterType.Bathrooms},
+                new GYPFilterItem { Id = 3, Description = "3 bathrooms" , GYPFilterType = GYPFilterType.Bathrooms }
             }
         },
         new GYPFilter
@@ -70,9 +64,9 @@ namespace GetYourPlaceApp.Repository.Filter
             Description = "Garage",
             Items = new List<GYPFilterItem>
             {
-                new GYPFilterItem { Id = 1, Description = "1 space" },
-                new GYPFilterItem { Id = 2, Description = "2 spaces" },
-                new GYPFilterItem { Id = 3, Description = "3 spaces" }
+                new GYPFilterItem { Id = 1, Description = "1 space" , GYPFilterType = GYPFilterType.Garage  },
+                new GYPFilterItem { Id = 2, Description = "2 spaces" , GYPFilterType = GYPFilterType.Garage  },
+                new GYPFilterItem { Id = 3, Description = "3 spaces" , GYPFilterType = GYPFilterType.Garage   }
             }
         },
         new GYPFilter
@@ -81,8 +75,8 @@ namespace GetYourPlaceApp.Repository.Filter
             Description = "Property Status",
             Items = new List<GYPFilterItem>
             {
-                new GYPFilterItem { Id = 1, Description = "New" },
-                new GYPFilterItem { Id = 2, Description = "Used" }
+                new GYPFilterItem { Id = 1, Description = "New" , GYPFilterType = GYPFilterType.PropertyStatus },
+                new GYPFilterItem { Id = 2, Description = "Used" , GYPFilterType = GYPFilterType.PropertyStatus}
             }
         },
         new GYPFilter
@@ -91,8 +85,8 @@ namespace GetYourPlaceApp.Repository.Filter
             Description = "Furnished",
             Items = new List<GYPFilterItem>
             {
-                new GYPFilterItem { Id = 1, Description = "Yes" },
-                new GYPFilterItem { Id = 2, Description = "No" }
+                new GYPFilterItem { Id = 1, Description = "Yes" , GYPFilterType = GYPFilterType.Furnished },
+                new GYPFilterItem { Id = 2, Description = "No" , GYPFilterType = GYPFilterType.Furnished}
             }
         },
     };

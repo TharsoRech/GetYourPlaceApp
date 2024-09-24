@@ -10,5 +10,8 @@ namespace GetYourPlaceApp.Models
 
         public List<GYPFilterItem> Items { get; set; }
 
+        public GYPFilter SelectedGYPFilter { get; set; } // Add this property
+
+
     }
 }

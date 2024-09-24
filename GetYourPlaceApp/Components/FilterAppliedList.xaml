@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:GetYourPlaceApp.Models"
+             xmlns:cm="clr-namespace:GetYourPlaceApp.Components"
+             Padding="8"
+             x:Name="filterListApplied"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="GetYourPlaceApp.Components.FilterAppliedList">
+    <ScrollView
+                BackgroundColor="{StaticResource White}"
+                IsVisible="{Binding HasFilterItems, Source={x:Reference filterListApplied}}">
+        <CollectionView ItemsSource="{Binding FilterItems , Source={x:Reference filterListApplied}}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:GYPFilterItem">
+                    <Border
+                        Margin="16"
+                         Padding="0"
+                         BackgroundColor="Transparent"
+                         Stroke="Transparent"
+                         StrokeThickness="0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="32" />
+                        </Border.StrokeShape>
+                        <Grid Padding="8" 
+                              BackgroundColor="{StaticResource GreenLightGYP}"
+                              ColumnDefinitions="auto,auto"
+                              RowDefinitions="auto">
+                            <Label Text="{Binding Description}" 
+                                   TextColor="{StaticResource White}" />
+                            <Image
+                              Margin="10,0,10,0"
+                              Aspect="AspectFit"
+                              HeightRequest="24"
+                              HorizontalOptions="CenterAndExpand"
+                              Source="close.svg"
+                              VerticalOptions="Center"
+                              Grid.Column="1"
+                              WidthRequest="24" >
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer 
+                                        Command="{Binding Source={x:Reference filterAppliedList}, Path=BindingContext.RemoveFilter}"
+                                        CommandParameter="{Binding .}"            />
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </ScrollView>
+</ContentView>
