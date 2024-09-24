@@ -48,6 +48,7 @@
                                         ItemDisplayBinding="{Binding Description}"
                                         ItemsSource="{Binding Items}"
                                         SelectedIndexChanged="OnPickerSelectedIndexChanged"
+                                        SelectedIndex="{Binding SelectedIndexFilter}"
                                         TextColor="{StaticResource White}" />
                                 </Grid>
                             </DataTemplate>

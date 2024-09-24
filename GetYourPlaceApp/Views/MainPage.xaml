@@ -3,9 +3,9 @@
     x:Class="GetYourPlaceApp.Views.MainPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:vm="clr-namespace:GetYourPlaceApp.ViewModels"
     xmlns:cm="clr-namespace:GetYourPlaceApp.Components"
     xmlns:models="clr-namespace:GetYourPlaceApp.Models"
+    xmlns:vm="clr-namespace:GetYourPlaceApp.ViewModels"
     x:DataType="vm:MainViewModel"
     BackgroundColor="{StaticResource GreenLightGYP}">
     <ScrollView>
@@ -27,12 +27,9 @@
                     BackgroundColor="{StaticResource GreenGYP}"
                     Command="{Binding ShowFilterCommand}"
                     Text="Add Filter" />
-                
+
             </Grid>
-            <cm:FilterAppliedList 
-                Grid.Row="1"
-                FilterItems="{Binding Filters}">
-            </cm:FilterAppliedList>
+            <cm:FilterAppliedList Grid.Row="1" FilterItems="{Binding Filters}" />
         </Grid>
     </ScrollView>
 </ContentPage>

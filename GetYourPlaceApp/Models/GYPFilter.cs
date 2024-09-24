@@ -12,6 +12,7 @@ namespace GetYourPlaceApp.Models
 
         public GYPFilter SelectedGYPFilter { get; set; } // Add this property
 
+        public int? SelectedIndexFilter { get; set; }
 
     }
 }

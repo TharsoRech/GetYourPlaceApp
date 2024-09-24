@@ -33,6 +33,36 @@ namespace GetYourPlaceApp.Components.ViewModels
             Task.Run(async () => {
                 pickerList = new ObservableCollection<GYPFilter>(await _filterRepository.GetFilters());;
             }).Wait();
+
+            LoadFiltersApplied();
+        }
+
+        private void LoadFiltersApplied()
+        {
+            try
+            {
+                var currentFilters = FilterManager.Instance.GetFilters();
+
+                if (currentFilters?.Count > 0 && pickerList?.Count > 0)
+                {
+                    foreach (var filter in currentFilters)
+                    {
+                        var picker = pickerList.FirstOrDefault(f =>
+                        f.GYPFilterType == filter.GYPFilterType);
+
+                        var pickerItem = picker.Items.FirstOrDefault(i =>
+                        i.Id == filter.Id &&
+                        i.GYPFilterType == filter.GYPFilterType);
+
+                        if (picker != null && pickerItem != null)
+                            picker.SelectedIndexFilter = picker.Items.IndexOf(pickerItem);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
         [RelayCommand]
         public async Task ApplyFilters()

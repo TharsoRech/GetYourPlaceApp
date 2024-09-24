@@ -7,23 +7,23 @@
              x:Name="filterListApplied"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="GetYourPlaceApp.Components.FilterAppliedList">
-    <ScrollView
-                BackgroundColor="{StaticResource White}"
+    <CollectionView ItemsSource="{Binding FilterItems , Source={x:Reference filterListApplied}}">
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="models:GYPFilterItem">
+                <ScrollView
+                 BackgroundColor="Transparent"
                 IsVisible="{Binding HasFilterItems, Source={x:Reference filterListApplied}}">
-        <CollectionView ItemsSource="{Binding FilterItems , Source={x:Reference filterListApplied}}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:GYPFilterItem">
                     <Border
-                        Margin="16"
-                         Padding="0"
+                        Margin="0,8,0,8"
                          BackgroundColor="Transparent"
+                         HorizontalOptions="StartAndExpand"
                          Stroke="Transparent"
                          StrokeThickness="0">
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="32" />
                         </Border.StrokeShape>
-                        <Grid Padding="8" 
-                              BackgroundColor="{StaticResource GreenLightGYP}"
+                        <Grid Padding="16,8,8,8" 
+                              BackgroundColor="{StaticResource GreenGYP}"
                               ColumnDefinitions="auto,auto"
                               RowDefinitions="auto">
                             <Label Text="{Binding Description}" 
@@ -39,14 +39,14 @@
                               WidthRequest="24" >
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer 
-                                        Command="{Binding Source={x:Reference filterAppliedList}, Path=BindingContext.RemoveFilter}"
+                                        Command="{Binding Source={x:Reference filterListApplied}, Path=BindingContext.RemoveFilter}"
                                         CommandParameter="{Binding .}"            />
                                 </Image.GestureRecognizers>
                             </Image>
                         </Grid>
                     </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </ScrollView>
+                </ScrollView>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
 </ContentView>

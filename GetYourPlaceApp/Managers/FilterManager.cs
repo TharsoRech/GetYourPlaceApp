@@ -48,5 +48,10 @@ namespace GetYourPlaceApp.Managers
                 FilterUpdated?.Invoke(null, Filters);
             }
         }
+
+        public List<GYPFilterItem> GetFilters()
+        {
+            return Filters;
+        }
     }
 }
