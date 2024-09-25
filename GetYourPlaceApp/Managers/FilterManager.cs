@@ -39,8 +39,8 @@ namespace GetYourPlaceApp.Managers
 
         public void RemoveFilter(GYPFilterItem filter)
         {
-            var filterFound = Filters.FirstOrDefault(f => 
-            f.Id == filter.Id && f.GYPFilterType == filter.GYPFilterType);
+            var filterFound = Filters?.FirstOrDefault(f => 
+            f.Id == filter?.Id && f.GYPFilterType == filter?.GYPFilterType);
 
             if(filterFound != null)
             {

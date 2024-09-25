@@ -29,7 +29,9 @@
                     Text="Add Filter" />
 
             </Grid>
-            <cm:FilterAppliedList Grid.Row="1" FilterItems="{Binding Filters}" />
+            <cm:FilterAppliedList Grid.Row="1" 
+                                  HasFilterItems="{Binding FiltersApplied}"
+                                  FilterItems="{Binding Filters}" />
         </Grid>
     </ScrollView>
 </ContentPage>

@@ -20,7 +20,7 @@ namespace GetYourPlaceApp.Repository.Filter
             Description = "Property Type",
             Items = new List<GYPFilterItem>
             {
-                new GYPFilterItem { Id = 1, Description = "Apartment" , GYPFilterType = GYPFilterType.PropertyType},
+                new GYPFilterItem { Id = 1, Description = "Apartment" , GYPFilterType = GYPFilterType.PropertyType,},
                 new GYPFilterItem { Id = 2, Description = "House" , GYPFilterType = GYPFilterType.PropertyType },
                 new GYPFilterItem { Id = 3, Description = "Site" , GYPFilterType = GYPFilterType.PropertyType}
             }

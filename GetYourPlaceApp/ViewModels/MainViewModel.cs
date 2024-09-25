@@ -13,6 +13,9 @@ public partial class MainViewModel : BaseViewModel, IDisposable
     #region Properties
     [ObservableProperty]
     ObservableCollection<GYPFilterItem> filters;
+
+    [ObservableProperty]
+    bool filtersApplied;
     #endregion
     public MainViewModel()
     {
@@ -33,6 +36,10 @@ public partial class MainViewModel : BaseViewModel, IDisposable
 
     private void FilterUpdated(object sender,List<GYPFilterItem> filterItems)
     {
-        Filters = new ObservableCollection<GYPFilterItem>(filterItems);
+        if(filterItems != null)
+        {
+            Filters = new ObservableCollection<GYPFilterItem>(filterItems);
+            FiltersApplied = filterItems.Any();
+        }
     }
 }

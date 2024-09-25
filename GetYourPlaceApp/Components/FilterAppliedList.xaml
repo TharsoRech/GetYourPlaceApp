@@ -26,9 +26,9 @@
                               BackgroundColor="{StaticResource GreenGYP}"
                               ColumnDefinitions="auto,auto"
                               RowDefinitions="auto">
-                            <Label Text="{Binding Description}" 
+                            <Label Text="{Binding FullDescription}" 
                                    TextColor="{StaticResource White}" />
-                            <Image
+                            <ImageButton
                               Margin="10,0,10,0"
                               Aspect="AspectFit"
                               HeightRequest="24"
@@ -36,13 +36,10 @@
                               Source="close.svg"
                               VerticalOptions="Center"
                               Grid.Column="1"
+                              CommandParameter="{Binding .}"
+                              Command="{Binding RemoveFilterCommand, Source={x:Reference filterListApplied}}"
                               WidthRequest="24" >
-                                <Image.GestureRecognizers>
-                                    <TapGestureRecognizer 
-                                        Command="{Binding Source={x:Reference filterListApplied}, Path=BindingContext.RemoveFilter}"
-                                        CommandParameter="{Binding .}"            />
-                                </Image.GestureRecognizers>
-                            </Image>
+                            </ImageButton>
                         </Grid>
                     </Border>
                 </ScrollView>

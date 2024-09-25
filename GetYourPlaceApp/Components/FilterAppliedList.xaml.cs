@@ -4,12 +4,11 @@ using GetYourPlaceApp.Models;
 
 namespace GetYourPlaceApp.Components;
 
-public partial class FilterAppliedList : ContentView, IDisposable
+public partial class FilterAppliedList : ContentView
 {
 	public FilterAppliedList()
 	{
 		InitializeComponent();
-        FilterManager.Instance.FilterUpdated += FilterUpdated;
     }
 
     #region Bindable Properties
@@ -25,7 +24,8 @@ public partial class FilterAppliedList : ContentView, IDisposable
     public static readonly BindableProperty HasFilterItemsProperty = BindableProperty.Create(
         nameof(HasFilterItems),
         typeof(bool),
-        typeof(FilterAppliedList)
+        typeof(FilterAppliedList),
+        defaultBindingMode: BindingMode.TwoWay
         );
 
     #endregion
@@ -48,17 +48,7 @@ public partial class FilterAppliedList : ContentView, IDisposable
     [RelayCommand]
     public async Task RemoveFilter(GYPFilterItem filterItem)
     {
-        FilterItems.Remove(filterItem);
+        FilterItems?.Remove(filterItem);
         FilterManager.Instance.RemoveFilter(filterItem);
-    }
-
-    private void FilterUpdated(object sender, List<GYPFilterItem> filterItems)
-    {
-        HasFilterItems = FilterItems?.Count > 0;
-    }
-
-    public void Dispose()
-    {
-        FilterManager.Instance.FilterUpdated -= FilterUpdated;
     }
 }

@@ -47,8 +47,8 @@
                                         x:DataType="models:GYPFilter"
                                         ItemDisplayBinding="{Binding Description}"
                                         ItemsSource="{Binding Items}"
-                                        SelectedIndexChanged="OnPickerSelectedIndexChanged"
                                         SelectedIndex="{Binding SelectedIndexFilter}"
+                                        SelectedIndexChanged="OnPickerSelectedIndexChanged"
                                         TextColor="{StaticResource White}" />
                                 </Grid>
                             </DataTemplate>
