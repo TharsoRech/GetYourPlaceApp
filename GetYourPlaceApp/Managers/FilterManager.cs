@@ -37,7 +37,7 @@ namespace GetYourPlaceApp.Managers
             FilterUpdated?.Invoke(null, filters);
         }
 
-        public void RemoveFilter(GYPFilterItem filter)
+        public void RemoveFilter(GYPFilterItem filter, bool InvokeMethod = false)
         {
             var filterFound = Filters?.FirstOrDefault(f => 
             f.Id == filter?.Id && f.GYPFilterType == filter?.GYPFilterType);
@@ -45,6 +45,22 @@ namespace GetYourPlaceApp.Managers
             if(filterFound != null)
             {
                 Filters.Remove(filterFound);
+                if(InvokeMethod)
+                {
+                    FilterUpdated?.Invoke(null, Filters);
+                }
+            }
+        }
+
+        public void RemoveFilters(List<GYPFilterItem> filters)
+        {
+            if(filters.Count > 0)
+            {
+                foreach(var filter in filters)
+                {
+                    RemoveFilter(filter);
+                }
+
                 FilterUpdated?.Invoke(null, Filters);
             }
         }

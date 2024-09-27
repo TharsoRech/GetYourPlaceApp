@@ -76,7 +76,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Components\FilterAppliedList.xaml">
+	  <MauiXaml Update="Components\FilterEditPopUp.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Components\FilterPopUp.xaml">

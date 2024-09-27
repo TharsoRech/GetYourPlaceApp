@@ -25,8 +25,15 @@ public partial class MainViewModel : BaseViewModel, IDisposable
     public async Task ShowFilter()
     {
 
-        await Application.Current.MainPage.ShowPopupAsync(new FilterPopUp());
+        Application.Current.MainPage.ShowPopupAsync(new FilterPopUp());
 
+    }
+
+    [RelayCommand]
+    public async Task ShowEditFilter()
+    {
+
+        Application.Current.MainPage.ShowPopupAsync(new FilterEditPopUp());
     }
 
     public void Dispose()
