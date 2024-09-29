@@ -9,7 +9,7 @@
     x:DataType="vm:MainViewModel"
     BackgroundColor="{StaticResource GreenLightGYP}">
     <ScrollView>
-        <Grid RowDefinitions="auto,auto">
+        <Grid RowDefinitions="auto,auto,auto">
             <Grid
                 Margin="16,8,0,0"
                 ColumnDefinitions="*,*"
@@ -36,7 +36,7 @@
                     Command="{Binding ShowEditFilterCommand}"
                     IsVisible="{Binding FiltersApplied}"
                     Text="Edit Filter" />
-
+                <cm:PropertyList IsLoading="{Binding LoadingProperties}" PropertieList="{Binding CurrentProperties}" />
             </Grid>
         </Grid>
     </ScrollView>

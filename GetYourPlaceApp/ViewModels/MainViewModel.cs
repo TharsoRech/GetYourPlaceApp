@@ -22,6 +22,9 @@ public partial class MainViewModel : BaseViewModel, IDisposable
     ObservableCollection<Propertie> currentProperties;
 
     [ObservableProperty]
+    bool loadingProperties;
+
+    [ObservableProperty]
     bool filtersApplied;
     #endregion
     public MainViewModel() { 
@@ -36,10 +39,25 @@ public partial class MainViewModel : BaseViewModel, IDisposable
 
     public async Task GetProperties()
     {
-        Task.Run(async () =>
+        LoadingProperties = true;
+        try
         {
-            CurrentProperties = new ObservableCollection<Propertie>(await _PropertiesRepository.GetProperties());
-        }).Wait();
+            Task.Run(async () =>
+            {
+                await Task.Delay(2000);
+                CurrentProperties = new ObservableCollection<Propertie>(await _PropertiesRepository.GetProperties());
+            }).Wait();
+        }
+        catch (Exception ex)
+        {
+
+           Console.WriteLine(ex.ToString());    
+        }
+        finally
+        {
+            LoadingProperties = false;
+        }
+
     }
     [RelayCommand]
     public async Task ShowFilter()

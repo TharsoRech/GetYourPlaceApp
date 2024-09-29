@@ -38,5 +38,18 @@ namespace GetYourPlaceApp.Helpers
             }
             return sb.ToString();
         }
+
+        public static ImageSource Base64ToImageSource(this string base64String)
+        {
+            try
+            {
+                return ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(base64String)));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
     }
 }
