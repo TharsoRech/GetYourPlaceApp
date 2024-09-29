@@ -29,9 +29,9 @@
             RowDefinitions="auto,auto,auto"
             RowSpacing="8"
             VerticalOptions="FillAndExpand">
-            <CollectionView ItemsSource="{Binding BindingContext.Filters,Source={x:Reference filterEditList}}" VerticalOptions="Start">
+            <CollectionView ItemsSource="{Binding BindingContext.Filters, Source={x:Reference filterEditList}}" VerticalOptions="Start">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:GYPFilterItem">
+                    <DataTemplate x:DataType="models:GYPPropertyInfoItem">
                         <ScrollView BackgroundColor="Transparent">
                             <Border
                                 Margin="0,8,0,8"

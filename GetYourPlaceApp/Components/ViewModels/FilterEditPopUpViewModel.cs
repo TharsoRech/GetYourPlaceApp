@@ -8,7 +8,7 @@ namespace GetYourPlaceApp.Components.ViewModels
     {
         #region Properties
         [ObservableProperty]
-        ObservableCollection<GYPFilterItem> filters;
+        ObservableCollection<GYPPropertyInfoItem> filters;
         #endregion
 
         #region Variable
@@ -18,7 +18,7 @@ namespace GetYourPlaceApp.Components.ViewModels
         public FilterEditPopUpViewModel(Popup popup)
         {
             _Popup = popup; 
-            Filters = new ObservableCollection<GYPFilterItem>(FilterManager.Instance.GetFilters());
+            Filters = new ObservableCollection<GYPPropertyInfoItem>(FilterManager.Instance.GetFilters());
         }
 
         [RelayCommand]
@@ -35,7 +35,7 @@ namespace GetYourPlaceApp.Components.ViewModels
         }
 
         [RelayCommand]
-        public async Task RemoveFilter(GYPFilterItem filterItem)
+        public async Task RemoveFilter(GYPPropertyInfoItem filterItem)
         {
             Filters?.Remove(filterItem);
         }

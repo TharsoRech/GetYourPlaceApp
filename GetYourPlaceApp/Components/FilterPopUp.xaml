@@ -38,7 +38,7 @@
                 <Grid RowSpacing="8">
                     <CollectionView ItemsSource="{Binding PickerList}">
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="models:GYPFilterItem">
+                            <DataTemplate x:DataType="models:GYPPropertyInfoItem">
                                 <Grid Padding="8" RowDefinitions="auto,auto">
                                     <Label Text="{Binding Description}" TextColor="{StaticResource White}" />
                                     <Picker

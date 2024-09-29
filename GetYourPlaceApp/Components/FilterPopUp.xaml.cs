@@ -24,7 +24,7 @@ public partial class FilterPopUp : Popup
 
             if (selectedIndex != -1)
             {
-                GYPFilterItem filterItem = (GYPFilterItem)picker.ItemsSource[selectedIndex];
+                GYPPropertyInfoItem filterItem = (GYPPropertyInfoItem)picker.ItemsSource[selectedIndex];
                 _VM.UpdateFilters(filterItem);
             }
         }

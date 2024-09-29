@@ -10,8 +10,8 @@ namespace GetYourPlaceApp.Managers
     public sealed class FilterManager
     {
         #region Variables
-        public static List<GYPFilterItem> Filters;
-        public event EventHandler<List<GYPFilterItem>> FilterUpdated;
+        public static List<GYPPropertyInfoItem> Filters;
+        public event EventHandler<List<GYPPropertyInfoItem>> FilterUpdated;
         private static FilterManager instance = null;
         #endregion
 
@@ -31,16 +31,16 @@ namespace GetYourPlaceApp.Managers
                 
         }
 
-        public void ApplyFilters(List<GYPFilterItem> filters)
+        public void ApplyFilters(List<GYPPropertyInfoItem> filters)
         {
             Filters = filters;
             FilterUpdated?.Invoke(null, filters);
         }
 
-        public void RemoveFilter(GYPFilterItem filter, bool InvokeMethod = false)
+        public void RemoveFilter(GYPPropertyInfoItem filter, bool InvokeMethod = false)
         {
             var filterFound = Filters?.FirstOrDefault(f => 
-            f.Id == filter?.Id && f.GYPFilterType == filter?.GYPFilterType);
+            f.Id == filter?.Id && f.GYPPropertyInfo == filter?.GYPPropertyInfo);
 
             if(filterFound != null)
             {
@@ -52,7 +52,7 @@ namespace GetYourPlaceApp.Managers
             }
         }
 
-        public void RemoveFilters(List<GYPFilterItem> filters)
+        public void RemoveFilters(List<GYPPropertyInfoItem> filters)
         {
             if(filters.Count > 0)
             {
@@ -60,12 +60,14 @@ namespace GetYourPlaceApp.Managers
                 {
                     RemoveFilter(filter);
                 }
-
-                FilterUpdated?.Invoke(null, Filters);
             }
+            else
+                Filters.Clear();
+
+            FilterUpdated?.Invoke(null, Filters);
         }
 
-        public List<GYPFilterItem> GetFilters()
+        public List<GYPPropertyInfoItem> GetFilters()
         {
             return Filters;
         }

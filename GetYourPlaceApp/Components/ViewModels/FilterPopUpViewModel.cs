@@ -13,7 +13,7 @@ namespace GetYourPlaceApp.Components.ViewModels
         Popup _popup;
         IFilterRepository _filterRepository;
 
-        ObservableCollection<GYPFilterItem> filterList;
+        ObservableCollection<GYPPropertyInfoItem> filterList;
         #endregion
 
         #region Properties
@@ -48,11 +48,11 @@ namespace GetYourPlaceApp.Components.ViewModels
                     foreach (var filter in currentFilters)
                     {
                         var picker = pickerList.FirstOrDefault(f =>
-                        f.GYPFilterType == filter.GYPFilterType);
+                        f.GYPPropertyInfo == filter.GYPPropertyInfo);
 
                         var pickerItem = picker.Items.FirstOrDefault(i =>
                         i.Id == filter.Id &&
-                        i.GYPFilterType == filter.GYPFilterType);
+                        i.GYPPropertyInfo == filter.GYPPropertyInfo);
 
                         if (picker != null && pickerItem != null)
                             picker.SelectedIndexFilter = picker.Items.IndexOf(pickerItem);
@@ -78,18 +78,18 @@ namespace GetYourPlaceApp.Components.ViewModels
             await _popup.CloseAsync();
         }
 
-        public void UpdateFilters(GYPFilterItem filterItem)
+        public void UpdateFilters(GYPPropertyInfoItem filterItem)
         {
             if(filterItem != null)
             {
                 var filterFound = filterList?.FirstOrDefault(f => 
-                f.GYPFilterType == filterItem.GYPFilterType);
+                f.GYPPropertyInfo == filterItem.GYPPropertyInfo);
 
                 if (filterFound != null)
                     filterList?.Remove(filterFound);
 
                 if(filterList is null)
-                   filterList = new ObservableCollection<GYPFilterItem> { filterItem };   
+                   filterList = new ObservableCollection<GYPPropertyInfoItem> { filterItem };   
                 else
                     filterList.Add(filterItem);
 ;

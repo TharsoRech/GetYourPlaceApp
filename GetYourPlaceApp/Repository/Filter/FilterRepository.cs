@@ -16,77 +16,77 @@ namespace GetYourPlaceApp.Repository.Filter
     {
         new GYPFilter
         {
-            GYPFilterType = GYPFilterType.PropertyType,
+            GYPPropertyInfo = GYPPropertyInfo.PropertyType,
             Description = "Property Type",
-            Items = new List<GYPFilterItem>
+            Items = new List<GYPPropertyInfoItem>
             {
-                new GYPFilterItem { Id = 1, Description = "Apartment" , GYPFilterType = GYPFilterType.PropertyType,},
-                new GYPFilterItem { Id = 2, Description = "House" , GYPFilterType = GYPFilterType.PropertyType },
-                new GYPFilterItem { Id = 3, Description = "Site" , GYPFilterType = GYPFilterType.PropertyType}
+                new GYPPropertyInfoItem { Id = 1, Description = "Apartment" , GYPPropertyInfo = GYPPropertyInfo.PropertyType,},
+                new GYPPropertyInfoItem { Id = 2, Description = "House" , GYPPropertyInfo = GYPPropertyInfo.PropertyType },
+                new GYPPropertyInfoItem { Id = 3, Description = "Site" , GYPPropertyInfo = GYPPropertyInfo.PropertyType}
             }
         },
         new GYPFilter
         {
-            GYPFilterType = GYPFilterType.City,
+            GYPPropertyInfo = GYPPropertyInfo.City,
             Description = "City",
-            Items = new List<GYPFilterItem>
+            Items = new List<GYPPropertyInfoItem>
             {
-                new GYPFilterItem { Id = 1, Description = "São Paulo" ,  GYPFilterType = GYPFilterType.City },
-                new GYPFilterItem { Id = 2, Description = "Rio de Janeiro" ,  GYPFilterType = GYPFilterType.City },
-                new GYPFilterItem { Id = 3, Description = "Belo Horizonte" ,  GYPFilterType = GYPFilterType.City }
+                new GYPPropertyInfoItem { Id = 1, Description = "São Paulo" ,  GYPPropertyInfo = GYPPropertyInfo.City },
+                new GYPPropertyInfoItem { Id = 2, Description = "Rio de Janeiro" ,  GYPPropertyInfo = GYPPropertyInfo.City },
+                new GYPPropertyInfoItem { Id = 3, Description = "Belo Horizonte" ,  GYPPropertyInfo = GYPPropertyInfo.City }
             }
         },
         new GYPFilter
         {
-            GYPFilterType = GYPFilterType.Bedrooms,
+            GYPPropertyInfo = GYPPropertyInfo.Bedrooms,
             Description = "Bedrooms",
-            Items = new List<GYPFilterItem>
+            Items = new List<GYPPropertyInfoItem>
             {
-                new GYPFilterItem { Id = 1, Description = "1 bedroom", GYPFilterType = GYPFilterType.Bedrooms },
-                new GYPFilterItem { Id = 2, Description = "2 bedrooms", GYPFilterType = GYPFilterType.Bedrooms },
-                new GYPFilterItem { Id = 3, Description = "3 bedrooms" , GYPFilterType = GYPFilterType.Bedrooms }
+                new GYPPropertyInfoItem { Id = 1, Description = "1 bedroom", GYPPropertyInfo = GYPPropertyInfo.Bedrooms },
+                new GYPPropertyInfoItem { Id = 2, Description = "2 bedrooms", GYPPropertyInfo = GYPPropertyInfo.Bedrooms },
+                new GYPPropertyInfoItem { Id = 3, Description = "3 bedrooms" , GYPPropertyInfo = GYPPropertyInfo.Bedrooms }
             }
         },
         new GYPFilter
         {
-            GYPFilterType = GYPFilterType.Bathrooms,
+            GYPPropertyInfo = GYPPropertyInfo.Bathrooms,
             Description = "Bathrooms",
-            Items = new List<GYPFilterItem>
+            Items = new List<GYPPropertyInfoItem>
             {
-                new GYPFilterItem { Id = 1, Description = "1 bathroom" , GYPFilterType = GYPFilterType.Bathrooms },
-                new GYPFilterItem { Id = 2, Description = "2 bathrooms" , GYPFilterType = GYPFilterType.Bathrooms},
-                new GYPFilterItem { Id = 3, Description = "3 bathrooms" , GYPFilterType = GYPFilterType.Bathrooms }
+                new GYPPropertyInfoItem { Id = 1, Description = "1 bathroom" , GYPPropertyInfo = GYPPropertyInfo.Bathrooms },
+                new GYPPropertyInfoItem { Id = 2, Description = "2 bathrooms" , GYPPropertyInfo = GYPPropertyInfo.Bathrooms},
+                new GYPPropertyInfoItem { Id = 3, Description = "3 bathrooms" , GYPPropertyInfo = GYPPropertyInfo.Bathrooms }
             }
         },
         new GYPFilter
         {
-            GYPFilterType = GYPFilterType.Garage,
+            GYPPropertyInfo = GYPPropertyInfo.Garage,
             Description = "Garage",
-            Items = new List<GYPFilterItem>
+            Items = new List<GYPPropertyInfoItem>
             {
-                new GYPFilterItem { Id = 1, Description = "1 space" , GYPFilterType = GYPFilterType.Garage  },
-                new GYPFilterItem { Id = 2, Description = "2 spaces" , GYPFilterType = GYPFilterType.Garage  },
-                new GYPFilterItem { Id = 3, Description = "3 spaces" , GYPFilterType = GYPFilterType.Garage   }
+                new GYPPropertyInfoItem { Id = 1, Description = "1 space" , GYPPropertyInfo = GYPPropertyInfo.Garage  },
+                new GYPPropertyInfoItem { Id = 2, Description = "2 spaces" , GYPPropertyInfo = GYPPropertyInfo.Garage  },
+                new GYPPropertyInfoItem { Id = 3, Description = "3 spaces" , GYPPropertyInfo = GYPPropertyInfo.Garage   }
             }
         },
         new GYPFilter
         {
-            GYPFilterType = GYPFilterType.PropertyStatus,
+            GYPPropertyInfo = GYPPropertyInfo.PropertyStatus,
             Description = "Property Status",
-            Items = new List<GYPFilterItem>
+            Items = new List<GYPPropertyInfoItem>
             {
-                new GYPFilterItem { Id = 1, Description = "New" , GYPFilterType = GYPFilterType.PropertyStatus },
-                new GYPFilterItem { Id = 2, Description = "Used" , GYPFilterType = GYPFilterType.PropertyStatus}
+                new GYPPropertyInfoItem { Id = 1, Description = "New" , GYPPropertyInfo = GYPPropertyInfo.PropertyStatus },
+                new GYPPropertyInfoItem { Id = 2, Description = "Used" , GYPPropertyInfo = GYPPropertyInfo.PropertyStatus}
             }
         },
         new GYPFilter
         {
-            GYPFilterType = GYPFilterType.Furnished,
+            GYPPropertyInfo = GYPPropertyInfo.Furnished,
             Description = "Furnished",
-            Items = new List<GYPFilterItem>
+            Items = new List<GYPPropertyInfoItem>
             {
-                new GYPFilterItem { Id = 1, Description = "Yes" , GYPFilterType = GYPFilterType.Furnished },
-                new GYPFilterItem { Id = 2, Description = "No" , GYPFilterType = GYPFilterType.Furnished}
+                new GYPPropertyInfoItem { Id = 1, Description = "Furnished" , GYPPropertyInfo = GYPPropertyInfo.Furnished },
+                new GYPPropertyInfoItem { Id = 2, Description = "Not Furnished" , GYPPropertyInfo = GYPPropertyInfo.Furnished}
             }
         },
     };

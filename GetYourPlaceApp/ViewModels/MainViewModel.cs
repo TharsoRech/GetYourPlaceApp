@@ -1,25 +1,45 @@
 ﻿using CommunityToolkit.Maui.Views;
 using GetYourPlaceApp.Components;
+using GetYourPlaceApp.Helpers;
 using GetYourPlaceApp.Managers;
 using GetYourPlaceApp.Models;
+using GetYourPlaceApp.Repository.Filter;
+using GetYourPlaceApp.Repository.Properties;
 
 namespace GetYourPlaceApp.ViewModels;
 
 public partial class MainViewModel : BaseViewModel, IDisposable
 {
     #region variables
+    private static IPropertiesRepository _PropertiesRepository;
     #endregion
 
     #region Properties
     [ObservableProperty]
-    ObservableCollection<GYPFilterItem> filters;
+    ObservableCollection<GYPPropertyInfoItem> filters;
+
+    [ObservableProperty]
+    ObservableCollection<Propertie> currentProperties;
 
     [ObservableProperty]
     bool filtersApplied;
     #endregion
-    public MainViewModel()
-    {
+    public MainViewModel() { 
+
+        if (_PropertiesRepository is null)
+            _PropertiesRepository = ServiceHelper.GetService<IPropertiesRepository>();
+
         FilterManager.Instance.FilterUpdated += FilterUpdated;
+
+        GetProperties();
+    }
+
+    public async Task GetProperties()
+    {
+        Task.Run(async () =>
+        {
+            CurrentProperties = new ObservableCollection<Propertie>(await _PropertiesRepository.GetProperties());
+        }).Wait();
     }
     [RelayCommand]
     public async Task ShowFilter()
@@ -41,12 +61,14 @@ public partial class MainViewModel : BaseViewModel, IDisposable
         FilterManager.Instance.FilterUpdated -= FilterUpdated;
     }
 
-    private void FilterUpdated(object sender,List<GYPFilterItem> filterItems)
+    private void FilterUpdated(object sender,List<GYPPropertyInfoItem> filterItems)
     {
         if(filterItems != null)
         {
-            Filters = new ObservableCollection<GYPFilterItem>(filterItems);
+            Filters = new ObservableCollection<GYPPropertyInfoItem>(filterItems);
             FiltersApplied = filterItems.Any();
+
+            GetProperties();
         }
     }
 }

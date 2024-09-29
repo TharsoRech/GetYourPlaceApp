@@ -1,6 +1,6 @@
 ﻿namespace GetYourPlaceApp.Models.Enums
 {
-    public enum GYPFilterType
+    public enum GYPPropertyInfo
     {
         PropertyType = 1,  
         City = 2,          

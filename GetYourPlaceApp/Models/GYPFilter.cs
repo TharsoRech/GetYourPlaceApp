@@ -6,9 +6,9 @@ namespace GetYourPlaceApp.Models
     {
        public string Description { get; set; }
 
-        public GYPFilterType GYPFilterType { get; set; }
+        public GYPPropertyInfo GYPPropertyInfo { get; set; }
 
-        public List<GYPFilterItem> Items { get; set; }
+        public List<GYPPropertyInfoItem> Items { get; set; }
 
         public GYPFilter SelectedGYPFilter { get; set; } // Add this property
 

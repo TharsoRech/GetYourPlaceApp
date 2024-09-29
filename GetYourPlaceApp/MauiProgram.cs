@@ -2,6 +2,7 @@
 using GetYourPlaceApp.Helpers;
 using GetYourPlaceApp.Repository.Filter;
 using GetYourPlaceApp.Repository.Login;
+using GetYourPlaceApp.Repository.Properties;
 namespace GetYourPlaceApp;
 
 public static class MauiProgram
@@ -35,6 +36,8 @@ public static class MauiProgram
         builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 
         builder.Services.AddScoped<IFilterRepository, FilterRepository>();
+
+        builder.Services.AddScoped<IPropertiesRepository, PropertiesRepository>();
 
         var app = builder.Build();
         ServiceHelper.Initialize(app.Services);
