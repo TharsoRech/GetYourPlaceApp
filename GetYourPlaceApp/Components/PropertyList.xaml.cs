@@ -1,4 +1,5 @@
 using GetYourPlaceApp.Models;
+using System.Linq;
 
 namespace GetYourPlaceApp.Components;
 
@@ -11,9 +12,9 @@ public partial class PropertyList : ContentView
 
     #region Bindable Properties
 
-    public static readonly BindableProperty PropertieListProperty = BindableProperty.Create(
-        nameof(PropertieList),
-        typeof(List<Propertie>),
+    public static readonly BindableProperty PropertysProperty = BindableProperty.Create(
+        nameof(Propertys),
+        typeof(ObservableCollection<Property>),
         typeof(PropertyList)
         );
 
@@ -27,10 +28,10 @@ public partial class PropertyList : ContentView
 
     #region [Properties]
 
-    public List<Propertie> PropertieList
+    public ObservableCollection<Property> Propertys
     {
-        get => (List<Propertie>)this.GetValue(PropertieListProperty);
-        set => this.SetValue(PropertieListProperty, value);
+        get => (ObservableCollection<Property>)this.GetValue(PropertysProperty);
+        set => this.SetValue(PropertysProperty, value);
     }
 
     public bool IsLoading
@@ -68,22 +69,22 @@ public partial class PropertyList : ContentView
         try
         {
             if(filterItem.Contains("Most Recent (High to Low)"))
-                PropertieList = PropertieList.OrderBy(p => p.CreatedDate).ToList();
+                Propertys = new ObservableCollection<Property>(Propertys.OrderByDescending(p => p.PuplishedAt).ToList());
 
             if (filterItem.Contains("Most Recent (Low to High)"))
-                PropertieList = PropertieList.OrderByDescending(p => p.CreatedDate).ToList();
+                Propertys = new ObservableCollection<Property>(Propertys.OrderBy(p => p.PuplishedAt).ToList());
 
             if (filterItem.Contains("Rating (High to Low)"))
-                PropertieList = PropertieList.OrderBy(p => p.Star).ToList();
+                Propertys = new ObservableCollection<Property>(Propertys.OrderByDescending(p => p.Star).ToList());
 
             if (filterItem.Contains("Rating (Low to High)"))
-                PropertieList = PropertieList.OrderByDescending(p => p.Star).ToList();
+                Propertys = new ObservableCollection<Property>(Propertys.OrderBy(p => p.Star).ToList());
 
             if (filterItem.Contains("Price (High to Low)"))
-                PropertieList = PropertieList.OrderBy(p => p.Price).ToList();
+                Propertys = new ObservableCollection<Property>(Propertys.OrderByDescending(p => p.Price).ToList());
 
             if (filterItem.Contains("Price (Low to High)"))
-                PropertieList = PropertieList.OrderByDescending(p => p.Price).ToList();
+                Propertys = new ObservableCollection<Property>(Propertys.OrderBy(p => p.Price).ToList());
 
         }
         catch (Exception ex)

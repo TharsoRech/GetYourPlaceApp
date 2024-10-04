@@ -19,10 +19,10 @@ public partial class MainViewModel : BaseViewModel, IDisposable
     ObservableCollection<GYPPropertyInfoItem> filters;
 
     [ObservableProperty]
-    ObservableCollection<Propertie> currentProperties;
+    ObservableCollection<Property> currentProperties;
 
     [ObservableProperty]
-    bool loadingProperties;
+    bool propertysLoading;
 
     [ObservableProperty]
     bool filtersApplied;
@@ -39,13 +39,13 @@ public partial class MainViewModel : BaseViewModel, IDisposable
 
     public async Task GetProperties()
     {
-        LoadingProperties = true;
+        PropertysLoading = true;
         try
         {
             Task.Run(async () =>
             {
-                await Task.Delay(2000);
-                CurrentProperties = new ObservableCollection<Propertie>(await _PropertiesRepository.GetProperties());
+                Task.Delay(2000);
+                CurrentProperties = new ObservableCollection<Property>(await _PropertiesRepository.GetProperties());
             }).Wait();
         }
         catch (Exception ex)
@@ -55,7 +55,7 @@ public partial class MainViewModel : BaseViewModel, IDisposable
         }
         finally
         {
-            LoadingProperties = false;
+            PropertysLoading = false;
         }
 
     }

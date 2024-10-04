@@ -3,12 +3,18 @@
     x:Class="GetYourPlaceApp.Components.PropertyList"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cm="clr-namespace:GetYourPlaceApp.Components"
+    xmlns:models="clr-namespace:GetYourPlaceApp.Models"
     xmlns:sk="clr-namespace:Maui.Skeleton;assembly=Sharpnado.HorusSkeleton.Maui"
     x:Name="propetieList">
     <Grid RowDefinitions="auto,auto">
         <Picker
             Title="Order by"
             Margin="16"
+            sk:Skeleton.Animation="{sk:DefaultAnimation Fade}"
+            sk:Skeleton.BackgroundColor="{StaticResource GreenGYP}"
+            sk:Skeleton.IsBusy="{Binding IsLoading, Source={x:Reference propetieList}}"
+            sk:Skeleton.IsParent="True"
             SelectedIndexChanged="OnPickerSelectedIndexChanged">
             <Picker.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
@@ -23,11 +29,16 @@
         </Picker>
         <ScrollView
             Grid.Row="1"
-            sk:Skeleton.IsParent="True"
-	        sk:Skeleton.IsBusy="{Binding IsLoading}"
-	        sk:Skeleton.Animation="{sk:DefaultAnimation Fade}" >
-            <CollectionView ItemsSource="{Binding BindingContext.PropertieList, Source={x:Reference propetieList}}" VerticalOptions="Start">
-                <CollectionView.ItemTemplate />
+            sk:Skeleton.Animation="{sk:DefaultAnimation Fade}"
+            sk:Skeleton.BackgroundColor="{StaticResource GreenGYP}"
+            sk:Skeleton.IsBusy="{Binding IsLoading, Source={x:Reference propetieList}}"
+            sk:Skeleton.IsParent="True">
+            <CollectionView ItemsSource="{Binding Propertys, Source={x:Reference propetieList}}" VerticalOptions="Start">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <cm:PropertyComponent Property="{Binding .}" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
             </CollectionView>
         </ScrollView>
     </Grid>

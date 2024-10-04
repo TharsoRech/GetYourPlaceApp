@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:GetYourPlaceApp.Models"
+             x:Name="propertyComponent"
+             x:Class="GetYourPlaceApp.Components.PropertyComponent">
+    <Border
+        Margin="8"
+        BackgroundColor="Transparent"
+        Stroke="Transparent"
+        StrokeThickness="0">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="28" />
+        </Border.StrokeShape>
+        <Grid RowDefinitions="auto,auto" 
+          BackgroundColor="{StaticResource GreenGYP}"
+          VerticalOptions="FillAndExpand"
+          HorizontalOptions="FillAndExpand"
+          ColumnDefinitions="*,*"
+          Padding="0,0,0,16"
+          RowSpacing="16">
+            <Image 
+            Source="{Binding Property.Base64Image, Source={x:Reference propertyComponent}}"
+            HeightRequest="160"
+            Margin="16"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand"
+            WidthRequest="160" ></Image>
+            <Grid Grid.Column="2" 
+              RowDefinitions="auto,auto,auto,auto,auto"
+              RowSpacing="16"
+              Margin="12"
+              HorizontalOptions="CenterAndExpand"
+              VerticalOptions="CenterAndExpand">
+                <Label Text="{Binding Property.Description, 
+                    Source={x:Reference propertyComponent}}"
+                   TextColor="{StaticResource White}"
+                       FontSize="Subtitle">
+                </Label>
+                <Label Text="{Binding Property.AddressFormated, 
+                    Source={x:Reference propertyComponent}}"
+                   Grid.Row="1"
+                   TextColor="{StaticResource White}">
+                </Label>
+                <Label Text="{Binding Property.Type, 
+                    Source={x:Reference propertyComponent}}" 
+                       Grid.Row="2"
+                       TextColor="{StaticResource White}"></Label>
+                <Label Text="{Binding Property.TypeOFRentFormated, 
+                    Source={x:Reference propertyComponent}}" 
+                   Grid.Row="3"
+                   TextColor="{StaticResource White}"></Label>
+                <Label Text="{Binding Property.PriceFormated, 
+                    Source={x:Reference propertyComponent}}" 
+                   Grid.Row="4"
+                   TextColor="{StaticResource White}">
+
+                </Label>
+            </Grid>
+            <Label Text="{Binding Property.PublishedAtFormated, Source={x:Reference propertyComponent}}" 
+                    Grid.Row="1"
+                   Margin="16,0,0,0"
+                    TextColor="{StaticResource White}">
+            </Label>
+            <Button Grid.Column="1"
+                    Grid.Row="1"
+                    Margin="0,0,16,0"
+                    Text="More Information"
+                    ></Button>
+        </Grid>
+    </Border>
+</ContentView>

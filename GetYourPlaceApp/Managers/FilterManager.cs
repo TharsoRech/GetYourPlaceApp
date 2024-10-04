@@ -10,7 +10,7 @@ namespace GetYourPlaceApp.Managers
     public sealed class FilterManager
     {
         #region Variables
-        public static List<GYPPropertyInfoItem> Filters;
+        public static List<GYPPropertyInfoItem> Filters = new List<GYPPropertyInfoItem>();
         public event EventHandler<List<GYPPropertyInfoItem>> FilterUpdated;
         private static FilterManager instance = null;
         #endregion

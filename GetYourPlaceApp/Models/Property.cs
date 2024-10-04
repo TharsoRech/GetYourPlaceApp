@@ -2,7 +2,7 @@
 
 namespace GetYourPlaceApp.Models
 {
-    public class Propertie
+    public class Property
     {
         public int Id { get; set; }
         public int GYPUserProfileId { get; set; }
@@ -14,8 +14,16 @@ namespace GetYourPlaceApp.Models
         public bool IsAvailable { get; set; }
         public string Base64Image { get; set; }
         public int Star { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public DateTime PuplishedAt { get; set; }
         public List<GYPPropertyInfoItem> PropertyInformations { get; set; }
         public ImageSource ImageSource => Base64Image.Base64ToImageSource();
+
+        public string PriceFormated => $"Price: {String.Format("{0:C}", Price)}";
+        public string TypeOFRentFormated => $"type of acquisition: {TypeOfRent?.Description}";
+        public string PublishedAtFormated => $"Published At: {PuplishedAt.ToShortDateString()}";
+        public string AddressFormated => $"Address: {Address}";
+        public string Type => $"Type: {PropertyInformations.FirstOrDefault(p => p.GYPPropertyInfo 
+        == Enums.GYPPropertyInfo.PropertyType)?.Description}";
+
     }
 }
