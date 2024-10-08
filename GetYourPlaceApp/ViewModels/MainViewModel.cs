@@ -26,6 +26,9 @@ public partial class MainViewModel : BaseViewModel, IDisposable
 
     [ObservableProperty]
     bool filtersApplied;
+
+    [ObservableProperty]
+    string searchText;
     #endregion
     public MainViewModel() { 
 
@@ -33,6 +36,7 @@ public partial class MainViewModel : BaseViewModel, IDisposable
             _PropertiesRepository = ServiceHelper.GetService<IPropertiesRepository>();
 
         FilterManager.Instance.FilterUpdated += FilterUpdated;
+        FilterManager.Instance.FilterChangeOrder += FilterOrderUpdated;
 
         GetProperties();
     }
@@ -46,6 +50,10 @@ public partial class MainViewModel : BaseViewModel, IDisposable
             {
                 Task.Delay(2000);
                 CurrentProperties = new ObservableCollection<Property>(await _PropertiesRepository.GetProperties());
+
+                if (FilterManager.Instance.CurrentFilterSelected != null)
+                    ApplyPropertiesByOrder(FilterManager.Instance.CurrentFilterSelected);
+
             }).Wait();
         }
         catch (Exception ex)
@@ -74,9 +82,23 @@ public partial class MainViewModel : BaseViewModel, IDisposable
         Application.Current.MainPage.ShowPopupAsync(new FilterEditPopUp());
     }
 
+    [RelayCommand]
+    public async Task SearchPropertie()
+    {
+        FilterManager.Instance.CustomFilter = SearchText;
+        GetProperties();
+    }
+
     public void Dispose()
     {
         FilterManager.Instance.FilterUpdated -= FilterUpdated;
+        FilterManager.Instance.FilterChangeOrder -= FilterOrderUpdated;
+    }
+
+    private void FilterOrderUpdated(object sender, string filter)
+    {
+        if (filter != null)
+            ApplyPropertiesByOrder(filter);
     }
 
     private void FilterUpdated(object sender,List<GYPPropertyInfoItem> filterItems)
@@ -88,5 +110,37 @@ public partial class MainViewModel : BaseViewModel, IDisposable
 
             GetProperties();
         }
+    }
+
+    public void ApplyPropertiesByOrder(string filterItem)
+    {
+        PropertysLoading = true;
+        try
+        {
+            if (filterItem.Contains("Most Recent (High to Low)"))
+                CurrentProperties = new ObservableCollection<Property>(CurrentProperties.OrderByDescending(p => p.PuplishedAt).ToList());
+
+            if (filterItem.Contains("Most Recent (Low to High)"))
+                CurrentProperties = new ObservableCollection<Property>(CurrentProperties.OrderBy(p => p.PuplishedAt).ToList());
+
+            if (filterItem.Contains("Rating (High to Low)"))
+                CurrentProperties = new ObservableCollection<Property>(CurrentProperties.OrderByDescending(p => p.Star).ToList());
+
+            if (filterItem.Contains("Rating (Low to High)"))
+                CurrentProperties = new ObservableCollection<Property>(CurrentProperties.OrderBy(p => p.Star).ToList());
+
+            if (filterItem.Contains("Price (High to Low)"))
+                CurrentProperties = new ObservableCollection<Property>(CurrentProperties.OrderByDescending(p => p.Price).ToList());
+
+            if (filterItem.Contains("Price (Low to High)"))
+                CurrentProperties = new ObservableCollection<Property>(CurrentProperties.OrderBy(p => p.Price).ToList());
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
+        }
+        finally
+        { PropertysLoading = false; }
     }
 }

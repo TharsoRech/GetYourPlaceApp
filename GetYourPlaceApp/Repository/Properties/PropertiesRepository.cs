@@ -169,19 +169,39 @@ namespace GetYourPlaceApp.Repository.Properties
                                         new GYPPropertyInfoItem { Id = 1, Description = "Furnished" , GYPPropertyInfo = GYPPropertyInfo.Furnished}
                     }
                 }
-                     };
+                         };
 
                 var propertysToRemove = new List<Property>();
-                foreach(var filter in FilterManager.Instance.GetFilters())
-                {
-                   foreach(var propertie in propertiesData)
+                foreach(var propertie in propertiesData)
+                { 
+                    foreach (var filter in FilterManager.Instance.GetFilters())
                     {
-                        var found = propertie.PropertyInformations.FirstOrDefault(
-                            p => p.GYPPropertyInfo == filter.GYPPropertyInfo &&
-                            p.Description.Contains(filter.Description));
+                        var propertyFound = propertie.PropertyInformations.
+                            FirstOrDefault(
+                            p => p.GYPPropertyInfo == filter.GYPPropertyInfo 
+                            && p.Description.Contains(filter.Description));
 
-                        if(found is null)
+                        if(propertyFound is null)
+                        {
                             propertysToRemove.Add(propertie);
+                            break;
+                        }
+                    }
+
+                    if (FilterManager.Instance.CustomFilter != null)
+                    {
+                        var propertyFound = propertie.PropertyInformations
+                            .FirstOrDefault(
+                              p => p.Description.
+                              Contains(FilterManager.Instance.CustomFilter)); 
+                        
+                        if (propertyFound is null && 
+                            !propertie.Description.ToLower().
+                            Contains(FilterManager.Instance.CustomFilter.ToLower()))
+                        {
+                            propertysToRemove.Add(propertie);
+                        }
+          
                     }
                 }
 

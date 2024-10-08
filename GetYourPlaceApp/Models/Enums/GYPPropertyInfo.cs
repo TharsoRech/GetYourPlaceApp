@@ -9,6 +9,6 @@
         Bathrooms = 5,      
         Garage = 6,           
         PropertyStatus = 7,  
-        Furnished = 8         
+        Furnished = 8 
     }
 }

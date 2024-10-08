@@ -12,6 +12,10 @@ namespace GetYourPlaceApp.Managers
         #region Variables
         public static List<GYPPropertyInfoItem> Filters = new List<GYPPropertyInfoItem>();
         public event EventHandler<List<GYPPropertyInfoItem>> FilterUpdated;
+        public string CurrentFilterSelected;
+        public string CustomFilter;
+        public event EventHandler<string> FilterChangeOrder;
+
         private static FilterManager instance = null;
         #endregion
 
@@ -70,6 +74,12 @@ namespace GetYourPlaceApp.Managers
         public List<GYPPropertyInfoItem> GetFilters()
         {
             return Filters;
+        }
+
+        public void RaiseChangeOrderEvent(string filter)
+        {
+            CurrentFilterSelected = filter;
+            FilterChangeOrder?.Invoke(null, filter);
         }
     }
 }
