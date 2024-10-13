@@ -3,6 +3,7 @@
     x:Class="GetYourPlaceApp.Components.PropertyComponent"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cm="clr-namespace:GetYourPlaceApp.Components"
     xmlns:models="clr-namespace:GetYourPlaceApp.Models"
     x:Name="propertyComponent">
     <Border
@@ -18,16 +19,27 @@
             BackgroundColor="{StaticResource GreenGYP}"
             ColumnDefinitions="*,*"
             HorizontalOptions="FillAndExpand"
-            RowDefinitions="auto,auto"
-            RowSpacing="16"
+            RowDefinitions="*,*,*"
+            RowSpacing="4"
             VerticalOptions="FillAndExpand">
-            <Image
-                Margin="16"
-                HeightRequest="160"
-                HorizontalOptions="CenterAndExpand"
-                Source="{Binding Property.Base64Image, Source={x:Reference propertyComponent}}"
-                VerticalOptions="CenterAndExpand"
-                WidthRequest="160" />
+            <Grid
+                RowDefinitions="*,*"
+                RowSpacing="4"
+                VerticalOptions="StartAndExpand">
+                <Image
+                    Margin="16,16,16,0"
+                    Aspect="AspectFit"
+                    HeightRequest="140"
+                    HorizontalOptions="CenterAndExpand"
+                    Source="{Binding Property.Base64Image, Source={x:Reference propertyComponent}}"
+                    VerticalOptions="Start" />
+                <cm:StarRatingComponent
+                    Grid.Row="1"
+                    CanChangeStars="False"
+                    Rating="{Binding Property.Star, Source={x:Reference propertyComponent}}"
+                    StarCount="5"
+                    VerticalOptions="StartAndExpand" />
+            </Grid>
             <Grid
                 Grid.Column="2"
                 Margin="12"
@@ -59,12 +71,15 @@
             <Label
                 Grid.Row="1"
                 Margin="16,0,0,0"
+                FontSize="Small"
                 Text="{Binding Property.PublishedAtFormated, Source={x:Reference propertyComponent}}"
-                TextColor="{StaticResource White}" />
+                TextColor="{StaticResource White}"
+                VerticalOptions="EndAndExpand" />
             <Button
                 Grid.Row="1"
                 Grid.Column="1"
                 Margin="0,0,16,0"
+                HeightRequest="50"
                 Text="More Information" />
         </Grid>
     </Border>

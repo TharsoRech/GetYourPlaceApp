@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="GetYourPlaceApp.Components.StarRatingComponent"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="startRatingComponent">
+    <FlexLayout
+        BindableLayout.ItemsSource="{Binding StarList, Source={x:Reference startRatingComponent}}"
+        Direction="Row"
+        HorizontalOptions="CenterAndExpand"
+        VerticalOptions="Start"
+        Wrap="Wrap">
+        <BindableLayout.ItemTemplate>
+            <DataTemplate>
+                <Path
+                    Margin="4"
+                    Aspect="Uniform"
+                    Data="M50 0 L61.8 38 H100 L70.9 61.8 L82.7 100 L50 77.2 L17.3 100 L29.1 61.8 L0 38 H38.2 Z"
+                    Fill="{Binding StarColor, Mode=TwoWay}"
+                    HeightRequest="18"
+                    IsEnabled="{Binding CanChangeStars, Source={x:Reference startRatingComponent}}"
+                    VerticalOptions="Start"
+                    WidthRequest="18">
+                    <Path.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding StarRatingClickedCommand, Source={x:Reference startRatingComponent}, Mode=TwoWay}"
+                            CommandParameter="{Binding .}"
+                            NumberOfTapsRequired="1" />
+                    </Path.GestureRecognizers>
+                </Path>
+            </DataTemplate>
+        </BindableLayout.ItemTemplate>
+    </FlexLayout>
+</ContentView>

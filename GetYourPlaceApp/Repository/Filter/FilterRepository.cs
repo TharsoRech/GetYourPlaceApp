@@ -89,6 +89,16 @@ namespace GetYourPlaceApp.Repository.Filter
                 new GYPPropertyInfoItem { Id = 2, Description = "Not Furnished" , GYPPropertyInfo = GYPPropertyInfo.Furnished}
             }
         },
+               new GYPFilter
+        {
+            GYPPropertyInfo = GYPPropertyInfo.TypeOfRent,
+            Description = "Type of Rent",
+            Items = new List<GYPPropertyInfoItem>
+            {
+                new GYPPropertyInfoItem { Id = 1, Description = "Sell" , GYPPropertyInfo = GYPPropertyInfo.TypeOfRent },
+                new GYPPropertyInfoItem { Id = 2, Description = "Rent" , GYPPropertyInfo = GYPPropertyInfo.TypeOfRent}
+            }
+        },
     };
         }
     }

@@ -17,14 +17,14 @@
                 VerticalOptions="FillAndExpand">
                 <Entry
                     FontSize="Small"
-                    Text="{Binding SearchText}"
                     Placeholder="Find your propertie"
+                    Text="{Binding SearchText}"
                     TextColor="{StaticResource White}" />
                 <Button
                     Grid.Column="1"
                     Margin="8,0,8,8"
-                    Command="{Binding SearchPropertieCommand}"
                     BackgroundColor="{StaticResource GreenGYP}"
+                    Command="{Binding SearchPropertieCommand}"
                     Text="Search" />
                 <Button
                     Grid.Row="1"
