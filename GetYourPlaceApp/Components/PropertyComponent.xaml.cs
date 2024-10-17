@@ -16,6 +16,12 @@ public partial class PropertyComponent : ContentView
       typeof(PropertyComponent)
       );
 
+    public static readonly BindableProperty IsLoadingProperty = BindableProperty.Create(
+    nameof(IsLoading),
+    typeof(bool),
+    typeof(PropertyComponent)
+    );
+
     #endregion
 
     #region [Properties]
@@ -23,6 +29,12 @@ public partial class PropertyComponent : ContentView
     { 
         get => (Property)this.GetValue(PropertyProperty);
         set => this.SetValue(PropertyProperty, value);
+    }
+
+    public bool IsLoading
+    {
+        get => (bool)this.GetValue(IsLoadingProperty);
+        set => this.SetValue(IsLoadingProperty, value);
     }
 
     #endregion

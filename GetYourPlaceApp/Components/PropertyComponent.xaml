@@ -5,6 +5,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:cm="clr-namespace:GetYourPlaceApp.Components"
     xmlns:models="clr-namespace:GetYourPlaceApp.Models"
+    xmlns:sk="clr-namespace:Maui.Skeleton;assembly=Sharpnado.HorusSkeleton.Maui"
+    sk:Skeleton.Animation="{sk:DefaultAnimation Fade}"
+    sk:Skeleton.BackgroundColor="{StaticResource Gray300}"
+    sk:Skeleton.IsBusy="{Binding IsLoading, Source={x:Reference propertyComponent}}"
+    sk:Skeleton.IsParent="True"
     x:Name="propertyComponent">
     <Border
         Margin="8"

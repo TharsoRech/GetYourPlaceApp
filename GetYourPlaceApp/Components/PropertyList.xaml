@@ -11,10 +11,6 @@
         <Picker
             Title="Order by"
             Margin="16"
-            sk:Skeleton.Animation="{sk:DefaultAnimation Fade}"
-            sk:Skeleton.BackgroundColor="{StaticResource GreenGYP}"
-            sk:Skeleton.IsBusy="{Binding IsLoading, Source={x:Reference propetieList}}"
-            sk:Skeleton.IsParent="True"
             SelectedIndexChanged="OnPickerSelectedIndexChanged">
             <Picker.ItemsSource>
                 <x:Array Type="{x:Type x:String}">
@@ -27,19 +23,22 @@
                 </x:Array>
             </Picker.ItemsSource>
         </Picker>
-        <ScrollView
+        <StackLayout
             Grid.Row="1"
+            VerticalOptions="FillAndExpand"
             sk:Skeleton.Animation="{sk:DefaultAnimation Fade}"
-            sk:Skeleton.BackgroundColor="{StaticResource GreenGYP}"
+            sk:Skeleton.BackgroundColor="{StaticResource Gray300}"
             sk:Skeleton.IsBusy="{Binding IsLoading, Source={x:Reference propetieList}}"
             sk:Skeleton.IsParent="True">
-            <CollectionView ItemsSource="{Binding Propertys, Source={x:Reference propetieList}}" VerticalOptions="Start">
+            <CollectionView ItemsSource="{Binding Propertys, Source={x:Reference propetieList}}" >
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <cm:PropertyComponent Property="{Binding .}" />
+                        <cm:PropertyComponent
+                            IsLoading="{Binding IsLoading, Source={x:Reference propetieList}}"
+                            Property="{Binding .}" />
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-        </ScrollView>
+        </StackLayout>
     </Grid>
 </ContentView>

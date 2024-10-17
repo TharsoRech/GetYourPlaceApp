@@ -7,7 +7,7 @@
     xmlns:models="clr-namespace:GetYourPlaceApp.Models"
     xmlns:vm="clr-namespace:GetYourPlaceApp.ViewModels"
     x:DataType="vm:MainViewModel"
-    BackgroundColor="{StaticResource GreenLightGYP}">
+    BackgroundColor="DarkSlateGray">
     <ScrollView>
         <Grid RowDefinitions="auto,auto,auto">
             <Grid
