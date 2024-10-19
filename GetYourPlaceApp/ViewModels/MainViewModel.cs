@@ -5,6 +5,7 @@ using GetYourPlaceApp.Managers;
 using GetYourPlaceApp.Models;
 using GetYourPlaceApp.Repository.Filter;
 using GetYourPlaceApp.Repository.Properties;
+using GetYourPlaceApp.Services.BackGroundTask;
 
 namespace GetYourPlaceApp.ViewModels;
 
@@ -12,6 +13,7 @@ public partial class MainViewModel : BaseViewModel, IDisposable
 {
     #region variables
     private static IPropertiesRepository _PropertiesRepository;
+    BackgroundTaskRunner<List<Property>> _getPropertiesTask;
     #endregion
 
     #region Properties
@@ -46,15 +48,16 @@ public partial class MainViewModel : BaseViewModel, IDisposable
         PropertysLoading = true;
         try
         {
-            Task.Run(async () =>
+            _getPropertiesTask =  new BackgroundTaskRunner<List<Property>>();
+            _getPropertiesTask.RunInBackground(async () => await _PropertiesRepository.GetProperties());
+            _getPropertiesTask.StatusChanged = (status) =>
             {
-                Task.Delay(2000);
-                CurrentProperties = new ObservableCollection<Property>(await _PropertiesRepository.GetProperties());
+                CurrentProperties = new ObservableCollection<Property>();
 
                 if (FilterManager.Instance.CurrentFilterSelected != null)
                     ApplyPropertiesByOrder(FilterManager.Instance.CurrentFilterSelected);
+            }
 
-            }).Wait();
         }
         catch (Exception ex)
         {
