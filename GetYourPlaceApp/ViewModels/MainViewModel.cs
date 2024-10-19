@@ -50,14 +50,14 @@ public partial class MainViewModel : BaseViewModel, IDisposable
         {
             _getPropertiesTask =  new BackgroundTaskRunner<List<Property>>();
             _getPropertiesTask.RunInBackground(async () => await _PropertiesRepository.GetProperties());
-            _getPropertiesTask.StatusChanged = (status) =>
+            _getPropertiesTask.StatusChanged += (serder, e) =>
             {
-                CurrentProperties = new ObservableCollection<Property>();
+                if (e.TaskStatus == BackgroundTaskStatus.Completed && e.Result != null)
+                    CurrentProperties = new ObservableCollection<Property>(e.Result);
 
                 if (FilterManager.Instance.CurrentFilterSelected != null)
                     ApplyPropertiesByOrder(FilterManager.Instance.CurrentFilterSelected);
-            }
-
+            };
         }
         catch (Exception ex)
         {
