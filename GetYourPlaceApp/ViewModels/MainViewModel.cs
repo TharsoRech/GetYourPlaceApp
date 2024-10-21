@@ -13,6 +13,7 @@ public partial class MainViewModel : BaseViewModel, IDisposable
     #region variables
     private static IPropertiesRepository _PropertiesRepository;
     BackgroundTaskRunner<List<Property>> _getPropertiesTask;
+    BackgroundTaskRunner<bool> _applyFilterTask;
     #endregion
 
     #region Properties
@@ -57,9 +58,16 @@ public partial class MainViewModel : BaseViewModel, IDisposable
                         CurrentProperties = new ObservableCollection<Property>(e.Result);
 
                         if (FilterManager.Instance.CurrentFilterSelected != null)
-                            ApplyPropertiesByOrder(FilterManager.Instance.CurrentFilterSelected);
+                           ApplyPropertiesByOrder(FilterManager.Instance.CurrentFilterSelected);
 
+                        PropertiesLoading = false;
                     });
+                }
+                else if(e.TaskStatus == BackgroundTaskStatus.Failed || 
+                   (e.TaskStatus == BackgroundTaskStatus.Completed && 
+                    e.Result is null))
+                {
+                    PropertiesLoading = false;
                 }
             };
         }
@@ -68,9 +76,32 @@ public partial class MainViewModel : BaseViewModel, IDisposable
 
            Console.WriteLine(ex.ToString());    
         }
-        finally
+
+    }
+
+    public async Task ApplyPropertiesByOrderInBackGround(string filter)
+    {
+        PropertiesLoading = true;
+
+        try
         {
-            PropertiesLoading = false;
+            _applyFilterTask = new BackgroundTaskRunner<bool>();
+            _applyFilterTask.RunInBackground(async () => await ApplyPropertiesByOrder(filter));
+            _applyFilterTask.StatusChanged += (serder, e) =>
+            {
+                if (e.TaskStatus == BackgroundTaskStatus.Completed || 
+                    e.TaskStatus == BackgroundTaskStatus.Failed )
+                {
+                    MainThread.BeginInvokeOnMainThread(() =>
+                    {
+                        PropertiesLoading = false;
+                    });
+                }
+            };
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.ToString());
         }
 
     }
@@ -107,7 +138,7 @@ public partial class MainViewModel : BaseViewModel, IDisposable
     private void FilterOrderUpdated(object sender, string filter)
     {
         if (filter != null)
-            ApplyPropertiesByOrder(filter);
+            ApplyPropertiesByOrderInBackGround(filter);
     }
 
     private void FilterUpdated(object sender,List<GYPPropertyInfoItem> filterItems)
@@ -121,9 +152,8 @@ public partial class MainViewModel : BaseViewModel, IDisposable
         }
     }
 
-    public void ApplyPropertiesByOrder(string filterItem)
-    {
-        PropertiesLoading = true;
+    public async Task<bool> ApplyPropertiesByOrder(string filterItem)
+    {  
         try
         {
             if (filterItem.Contains("Most Recent (High to Low)"))
@@ -148,8 +178,9 @@ public partial class MainViewModel : BaseViewModel, IDisposable
         catch (Exception ex)
         {
             Console.WriteLine(ex.ToString());
+            return false;
         }
-        finally
-        { PropertiesLoading = false; }
+
+        return true;
     }
 }

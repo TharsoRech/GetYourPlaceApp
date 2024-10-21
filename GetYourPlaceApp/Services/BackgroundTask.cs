@@ -56,10 +56,11 @@
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex);
-                    OnStatusChanged(BackgroundTaskStatus.Completed, default, _cancellationTokenSource, ex);
+                    OnStatusChanged(BackgroundTaskStatus.Failed, default, _cancellationTokenSource, ex);
                 }
             }, _cancellationTokenSource.Token);
         }
+
 
         private void OnStatusChanged(BackgroundTaskStatus
             backgroundTaskStatus,
@@ -70,7 +71,7 @@
             {
                 if(!_runnableTask.IsCanceled)
                 {
-                    StatusChanged.Invoke(this,new BackgroundTaskEventArgs<T>(backgroundTaskStatus,result,exception));
+                    StatusChanged?.Invoke(this,new BackgroundTaskEventArgs<T>(backgroundTaskStatus,result,exception));
                 }
             }
         }
