@@ -5,9 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:cm="clr-namespace:GetYourPlaceApp.Components"
     xmlns:models="clr-namespace:GetYourPlaceApp.Models"
-    xmlns:sk="clr-namespace:Maui.Skeleton;assembly=Sharpnado.HorusSkeleton.Maui"
-    x:Name="propertyComponent"
-    sk:Skeleton.IsParent="True">
+    x:Name="propertyComponent">
     <Border
         Margin="8"
         BackgroundColor="Transparent"
@@ -30,9 +28,6 @@
                 VerticalOptions="StartAndExpand">
                 <Image
                     Margin="16,16,16,0"
-                    sk:Skeleton.BackgroundColor="{StaticResource Gray300}"
-                    sk:Skeleton.IsBusy="{Binding IsLoading, Source={x:Reference propertyComponent}}"
-                    sk:Skeleton.IsParent="True"
                     Aspect="AspectFit"
                     HeightRequest="140"
                     HorizontalOptions="CenterAndExpand"
@@ -40,9 +35,6 @@
                     VerticalOptions="Start" />
                 <cm:StarRatingComponent
                     Grid.Row="1"
-                    sk:Skeleton.BackgroundColor="{StaticResource Gray300}"
-                    sk:Skeleton.IsBusy="{Binding IsLoading, Source={x:Reference propertyComponent}}"
-                    sk:Skeleton.IsParent="True"
                     CanChangeStars="False"
                     Rating="{Binding Property.Star, Source={x:Reference propertyComponent}}"
                     StarCount="5"
@@ -56,47 +48,29 @@
                 RowSpacing="16"
                 VerticalOptions="CenterAndExpand">
                 <Label
-                    sk:Skeleton.BackgroundColor="{StaticResource Gray300}"
-                    sk:Skeleton.IsBusy="{Binding IsLoading, Source={x:Reference propertyComponent}}"
-                    sk:Skeleton.IsParent="True"
                     FontSize="Subtitle"
                     Text="{Binding Property.Description, Source={x:Reference propertyComponent}}"
                     TextColor="{StaticResource White}" />
                 <Label
                     Grid.Row="1"
-                    sk:Skeleton.BackgroundColor="{StaticResource Gray300}"
-                    sk:Skeleton.IsBusy="{Binding IsLoading, Source={x:Reference propertyComponent}}"
-                    sk:Skeleton.IsParent="True"
                     Text="{Binding Property.AddressFormated, Source={x:Reference propertyComponent}}"
                     TextColor="{StaticResource White}" />
                 <Label
                     Grid.Row="2"
-                    sk:Skeleton.BackgroundColor="{StaticResource Gray300}"
-                    sk:Skeleton.IsBusy="{Binding IsLoading, Source={x:Reference propertyComponent}}"
-                    sk:Skeleton.IsParent="True"
                     Text="{Binding Property.Type, Source={x:Reference propertyComponent}}"
                     TextColor="{StaticResource White}" />
                 <Label
                     Grid.Row="3"
-                    sk:Skeleton.BackgroundColor="{StaticResource Gray300}"
-                    sk:Skeleton.IsBusy="{Binding IsLoading, Source={x:Reference propertyComponent}}"
-                    sk:Skeleton.IsParent="True"
                     Text="{Binding Property.TypeOFRentFormated, Source={x:Reference propertyComponent}}"
                     TextColor="{StaticResource White}" />
                 <Label
                     Grid.Row="4"
-                    sk:Skeleton.BackgroundColor="{StaticResource Gray300}"
-                    sk:Skeleton.IsBusy="{Binding IsLoading, Source={x:Reference propertyComponent}}"
-                    sk:Skeleton.IsParent="True"
                     Text="{Binding Property.PriceFormated, Source={x:Reference propertyComponent}}"
                     TextColor="{StaticResource White}" />
             </Grid>
             <Label
                 Grid.Row="1"
                 Margin="16,0,0,0"
-                sk:Skeleton.BackgroundColor="{StaticResource Gray300}"
-                sk:Skeleton.IsBusy="{Binding IsLoading, Source={x:Reference propertyComponent}}"
-                sk:Skeleton.IsParent="True"
                 FontSize="Small"
                 Text="{Binding Property.PublishedAtFormated, Source={x:Reference propertyComponent}}"
                 TextColor="{StaticResource White}"

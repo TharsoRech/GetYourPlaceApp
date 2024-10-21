@@ -5,11 +5,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:cm="clr-namespace:GetYourPlaceApp.Components"
     xmlns:models="clr-namespace:GetYourPlaceApp.Models"
+    xmlns:sk="clr-namespace:Maui.Skeleton;assembly=Sharpnado.HorusSkeleton.Maui"
     xmlns:vm="clr-namespace:GetYourPlaceApp.ViewModels"
     x:DataType="vm:MainViewModel"
     BackgroundColor="DarkSlateGray">
     <ScrollView>
-        <Grid RowDefinitions="auto,auto,auto">
+        <Grid RowDefinitions="auto,*">
             <Grid
                 Margin="16,8,0,0"
                 ColumnDefinitions="*,*"
@@ -42,8 +43,9 @@
                     Text="Edit Filter" />
             </Grid>
             <cm:PropertyList
+                x:Name="propertylist"
                 Grid.Row="1"
-                IsLoading="{Binding PropertysLoading}"
+                IsLoading="{Binding PropertiesLoading}"
                 Propertys="{Binding CurrentProperties}" />
         </Grid>
     </ScrollView>

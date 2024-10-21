@@ -43,9 +43,6 @@
 
         public void RunInBackground(Func<Task<T>> backGroundTask)
         {
-            if (_runnableTask is null || _runnableTask.IsCompleted)
-                Dispose();
-
             _cancellationTokenSource = new CancellationTokenSource(10000);
             _runnableTask = Task.Factory.StartNew(async () =>
             {
@@ -71,7 +68,7 @@
         {
             if(_runnableTask !=null && _cancellationTokenSource != null)
             {
-                if(!_runnableTask.IsCanceled && _cancellationTokenSource.IsCancellationRequested)
+                if(!_runnableTask.IsCanceled)
                 {
                     StatusChanged.Invoke(this,new BackgroundTaskEventArgs<T>(backgroundTaskStatus,result,exception));
                 }

@@ -3,7 +3,6 @@ using GetYourPlaceApp.Components;
 using GetYourPlaceApp.Helpers;
 using GetYourPlaceApp.Managers;
 using GetYourPlaceApp.Models;
-using GetYourPlaceApp.Repository.Filter;
 using GetYourPlaceApp.Repository.Properties;
 using GetYourPlaceApp.Services.BackGroundTask;
 
@@ -24,7 +23,7 @@ public partial class MainViewModel : BaseViewModel, IDisposable
     ObservableCollection<Property> currentProperties;
 
     [ObservableProperty]
-    bool propertysLoading;
+    bool propertiesLoading;
 
     [ObservableProperty]
     bool filtersApplied;
@@ -39,13 +38,12 @@ public partial class MainViewModel : BaseViewModel, IDisposable
 
         FilterManager.Instance.FilterUpdated += FilterUpdated;
         FilterManager.Instance.FilterChangeOrder += FilterOrderUpdated;
-
-        GetProperties();
     }
 
     public async Task GetProperties()
     {
-        PropertysLoading = true;
+        PropertiesLoading = true;
+ 
         try
         {
             _getPropertiesTask =  new BackgroundTaskRunner<List<Property>>();
@@ -53,10 +51,16 @@ public partial class MainViewModel : BaseViewModel, IDisposable
             _getPropertiesTask.StatusChanged += (serder, e) =>
             {
                 if (e.TaskStatus == BackgroundTaskStatus.Completed && e.Result != null)
-                    CurrentProperties = new ObservableCollection<Property>(e.Result);
+                {
+                    MainThread.BeginInvokeOnMainThread(() =>
+                    {
+                        CurrentProperties = new ObservableCollection<Property>(e.Result);
 
-                if (FilterManager.Instance.CurrentFilterSelected != null)
-                    ApplyPropertiesByOrder(FilterManager.Instance.CurrentFilterSelected);
+                        if (FilterManager.Instance.CurrentFilterSelected != null)
+                            ApplyPropertiesByOrder(FilterManager.Instance.CurrentFilterSelected);
+
+                    });
+                }
             };
         }
         catch (Exception ex)
@@ -66,7 +70,7 @@ public partial class MainViewModel : BaseViewModel, IDisposable
         }
         finally
         {
-            PropertysLoading = false;
+            PropertiesLoading = false;
         }
 
     }
@@ -94,6 +98,8 @@ public partial class MainViewModel : BaseViewModel, IDisposable
 
     public void Dispose()
     {
+        _getPropertiesTask?.Dispose();
+        _getPropertiesTask = null;
         FilterManager.Instance.FilterUpdated -= FilterUpdated;
         FilterManager.Instance.FilterChangeOrder -= FilterOrderUpdated;
     }
@@ -117,7 +123,7 @@ public partial class MainViewModel : BaseViewModel, IDisposable
 
     public void ApplyPropertiesByOrder(string filterItem)
     {
-        PropertysLoading = true;
+        PropertiesLoading = true;
         try
         {
             if (filterItem.Contains("Most Recent (High to Low)"))
@@ -144,6 +150,6 @@ public partial class MainViewModel : BaseViewModel, IDisposable
             Console.WriteLine(ex.ToString());
         }
         finally
-        { PropertysLoading = false; }
+        { PropertiesLoading = false; }
     }
 }

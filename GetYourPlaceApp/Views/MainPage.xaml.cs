@@ -2,9 +2,17 @@
 
 public partial class MainPage : ContentPage
 {
-	public MainPage()
+    private MainViewModel _mainViewModel;
+    public MainPage()
 	{
 		InitializeComponent();
-		BindingContext = new MainViewModel();
-	}
+        _mainViewModel = new MainViewModel();
+        BindingContext = _mainViewModel;
+    }
+
+    protected override void OnAppearing()
+    {
+        _mainViewModel?.GetProperties();
+        base.OnAppearing();
+    }
 }

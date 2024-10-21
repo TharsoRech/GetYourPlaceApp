@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="GetYourPlaceApp.Components.LoadingComponent"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="loadingComponent">
+    <Grid
+        Margin="0,20,0,0"
+        Padding="20"
+        BackgroundColor="Transparent"
+        HorizontalOptions="FillAndExpand"
+        RowDefinitions="120,120"
+        RowSpacing="8"
+        VerticalOptions="Fill">
+        <ActivityIndicator IsRunning="{Binding IsLoading, Source={x:Reference loadingComponent}}" Color="{Binding LoadingColor, Source={x:Reference loadingComponent}}" />
+        <Label
+            Grid.Row="1"
+            HorizontalOptions="CenterAndExpand"
+            Text="{Binding LoadingText, Source={x:Reference loadingComponent}}"
+            TextColor="{StaticResource White}"
+            VerticalOptions="CenterAndExpand" />
+    </Grid>
+</ContentView>

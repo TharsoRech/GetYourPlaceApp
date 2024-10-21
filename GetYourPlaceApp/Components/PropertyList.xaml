@@ -6,39 +6,51 @@
     xmlns:cm="clr-namespace:GetYourPlaceApp.Components"
     xmlns:models="clr-namespace:GetYourPlaceApp.Models"
     xmlns:sk="clr-namespace:Maui.Skeleton;assembly=Sharpnado.HorusSkeleton.Maui"
-    x:Name="propetieList">
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Name="propetieList"
+    HorizontalOptions="FillAndExpand"
+    VerticalOptions="FillAndExpand">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
     <Grid RowDefinitions="auto,auto">
-        <Picker
-            Title="Order by"
-            Margin="16"
-            SelectedIndexChanged="OnPickerSelectedIndexChanged">
-            <Picker.ItemsSource>
-                <x:Array Type="{x:Type x:String}">
-                    <x:String>Most Recent (High to Low)</x:String>
-                    <x:String>Most Recent (Low to High)</x:String>
-                    <x:String>Rating (High to Low)</x:String>
-                    <x:String>Rating (Low to High)</x:String>
-                    <x:String>Price (High to Low)</x:String>
-                    <x:String>Price (Low to High)</x:String>
-                </x:Array>
-            </Picker.ItemsSource>
-        </Picker>
-        <StackLayout
-            Grid.Row="1"
-            VerticalOptions="FillAndExpand"
-            sk:Skeleton.Animation="{sk:DefaultAnimation Fade}"
-            sk:Skeleton.BackgroundColor="{StaticResource Gray300}"
-            sk:Skeleton.IsBusy="{Binding IsLoading, Source={x:Reference propetieList}}"
-            sk:Skeleton.IsParent="True">
-            <CollectionView ItemsSource="{Binding Propertys, Source={x:Reference propetieList}}" >
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <cm:PropertyComponent
-                            IsLoading="{Binding IsLoading, Source={x:Reference propetieList}}"
-                            Property="{Binding .}" />
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </StackLayout>
+        <Grid IsVisible="{Binding IsLoading, Source={x:Reference propetieList}, Converter={StaticResource InvertedBoolConverter}}" RowDefinitions="auto,auto">
+            <Picker
+                Title="Order by"
+                Margin="16"
+                SelectedIndexChanged="OnPickerSelectedIndexChanged">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Most Recent (High to Low)</x:String>
+                        <x:String>Most Recent (Low to High)</x:String>
+                        <x:String>Rating (High to Low)</x:String>
+                        <x:String>Rating (Low to High)</x:String>
+                        <x:String>Price (High to Low)</x:String>
+                        <x:String>Price (Low to High)</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            <StackLayout
+                Grid.Row="1"
+                BackgroundColor="Transparent"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+                <CollectionView ItemsSource="{Binding Propertys, Source={x:Reference propetieList}}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <cm:PropertyComponent Property="{Binding .}" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
+        </Grid>
+        <cm:LoadingComponent
+            LoadingText="Loading Properties..."
+            LoadingColor="{StaticResource GreenGYP}"
+            IsLoading="{Binding IsLoading, Source={x:Reference propetieList}}"
+            IsVisible="{Binding IsLoading, Source={x:Reference propetieList}}">
+        </cm:LoadingComponent>
     </Grid>
 </ContentView>
