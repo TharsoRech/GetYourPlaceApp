@@ -12,6 +12,7 @@
     VerticalOptions="FillAndExpand">
     <ContentView.Resources>
         <ResourceDictionary>
+            <toolkit:IsListNullOrEmptyConverter x:Key="isListNullOrEmptyConverter" />
             <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
@@ -20,7 +21,8 @@
             <Picker
                 Title="Order by"
                 Margin="16"
-                SelectedIndexChanged="OnPickerSelectedIndexChanged">
+                SelectedIndexChanged="OnPickerSelectedIndexChanged"
+                TextColor="{StaticResource White}">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>Most Recent (High to Low)</x:String>
@@ -47,10 +49,25 @@
             </StackLayout>
         </Grid>
         <cm:LoadingComponent
-            LoadingText="Loading Properties..."
-            LoadingColor="{StaticResource GreenGYP}"
             IsLoading="{Binding IsLoading, Source={x:Reference propetieList}}"
-            IsVisible="{Binding IsLoading, Source={x:Reference propetieList}}">
-        </cm:LoadingComponent>
+            IsVisible="{Binding IsLoading, Source={x:Reference propetieList}}"
+            LoadingColor="{StaticResource GreenGYP}"
+            LoadingText="Loading Properties..." />
+        <Label
+            Grid.Row="1"
+            HorizontalOptions="CenterAndExpand"
+            IsVisible="{Binding Propertys, Source={x:Reference propetieList}, Converter={StaticResource isListNullOrEmptyConverter}}"
+            Text="No properties found"
+            TextColor="{StaticResource White}"
+            VerticalOptions="CenterAndExpand">
+            <Label.Triggers>
+                <DataTrigger
+                    Binding="{Binding IsLoading, Source={x:Reference propetieList}}"
+                    TargetType="Label"
+                    Value="True">
+                    <Setter Property="IsVisible" Value="false" />
+                </DataTrigger>
+            </Label.Triggers>
+        </Label>
     </Grid>
 </ContentView>
