@@ -59,7 +59,9 @@
 	  <None Remove="Resources\Images\favorite.png" />
 	  <None Remove="Resources\Images\GetYourPlaceIcon.png" />
 	  <None Remove="Resources\Images\home.png" />
+	  <None Remove="Resources\Images\leftarrow.svg" />
 	  <None Remove="Resources\Images\login.png" />
+	  <None Remove="Resources\Images\rightarrow.svg" />
 	  <None Remove="Resources\Images\search.png" />
 	</ItemGroup>
 
@@ -83,6 +85,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Components\LoadingComponent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Components\PaginationComponent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Components\PopUps\FilterPopUp.xaml">

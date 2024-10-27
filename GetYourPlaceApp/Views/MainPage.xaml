@@ -46,7 +46,7 @@
                 x:Name="propertylist"
                 Grid.Row="1"
                 IsLoading="{Binding PropertiesLoading}"
-                Propertys="{Binding CurrentProperties}" />
+                AllProperties="{Binding CurrentProperties}" />
         </Grid>
     </ScrollView>
 </ContentPage>

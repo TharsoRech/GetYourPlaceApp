@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GetYourPlaceApp.Components.PaginationComponent"
+             x:Name="paginationComponent">
+    <Grid
+         Grid.Column="1"
+         Margin="0,8,0,0"
+         ColumnDefinitions="*,*,*"
+         ColumnSpacing="40"
+         HorizontalOptions="CenterAndExpand"
+         RowDefinitions="auto">
+        <Grid
+                Padding="30,18,16,24"
+                ColumnDefinitions="*,*,*"
+                HorizontalOptions="FillAndExpand"
+                RowDefinitions="auto,auto"
+                VerticalOptions="EndAndExpand">
+            <Image
+                Source="letfarrow.svg"
+                WidthRequest="28"
+                HeightRequest="28"
+                HorizontalOptions="StartAndExpand"
+                IsEnabled="{Binding PreviousPageEnabledButton,Source={x:Reference paginationComponent}}"  >
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding PreviousPageCommand,Source={x:Reference paginationComponent}}" />
+                </Image.GestureRecognizers>
+            </Image>
+            <Frame
+                  Padding="0"
+                  BorderColor="{StaticResource GreenGYP}"
+                  CornerRadius="16"
+                  HeightRequest="28"
+                  WidthRequest="28">
+                <Frame.Triggers>
+                    <DataTrigger
+                          Binding="{Binding PreviousPageActive,Source={x:Reference paginationComponent}}"
+                          TargetType="Frame"
+                          Value="true">
+                        <Setter Property="BackgroundColor" Value="{StaticResource MarvelRed}" />
+                    </DataTrigger>
+                </Frame.Triggers>
+                <Label
+                      Margin="9,2,0,0"
+                      FontSize="Body"
+                      Text="{Binding PreviousPageText,Source={x:Reference paginationComponent}}"
+                      TextColor="{StaticResource White}">
+                    <Label.Triggers>
+                        <DataTrigger
+                              Binding="{Binding PreviousPageActive,Source={x:Reference paginationComponent}}"
+                              TargetType="Label"
+                              Value="true">
+                            <Setter Property="TextColor" Value="{StaticResource White}" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+            </Frame>
+        </Grid>
+        <CollectionView 
+                Grid.Column="1"
+                ItemsSource="{Binding Items, Source={x:Reference paginationComponent}}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame
+                        Padding="0"
+                        BorderColor="{StaticResource GreenGYP}"
+                        CornerRadius="16"
+                        HeightRequest="28"
+                        WidthRequest="28">
+                        <Label
+                             Margin="9,2,0,0"
+                             FontSize="Body"
+                             Text="{Binding Text}"
+                             TextColor="{StaticResource White}">
+                        </Label>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Grid
+                Grid.Column="2"
+                ColumnDefinitions="*,*"
+                HorizontalOptions="FillAndExpand"
+                RowDefinitions="auto,auto"
+                VerticalOptions="EndAndExpand">
+            <Image
+                Source="rightarrow.svg"
+                Grid.Column="2"
+                WidthRequest="28"
+                HeightRequest="28"
+                Grid.ColumnSpan="3"
+                HorizontalOptions="EndAndExpand"
+                IsEnabled="{Binding NextPageEnabledButton,Source={x:Reference paginationComponent}}" >
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NextPageCommand,Source={x:Reference paginationComponent}}" />
+                </Image.GestureRecognizers>
+            </Image>
+            <Frame
+                    Padding="0"
+                    BorderColor="{StaticResource GreenGYP}"
+                    CornerRadius="16"
+                    HeightRequest="28"
+                    IsVisible="{Binding NextPageEnabled, Source={x:Reference paginationComponent}}"
+                    WidthRequest="28">
+                <Frame.Triggers>
+                    <DataTrigger
+                            Binding="{Binding NextPageActive, Source={x:Reference paginationComponent}}"
+                            TargetType="Frame"
+                            Value="true">
+                        <Setter Property="BackgroundColor" Value="{StaticResource White}" />
+                    </DataTrigger>
+                </Frame.Triggers>
+                <Label
+                        Margin="9,2,0,0"
+                        FontSize="Body"
+                        Text="{Binding NextPageText, Source={x:Reference paginationComponent}}"
+                        TextColor="{StaticResource White}">
+                    <Label.Triggers>
+                        <DataTrigger
+                                Binding="{Binding NextPageActive, Source={x:Reference paginationComponent}}"
+                                TargetType="Label"
+                                Value="true">
+                            <Setter Property="TextColor" Value="{StaticResource White}" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
+            </Frame>
+        </Grid>
+    </Grid>
+</ContentView>

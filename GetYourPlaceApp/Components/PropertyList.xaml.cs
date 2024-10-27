@@ -1,3 +1,4 @@
+using GetYourPlaceApp.Components.ViewModels;
 using GetYourPlaceApp.Managers;
 using GetYourPlaceApp.Models;
 using System.Linq;
@@ -6,18 +7,26 @@ namespace GetYourPlaceApp.Components;
 
 public partial class PropertyList : ContentView
 {
-	public PropertyList()
+    public PropertyList()
 	{
 		InitializeComponent();
-	}
+
+    }
 
     #region Bindable Properties
 
-    public static readonly BindableProperty PropertysProperty = BindableProperty.Create(
-        nameof(Propertys),
+    public static readonly BindableProperty AllPropertiesProperty = BindableProperty.Create(
+        nameof(AllProperties),
         typeof(ObservableCollection<Property>),
-        typeof(PropertyList)
+        typeof(PropertyList),
+        propertyChanged: PropertyUpdated
         );
+
+    private static readonly BindableProperty CurrentPropertiesProperty = BindableProperty.Create(
+    nameof(CurrentProperties),
+    typeof(ObservableCollection<Property>),
+    typeof(PropertyList)
+    );
 
     public static readonly BindableProperty IsLoadingProperty = BindableProperty.Create(
     nameof(IsLoading),
@@ -25,14 +34,26 @@ public partial class PropertyList : ContentView
     typeof(PropertyList)
     );
 
+    private static void PropertyUpdated(BindableObject bindable, object oldValue, object newValue)
+    {
+        var paginationComponent = (PropertyList)bindable;
+        paginationComponent.UpdateList(paginationComponent.AllProperties);
+    }
+
     #endregion
 
     #region [Properties]
 
-    public ObservableCollection<Property> Propertys
+    public ObservableCollection<Property> AllProperties
     {
-        get => (ObservableCollection<Property>)this.GetValue(PropertysProperty);
-        set => this.SetValue(PropertysProperty, value);
+        get => (ObservableCollection<Property>)this.GetValue(AllPropertiesProperty);
+        set => this.SetValue(AllPropertiesProperty, value);
+    }
+
+    public ObservableCollection<Property> CurrentProperties
+    {
+        get => (ObservableCollection<Property>)this.GetValue(CurrentPropertiesProperty);
+        set => this.SetValue(CurrentPropertiesProperty, value);
     }
 
     public bool IsLoading
@@ -40,8 +61,25 @@ public partial class PropertyList : ContentView
         get => (bool)this.GetValue(IsLoadingProperty);
         set => this.SetValue(IsLoadingProperty, value);
     }
+
     #endregion
 
+    [RelayCommand]
+    public async Task NextPage(int numberOfItemsPerPage)
+    {
+        CurrentProperties = new ObservableCollection<Property>(AllProperties.Take(numberOfItemsPerPage).ToList());
+    }
+
+    [RelayCommand]
+    public async Task PreviousPage(int numberOfItemsPerPage)
+    {
+
+    }
+
+    public void UpdateList(ObservableCollection<Property> properties)
+    {
+        CurrentProperties = new ObservableCollection<Property>(AllProperties.Take(4).ToList());
+    }
     public void OnPickerSelectedIndexChanged(object sender, EventArgs e)
     {
         try
