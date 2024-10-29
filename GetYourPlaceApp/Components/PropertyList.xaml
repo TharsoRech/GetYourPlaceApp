@@ -53,12 +53,12 @@
             IsVisible="{Binding IsLoading, Source={x:Reference propetieList}}"
             LoadingColor="{StaticResource GreenGYP}"
             LoadingText="Loading Properties..." />
-        <!--<cm:PaginationComponent
-            NumberOfItemsPerPage="4"
-            PreviousPageExecute="{Binding PreviousPageCommand, Source={x:Reference propetieList}}"
+        <cm:PaginationComponent
+            Grid.Row="1"
+            Items="{Binding AllProperties, Source={x:Reference propetieList}}"
             NextPageExecute="{Binding NextPageCommand, Source={x:Reference propetieList}}"
-            Items="{Binding Propertys, Source={x:Reference propetieList}}">
-        </cm:PaginationComponent>-->
+            NumberOfItemsPerPage="4"
+            PreviousPageExecute="{Binding PreviousPageCommand, Source={x:Reference propetieList}}" />
         <Label
             Grid.Row="1"
             HorizontalOptions="CenterAndExpand"

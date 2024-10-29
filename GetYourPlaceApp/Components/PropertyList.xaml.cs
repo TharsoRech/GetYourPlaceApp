@@ -65,20 +65,25 @@ public partial class PropertyList : ContentView
     #endregion
 
     [RelayCommand]
-    public async Task NextPage(int numberOfItemsPerPage)
+    public async Task NextPage(Tuple<int,int> pageInfoItem)
     {
-        CurrentProperties = new ObservableCollection<Property>(AllProperties.Take(numberOfItemsPerPage).ToList());
+        CurrentProperties = new ObservableCollection<Property>
+            (AllProperties.Skip(pageInfoItem.Item2 * pageInfoItem.Item1).
+            Take(pageInfoItem.Item2).ToList());
     }
 
     [RelayCommand]
-    public async Task PreviousPage(int numberOfItemsPerPage)
+    public async Task PreviousPage(Tuple<int, int> pageInfoItem)
     {
-
+        CurrentProperties = new ObservableCollection<Property>
+            (AllProperties.Skip((pageInfoItem.Item2 -1) * pageInfoItem.Item1)
+            .Take(pageInfoItem.Item2).ToList());
     }
 
     public void UpdateList(ObservableCollection<Property> properties)
     {
-        CurrentProperties = new ObservableCollection<Property>(AllProperties.Take(4).ToList());
+        CurrentProperties = new ObservableCollection<Property>
+            (AllProperties.Take(4).ToList());
     }
     public void OnPickerSelectedIndexChanged(object sender, EventArgs e)
     {
