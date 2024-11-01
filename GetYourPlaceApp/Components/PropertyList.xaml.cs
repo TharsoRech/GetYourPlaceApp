@@ -67,16 +67,16 @@ public partial class PropertyList : ContentView
     [RelayCommand]
     public async Task NextPage(Tuple<int,int> pageInfoItem)
     {
+        var itemsToSkip = AllProperties.Skip(pageInfoItem.Item2);
         CurrentProperties = new ObservableCollection<Property>
-            (AllProperties.Skip(pageInfoItem.Item2 * pageInfoItem.Item1).
-            Take(pageInfoItem.Item2).ToList());
+            (itemsToSkip.Take(pageInfoItem.Item2).ToList());
     }
 
     [RelayCommand]
     public async Task PreviousPage(Tuple<int, int> pageInfoItem)
     {
         CurrentProperties = new ObservableCollection<Property>
-            (AllProperties.Skip((pageInfoItem.Item2 -1) * pageInfoItem.Item1)
+            (AllProperties.Skip((pageInfoItem.Item2 - CurrentProperties.Count) * pageInfoItem.Item1)
             .Take(pageInfoItem.Item2).ToList());
     }
 

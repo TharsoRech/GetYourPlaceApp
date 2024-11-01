@@ -1,5 +1,4 @@
 using GetYourPlaceApp.Models;
-using System.Windows.Input;
 
 namespace GetYourPlaceApp.Components;
 
@@ -142,8 +141,7 @@ public partial class PaginationComponent : ContentView
     public async Task NextPage()
     {
         CurrentPage += 1;
-        GeneratePagination();
-        NextPageExecute?.Execute(new Tuple<int, int>(CurrentPage -1,NumberOfItemsPerPage));
+        OrganizeAndGoToPage(true);
     }
 
     [RelayCommand]
@@ -152,8 +150,29 @@ public partial class PaginationComponent : ContentView
         if (CurrentPage > 1)
         {
             CurrentPage -= 1;
-            GeneratePagination();
-            PreviousPageExecute?.Execute(new Tuple<int, int>(CurrentPage, NumberOfItemsPerPage));
+            OrganizeAndGoToPage(false);
+
         }
+    }
+
+    [RelayCommand]
+    public async Task GoToPage(PaginationItem paginationItem)
+    {
+        if(paginationItem!= null && paginationItem.PageIndex > 0)
+        {
+            bool isNextPage = paginationItem.PageIndex > CurrentPage;
+            CurrentPage = paginationItem.PageIndex;
+            OrganizeAndGoToPage(isNextPage);
+        }
+
+    }
+
+    public void OrganizeAndGoToPage(bool isNextPage)
+    {
+        GeneratePagination();
+        if(isNextPage)
+            NextPageExecute?.Execute(new Tuple<int, int>(CurrentPage, NumberOfItemsPerPage));
+        else
+            PreviousPageExecute?.Execute(new Tuple<int, int>(CurrentPage, NumberOfItemsPerPage));
     }
 }

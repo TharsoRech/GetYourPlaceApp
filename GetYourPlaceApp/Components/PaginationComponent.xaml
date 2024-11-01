@@ -74,7 +74,12 @@
                             Margin="10,2,0,0"
                             FontSize="Body"
                             Text="{Binding Text}"
-                            TextColor="{StaticResource White}" />
+                            TextColor="{StaticResource White}">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GoToPageCommand, Source={x:Reference paginationComponent}}" 
+                                                      CommandParameter="{Binding .}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
