@@ -1,7 +1,4 @@
-using GetYourPlaceApp.Components.ViewModels;
-using GetYourPlaceApp.Managers;
 using GetYourPlaceApp.Models;
-using System.Linq;
 
 namespace GetYourPlaceApp.Components;
 
@@ -15,15 +12,14 @@ public partial class PropertyList : ContentView
 
     #region Bindable Properties
 
-    public static readonly BindableProperty AllPropertiesProperty = BindableProperty.Create(
-        nameof(AllProperties),
-        typeof(ObservableCollection<Property>),
-        typeof(PropertyList),
-        propertyChanged: PropertyUpdated
-        );
+    public static readonly BindableProperty ItemsProperty = BindableProperty.Create(
+    nameof(Items),
+    typeof(ObservableCollection<Property>),
+    typeof(PropertyList)
+    );
 
-    private static readonly BindableProperty CurrentPropertiesProperty = BindableProperty.Create(
-    nameof(CurrentProperties),
+    public static readonly BindableProperty CurrentItemsProperty = BindableProperty.Create(
+    nameof(CurrentItems),
     typeof(ObservableCollection<Property>),
     typeof(PropertyList)
     );
@@ -34,26 +30,44 @@ public partial class PropertyList : ContentView
     typeof(PropertyList)
     );
 
-    private static void PropertyUpdated(BindableObject bindable, object oldValue, object newValue)
-    {
-        var paginationComponent = (PropertyList)bindable;
-        paginationComponent.UpdateList(paginationComponent.AllProperties);
-    }
+    public static readonly BindableProperty PageChangedCommandProperty = BindableProperty.Create(
+    nameof(PageChangedCommand),
+    typeof(IAsyncRelayCommand),
+    typeof(PropertyList)
+    );
+
+    public static readonly BindableProperty OrderUpdatedCommandProperty = BindableProperty.Create(
+    nameof(OrderUpdatedCommand),
+    typeof(IAsyncRelayCommand),
+    typeof(PropertyList)
+    );
 
     #endregion
 
     #region [Properties]
 
-    public ObservableCollection<Property> AllProperties
+    public ObservableCollection<Property> Items
     {
-        get => (ObservableCollection<Property>)this.GetValue(AllPropertiesProperty);
-        set => this.SetValue(AllPropertiesProperty, value);
+        get => (ObservableCollection<Property>)this.GetValue(ItemsProperty);
+        set => this.SetValue(ItemsProperty, value);
     }
 
-    public ObservableCollection<Property> CurrentProperties
+    public ObservableCollection<Property> CurrentItems
     {
-        get => (ObservableCollection<Property>)this.GetValue(CurrentPropertiesProperty);
-        set => this.SetValue(CurrentPropertiesProperty, value);
+        get => (ObservableCollection<Property>)this.GetValue(CurrentItemsProperty);
+        set => this.SetValue(CurrentItemsProperty, value);
+    }
+
+    public IAsyncRelayCommand PageChangedCommand
+    {
+        get => (IAsyncRelayCommand)this.GetValue(PageChangedCommandProperty);
+        set => this.SetValue(PageChangedCommandProperty, value);
+    }
+
+    public IAsyncRelayCommand OrderUpdatedCommand
+    {
+        get => (IAsyncRelayCommand)this.GetValue(OrderUpdatedCommandProperty);
+        set => this.SetValue(OrderUpdatedCommandProperty, value);
     }
 
     public bool IsLoading
@@ -67,24 +81,15 @@ public partial class PropertyList : ContentView
     [RelayCommand]
     public async Task NextPage(Tuple<int,int> pageInfoItem)
     {
-        var itemsToSkip = AllProperties.Skip(pageInfoItem.Item2);
-        CurrentProperties = new ObservableCollection<Property>
-            (itemsToSkip.Take(pageInfoItem.Item2).ToList());
+        PageChangedCommand?.ExecuteAsync(pageInfoItem);
     }
 
     [RelayCommand]
     public async Task PreviousPage(Tuple<int, int> pageInfoItem)
     {
-        CurrentProperties = new ObservableCollection<Property>
-            (AllProperties.Skip((pageInfoItem.Item2 - CurrentProperties.Count) * pageInfoItem.Item1)
-            .Take(pageInfoItem.Item2).ToList());
+        PageChangedCommand?.ExecuteAsync(pageInfoItem);
     }
 
-    public void UpdateList(ObservableCollection<Property> properties)
-    {
-        CurrentProperties = new ObservableCollection<Property>
-            (AllProperties.Take(4).ToList());
-    }
     public void OnPickerSelectedIndexChanged(object sender, EventArgs e)
     {
         try
@@ -96,8 +101,8 @@ public partial class PropertyList : ContentView
             {
                 var filterItem = (string)picker.ItemsSource[selectedIndex];
 
-                if(filterItem != null)
-                    FilterManager.Instance.RaiseChangeOrderEvent(filterItem);
+                if (filterItem != null)
+                    OrderUpdatedCommand?.ExecuteAsync(filterItem);
             }
         }
         catch (Exception ex)

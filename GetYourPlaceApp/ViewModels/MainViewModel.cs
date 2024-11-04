@@ -13,7 +13,7 @@ public partial class MainViewModel : BaseViewModel, IDisposable
     #region variables
     private static IPropertiesRepository _PropertiesRepository;
     BackgroundTaskRunner<List<Property>> _getPropertiesTask;
-    BackgroundTaskRunner<bool> _applyFilterTask;
+    BackgroundTaskRunner<bool> _applyFilterTask; 
     #endregion
 
     #region Properties
@@ -22,6 +22,9 @@ public partial class MainViewModel : BaseViewModel, IDisposable
 
     [ObservableProperty]
     ObservableCollection<Property> currentProperties;
+
+    [ObservableProperty]
+    ObservableCollection<Property> allProperties;
 
     [ObservableProperty]
     bool propertiesLoading;
@@ -41,7 +44,7 @@ public partial class MainViewModel : BaseViewModel, IDisposable
         FilterManager.Instance.FilterChangeOrder += FilterOrderUpdated;
     }
 
-    public async Task GetProperties()
+    public async Task GetProperties(Tuple<int, int> pageInfoItem =  null)
     {
         PropertiesLoading = true;
  
@@ -55,10 +58,21 @@ public partial class MainViewModel : BaseViewModel, IDisposable
                 {
                     MainThread.BeginInvokeOnMainThread(() =>
                     {
-                        CurrentProperties = new ObservableCollection<Property>(e.Result);
+                        AllProperties = new ObservableCollection<Property>(e.Result);
+                        CurrentProperties = AllProperties;
+
+                        if (pageInfoItem != null)
+                        {
+                            var itemsToSkip = AllProperties.Skip((pageInfoItem.Item2 *
+                                pageInfoItem.Item1) - pageInfoItem.Item2);
+                            CurrentProperties = new ObservableCollection<Property>
+                                (itemsToSkip.Take(pageInfoItem.Item2).ToList());
+                        }
+                        else
+                            CurrentProperties = new ObservableCollection<Property>(CurrentProperties.Take(4).ToList());
 
                         if (FilterManager.Instance.CurrentFilterSelected != null)
-                           ApplyPropertiesByOrder(FilterManager.Instance.CurrentFilterSelected);
+                            ApplyPropertiesByOrder(FilterManager.Instance.CurrentFilterSelected);
 
                         PropertiesLoading = false;
                     });
@@ -78,6 +92,21 @@ public partial class MainViewModel : BaseViewModel, IDisposable
         }
 
     }
+
+    [RelayCommand]
+    public async Task PageChanged(Tuple<int, int> pageInfoItem)
+    {
+
+        GetProperties(pageInfoItem);
+    }
+
+    [RelayCommand]
+    public async Task OrderUpdated(string filterItem)
+    {
+        FilterManager.Instance.RaiseChangeOrderEvent(filterItem);
+    }
+
+
 
     public async Task ApplyPropertiesByOrderInBackGround(string filter)
     {

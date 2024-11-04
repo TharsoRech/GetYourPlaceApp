@@ -33,9 +33,9 @@
                 </Image.Behaviors>
                 <Image.Triggers>
                     <DataTrigger
-                 Binding="{Binding PreviousPageEnabledButton, Source={x:Reference paginationComponent}}"
-                 TargetType="Image"
-                 Value="False">
+                        Binding="{Binding PreviousPageEnabledButton, Source={x:Reference paginationComponent}}"
+                        TargetType="Image"
+                        Value="False">
                         <Setter Property="BackgroundColor" Value="{StaticResource Gray500}" />
                     </DataTrigger>
                 </Image.Triggers>
@@ -76,8 +76,7 @@
                             Text="{Binding Text}"
                             TextColor="{StaticResource White}">
                             <Label.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding GoToPageCommand, Source={x:Reference paginationComponent}}" 
-                                                      CommandParameter="{Binding .}"/>
+                                <TapGestureRecognizer Command="{Binding GoToPageCommand, Source={x:Reference paginationComponent}}" CommandParameter="{Binding .}" />
                             </Label.GestureRecognizers>
                         </Label>
                     </Border>

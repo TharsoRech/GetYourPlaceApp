@@ -43,9 +43,10 @@
                     Text="Edit Filter" />
             </Grid>
             <cm:PropertyList
-                x:Name="propertylist"
                 Grid.Row="1"
-                AllProperties="{Binding CurrentProperties}"
+                Items="{Binding CurrentProperties}"
+                OrderUpdatedCommand="{Binding OrderUpdatedCommand}"
+                PageChangedCommand="{Binding PageChangedCommand}"
                 IsLoading="{Binding PropertiesLoading}" />
         </Grid>
     </ScrollView>

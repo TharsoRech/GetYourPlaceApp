@@ -39,7 +39,7 @@
                 BackgroundColor="Transparent"
                 HorizontalOptions="FillAndExpand"
                 VerticalOptions="FillAndExpand">
-                <CollectionView ItemsSource="{Binding CurrentProperties, Source={x:Reference propetieList}}">
+                <CollectionView ItemsSource="{Binding Items, Source={x:Reference propetieList}}">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <cm:PropertyComponent Property="{Binding .}" />
@@ -55,14 +55,14 @@
             LoadingText="Loading Properties..." />
         <cm:PaginationComponent
             Grid.Row="1"
-            Items="{Binding AllProperties, Source={x:Reference propetieList}}"
+            Items="{Binding Items, Source={x:Reference propetieList}}"
             NextPageExecute="{Binding NextPageCommand, Source={x:Reference propetieList}}"
             NumberOfItemsPerPage="4"
             PreviousPageExecute="{Binding PreviousPageCommand, Source={x:Reference propetieList}}" />
         <Label
             Grid.Row="1"
             HorizontalOptions="CenterAndExpand"
-            IsVisible="{Binding CurrentProperties, Source={x:Reference propetieList}, Converter={StaticResource isListNullOrEmptyConverter}}"
+            IsVisible="{Binding Items, Source={x:Reference propetieList}, Converter={StaticResource isListNullOrEmptyConverter}}"
             Text="No properties found"
             TextColor="{StaticResource White}"
             VerticalOptions="CenterAndExpand">
