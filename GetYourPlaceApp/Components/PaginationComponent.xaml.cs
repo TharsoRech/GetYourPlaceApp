@@ -51,6 +51,12 @@ public partial class PaginationComponent : ContentView
     defaultValue: new ObservableCollection<PaginationItem>()
     );
 
+    public static readonly BindableProperty IsLoadingProperty = BindableProperty.Create(
+    nameof(IsLoading),
+    typeof(bool),
+    typeof(PaginationComponent)
+    );
+
     private static void PropertyUpdated(BindableObject bindable, object oldValue, object newValue)
     {
         var paginationComponent = (PaginationComponent)bindable;
@@ -87,6 +93,12 @@ public partial class PaginationComponent : ContentView
     {
         get => (IAsyncRelayCommand)this.GetValue(PreviousPageExecuteProperty);
         set => this.SetValue(PreviousPageExecuteProperty, value);
+    }
+
+    public bool IsLoading
+    {
+        get => (bool)this.GetValue(IsLoadingProperty);
+        set => this.SetValue(IsLoadingProperty, value);
     }
     #endregion
     private void GeneratePagination()

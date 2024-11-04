@@ -5,7 +5,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:Name="paginationComponent">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
     <Grid
+        IsVisible="{Binding IsLoading, Source={x:Reference paginationComponent}, Converter={StaticResource InvertedBoolConverter}}"
         Grid.Column="1"
         Margin="0,8,0,0"
         Padding="0,0,0,16"

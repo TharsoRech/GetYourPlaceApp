@@ -12,7 +12,7 @@ public partial class MainPage : ContentPage
 
     protected override void OnAppearing()
     {
-        Task.Run(() => _mainViewModel?.GetProperties());
+        Task.Run(() => _mainViewModel?.GetPropertiesInBackground());
         base.OnAppearing();
     }
 }

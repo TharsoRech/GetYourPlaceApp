@@ -55,7 +55,8 @@
             LoadingText="Loading Properties..." />
         <cm:PaginationComponent
             Grid.Row="1"
-            Items="{Binding Items, Source={x:Reference propetieList}}"
+            IsLoading="{Binding IsLoading, Source={x:Reference propetieList}}"
+            Items="{Binding AllItems, Source={x:Reference propetieList}}"
             NextPageExecute="{Binding NextPageCommand, Source={x:Reference propetieList}}"
             NumberOfItemsPerPage="4"
             PreviousPageExecute="{Binding PreviousPageCommand, Source={x:Reference propetieList}}" />

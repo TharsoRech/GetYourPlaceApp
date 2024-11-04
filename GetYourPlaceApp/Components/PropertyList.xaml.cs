@@ -18,8 +18,8 @@ public partial class PropertyList : ContentView
     typeof(PropertyList)
     );
 
-    public static readonly BindableProperty CurrentItemsProperty = BindableProperty.Create(
-    nameof(CurrentItems),
+    public static readonly BindableProperty AllItemsProperty = BindableProperty.Create(
+    nameof(AllItems),
     typeof(ObservableCollection<Property>),
     typeof(PropertyList)
     );
@@ -52,10 +52,10 @@ public partial class PropertyList : ContentView
         set => this.SetValue(ItemsProperty, value);
     }
 
-    public ObservableCollection<Property> CurrentItems
+    public ObservableCollection<Property> AllItems
     {
-        get => (ObservableCollection<Property>)this.GetValue(CurrentItemsProperty);
-        set => this.SetValue(CurrentItemsProperty, value);
+        get => (ObservableCollection<Property>)this.GetValue(AllItemsProperty);
+        set => this.SetValue(AllItemsProperty, value);
     }
 
     public IAsyncRelayCommand PageChangedCommand
