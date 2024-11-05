@@ -7,11 +7,11 @@
     x:Name="paginationComponent">
     <ContentView.Resources>
         <ResourceDictionary>
+            <toolkit:IsListNullOrEmptyConverter x:Key="isListNullOrEmptyConverter" />
             <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
     <Grid
-        IsVisible="{Binding IsLoading, Source={x:Reference paginationComponent}, Converter={StaticResource InvertedBoolConverter}}"
         Grid.Column="1"
         Margin="0,8,0,0"
         Padding="0,0,0,16"
@@ -19,6 +19,20 @@
         ColumnSpacing="32"
         HorizontalOptions="CenterAndExpand"
         RowDefinitions="auto">
+        <Grid.Triggers>
+            <DataTrigger
+                 Binding="{Binding IsLoading, Source={x:Reference paginationComponent}}"
+                 TargetType="Grid"
+                 Value="True">
+                <Setter Property="IsVisible" Value="false" />
+            </DataTrigger>
+            <DataTrigger
+                Binding="{Binding Items, Source={x:Reference paginationComponent}, Converter={StaticResource isListNullOrEmptyConverter}}"
+                TargetType="Grid"
+                Value="True">
+                <Setter Property="IsVisible" Value="false" />
+            </DataTrigger>
+        </Grid.Triggers>
         <Grid
             ColumnDefinitions="auto,auto,auto"
             HorizontalOptions="StartAndExpand"

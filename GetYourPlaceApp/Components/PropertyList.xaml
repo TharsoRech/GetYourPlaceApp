@@ -13,6 +13,7 @@
     <ContentView.Resources>
         <ResourceDictionary>
             <toolkit:IsListNullOrEmptyConverter x:Key="isListNullOrEmptyConverter" />
+            <toolkit:IsListNotNullOrEmptyConverter x:Key="isListNotNullOrEmptyConverter" />
             <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
@@ -21,6 +22,7 @@
             <Picker
                 Title="Order by"
                 Margin="16"
+                IsVisible="{Binding Items, Source={x:Reference propetieList}, Converter={StaticResource isListNotNullOrEmptyConverter}}"
                 SelectedIndexChanged="OnPickerSelectedIndexChanged"
                 TextColor="{StaticResource White}">
                 <Picker.ItemsSource>

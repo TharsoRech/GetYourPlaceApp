@@ -44,11 +44,11 @@
             </Grid>
             <cm:PropertyList
                 Grid.Row="1"
+                AllItems="{Binding AllProperties}"
+                IsLoading="{Binding PropertiesLoading}"
                 Items="{Binding CurrentProperties}"
-                AllItems ="{Binding AllProperties}"
                 OrderUpdatedCommand="{Binding OrderUpdatedCommand}"
-                PageChangedCommand="{Binding PageChangedCommand}"
-                IsLoading="{Binding PropertiesLoading}" />
+                PageChangedCommand="{Binding PageChangedCommand}" />
         </Grid>
     </ScrollView>
 </ContentPage>
