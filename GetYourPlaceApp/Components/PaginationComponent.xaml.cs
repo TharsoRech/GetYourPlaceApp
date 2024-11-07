@@ -6,8 +6,6 @@ public partial class PaginationComponent : ContentView
 {
     #region Variables
     public int CountPages;
-    public bool NextPageEnabledButton;
-    public bool PreviousPageEnabledButton;
     public int CurrentPage;
     #endregion
     public PaginationComponent()
@@ -57,6 +55,19 @@ public partial class PaginationComponent : ContentView
     typeof(PaginationComponent)
     );
 
+    public static readonly BindableProperty NextPageEnabledButtonProperty = BindableProperty.Create(
+    nameof(NextPageEnabledButton),
+    typeof(bool),
+    typeof(PaginationComponent)
+    );
+
+
+    public static readonly BindableProperty PreviousPageEnabledButtonProperty = BindableProperty.Create(
+    nameof(PreviousPageEnabledButton),
+    typeof(bool),
+    typeof(PaginationComponent)
+    );
+
     private static void PropertyUpdated(BindableObject bindable, object oldValue, object newValue)
     {
         var paginationComponent = (PaginationComponent)bindable;
@@ -65,6 +76,18 @@ public partial class PaginationComponent : ContentView
     #endregion
 
     #region [Properties]
+
+    public bool NextPageEnabledButton
+    {
+        get => (bool)this.GetValue(NextPageEnabledButtonProperty);
+        set => this.SetValue(NextPageEnabledButtonProperty, value);
+    }
+
+    public bool PreviousPageEnabledButton
+    {
+        get => (bool)this.GetValue(PreviousPageEnabledButtonProperty);
+        set => this.SetValue(PreviousPageEnabledButtonProperty, value);
+    }
     public int NumberOfItemsPerPage
     {
         get => (int)this.GetValue(NumberOfItemsPerPageProperty);
@@ -126,18 +149,21 @@ public partial class PaginationComponent : ContentView
 
             }
 
-            if (PaginationItems?.Count >= 1)
+            if (PaginationItems?.Count > 0)
             {
-                paginationComponent.IsVisible = true;
-                PreviousPageEnabledButton = true;
-
-                if(PaginationItems.Count > 1)
+                if(CurrentPage == PaginationItems.Count)
+                    NextPageEnabledButton = false;
+                else
                     NextPageEnabledButton = true;
+
+                if(CurrentPage == 1)
+                    PreviousPageEnabledButton = false;
+                else
+                    PreviousPageEnabledButton = true;
             }
             else
             {
                 PreviousPageEnabledButton = false;
-                paginationComponent.IsVisible = false;
                 NextPageEnabledButton = false;
             }
 

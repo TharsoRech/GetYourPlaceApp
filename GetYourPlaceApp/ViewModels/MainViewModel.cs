@@ -56,25 +56,25 @@ public partial class MainViewModel : BaseViewModel, IDisposable
             {
                 if (e.TaskStatus == BackgroundTaskStatus.Completed && e.Result != null)
                 {
+                    if (getProperties)
+                        AllProperties = new ObservableCollection<Property>(e.Result);
+
+                    ApplyPropertiesByOrder(FilterManager.Instance.CurrentFilterSelected);
+
+                    CurrentProperties = AllProperties;
+
+                    if (pageInfoItem != null)
+                    {
+                        var itemsToSkip = AllProperties.Skip((pageInfoItem.Item2 *
+                            pageInfoItem.Item1) - pageInfoItem.Item2);
+                        CurrentProperties = new ObservableCollection<Property>
+                            (itemsToSkip.Take(pageInfoItem.Item2).ToList());
+                    }
+                    else
+                        CurrentProperties = new ObservableCollection<Property>(CurrentProperties.Take(4).ToList());
+
                     MainThread.BeginInvokeOnMainThread(() =>
                     {
-                        if(getProperties)
-                            AllProperties = new ObservableCollection<Property>(e.Result);
-
-                        ApplyPropertiesByOrder(FilterManager.Instance.CurrentFilterSelected);
-
-                        CurrentProperties = AllProperties;
-
-                        if (pageInfoItem != null)
-                        {
-                            var itemsToSkip = AllProperties.Skip((pageInfoItem.Item2 *
-                                pageInfoItem.Item1) - pageInfoItem.Item2);
-                            CurrentProperties = new ObservableCollection<Property>
-                                (itemsToSkip.Take(pageInfoItem.Item2).ToList());
-                        }
-                        else
-                            CurrentProperties = new ObservableCollection<Property>(CurrentProperties.Take(4).ToList());
-
                         PropertiesLoading = false;
                     });
                 }

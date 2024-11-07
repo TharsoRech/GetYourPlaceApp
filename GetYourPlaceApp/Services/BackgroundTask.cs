@@ -67,13 +67,7 @@
             T result,
             CancellationTokenSource cancellationTokenSource, Exception exception)
         {
-            if(_runnableTask !=null && _cancellationTokenSource != null)
-            {
-                if(!_runnableTask.IsCanceled)
-                {
-                    StatusChanged?.Invoke(this,new BackgroundTaskEventArgs<T>(backgroundTaskStatus,result,exception));
-                }
-            }
+            StatusChanged?.Invoke(this,new BackgroundTaskEventArgs<T>(backgroundTaskStatus,result,exception));
         }
 
         public void Dispose()

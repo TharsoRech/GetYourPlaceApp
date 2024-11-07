@@ -21,9 +21,9 @@
         RowDefinitions="auto">
         <Grid.Triggers>
             <DataTrigger
-                 Binding="{Binding IsLoading, Source={x:Reference paginationComponent}}"
-                 TargetType="Grid"
-                 Value="True">
+                Binding="{Binding IsLoading, Source={x:Reference paginationComponent}}"
+                TargetType="Grid"
+                Value="True">
                 <Setter Property="IsVisible" Value="false" />
             </DataTrigger>
             <DataTrigger
@@ -37,12 +37,12 @@
             ColumnDefinitions="auto,auto,auto"
             HorizontalOptions="StartAndExpand"
             RowDefinitions="auto,auto"
+            IsVisible="{Binding PreviousPageEnabledButton, Source={x:Reference paginationComponent}}"
             VerticalOptions="StartAndExpand">
             <Image
                 BackgroundColor="Transparent"
                 HeightRequest="38"
                 HorizontalOptions="StartAndExpand"
-                IsEnabled="{Binding PreviousPageEnabledButton, Source={x:Reference paginationComponent}}"
                 Source="leftarrow.svg"
                 WidthRequest="38">
                 <Image.GestureRecognizers>
@@ -108,12 +108,12 @@
             ColumnDefinitions="*,*"
             HorizontalOptions="EndAndExpand"
             RowDefinitions="auto,auto"
+            IsVisible="{Binding NextPageEnabledButton, Source={x:Reference paginationComponent}}"
             VerticalOptions="StartAndExpand">
             <Image
                 Grid.Column="2"
                 HeightRequest="38"
                 HorizontalOptions="EndAndExpand"
-                IsEnabled="{Binding NextPageEnabledButton, Source={x:Reference paginationComponent}}"
                 Source="rightarrow.svg"
                 WidthRequest="38">
                 <Image.GestureRecognizers>
@@ -122,14 +122,6 @@
                 <Image.Behaviors>
                     <toolkit:IconTintColorBehavior TintColor="{StaticResource GreenGYP}" />
                 </Image.Behaviors>
-                <Image.Triggers>
-                    <DataTrigger
-                        Binding="{Binding NextPageEnabledButton, Source={x:Reference paginationComponent}}"
-                        TargetType="Image"
-                        Value="False">
-                        <Setter Property="BackgroundColor" Value="{StaticResource Gray500}" />
-                    </DataTrigger>
-                </Image.Triggers>
             </Image>
         </Grid>
     </Grid>
