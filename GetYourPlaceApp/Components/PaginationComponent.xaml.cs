@@ -14,6 +14,7 @@ public partial class PaginationComponent : ContentView, IDisposable
 		InitializeComponent();
         FilterManager.Instance.FilterChangeOrder += FilterOrderUpdated;
         FilterManager.Instance.FilterUpdated += FilterUpdated;
+        FilterManager.Instance.FilterSearchText += FilterSearchTextUpdated;
     }
     #region Bindable Properties
 
@@ -221,6 +222,11 @@ public partial class PaginationComponent : ContentView, IDisposable
     }
 
     private void FilterOrderUpdated(object sender, string filter)
+    {
+        CurrentPage = 1;
+    }
+
+    private void FilterSearchTextUpdated(object sender, string filter)
     {
         CurrentPage = 1;
     }

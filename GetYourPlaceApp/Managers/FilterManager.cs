@@ -15,6 +15,7 @@ namespace GetYourPlaceApp.Managers
         public string CurrentFilterSelected;
         public string CustomFilter;
         public event EventHandler<string> FilterChangeOrder;
+        public event EventHandler<string> FilterSearchText;
 
         private static FilterManager instance = null;
         #endregion
@@ -80,6 +81,11 @@ namespace GetYourPlaceApp.Managers
         {
             CurrentFilterSelected = filter;
             FilterChangeOrder?.Invoke(null, filter);
+        }
+
+        public void RaiseSearchTextFilter(string filter)
+        {
+            FilterSearchText?.Invoke(null, filter);
         }
     }
 }

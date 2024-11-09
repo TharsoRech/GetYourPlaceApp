@@ -51,7 +51,6 @@ public partial class MainViewModel : BaseViewModel, IDisposable
         try
         {
             _getPropertiesTask =  new BackgroundTaskRunner<List<Property>>();
-            _getPropertiesTask.RunInBackground(async () => await _PropertiesRepository.GetProperties());
             _getPropertiesTask.StatusChanged += (serder, e) =>
             {
                 if (e.TaskStatus == BackgroundTaskStatus.Completed && e.Result != null)
@@ -78,8 +77,8 @@ public partial class MainViewModel : BaseViewModel, IDisposable
                         PropertiesLoading = false;
                     });
                 }
-                else if(e.TaskStatus == BackgroundTaskStatus.Failed || 
-                   (e.TaskStatus == BackgroundTaskStatus.Completed && 
+                else if (e.TaskStatus == BackgroundTaskStatus.Failed ||
+                   (e.TaskStatus == BackgroundTaskStatus.Completed &&
                     e.Result is null))
                 {
                     MainThread.BeginInvokeOnMainThread(() =>
@@ -88,6 +87,7 @@ public partial class MainViewModel : BaseViewModel, IDisposable
                     });
                 }
             };
+            _getPropertiesTask.RunInBackground(async () => await _PropertiesRepository.GetProperties());
         }
         catch (Exception ex)
         {
@@ -133,6 +133,7 @@ public partial class MainViewModel : BaseViewModel, IDisposable
     public async Task SearchPropertie()
     {
         FilterManager.Instance.CustomFilter = SearchText;
+        FilterManager.Instance.RaiseSearchTextFilter(SearchText);
         GetPropertiesInBackground();
     }
 
