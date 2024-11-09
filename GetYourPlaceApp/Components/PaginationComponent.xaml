@@ -16,7 +16,7 @@
         Margin="0,8,0,0"
         Padding="0,0,0,16"
         ColumnDefinitions="auto,auto,auto"
-        ColumnSpacing="32"
+        ColumnSpacing="12"
         HorizontalOptions="CenterAndExpand"
         RowDefinitions="auto">
         <Grid.Triggers>
@@ -91,7 +91,7 @@
                             <RoundRectangle CornerRadius="28" />
                         </Border.StrokeShape>
                         <Label
-                            Margin="10,2,0,0"
+                            Margin="11,2,0,0"
                             FontSize="Body"
                             Text="{Binding Text}"
                             TextColor="{StaticResource White}">

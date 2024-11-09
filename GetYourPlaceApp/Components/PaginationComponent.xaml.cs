@@ -1,8 +1,9 @@
+using GetYourPlaceApp.Managers;
 using GetYourPlaceApp.Models;
 
 namespace GetYourPlaceApp.Components;
 
-public partial class PaginationComponent : ContentView
+public partial class PaginationComponent : ContentView, IDisposable
 {
     #region Variables
     public int CountPages;
@@ -11,7 +12,9 @@ public partial class PaginationComponent : ContentView
     public PaginationComponent()
 	{
 		InitializeComponent();
-	}
+        FilterManager.Instance.FilterChangeOrder += FilterOrderUpdated;
+        FilterManager.Instance.FilterUpdated += FilterUpdated;
+    }
     #region Bindable Properties
 
     public static readonly BindableProperty NumberOfItemsPerPageProperty = BindableProperty.Create(
@@ -132,7 +135,10 @@ public partial class PaginationComponent : ContentView
             {
                 PaginationItems?.Clear();
                 CountPages = (Items.Count + NumberOfItemsPerPage - 1) / NumberOfItemsPerPage;
-                for (int i = 1; i < CountPages + 1; i++)
+                var calculateFirstPage = CurrentPage  >= CountPages ? CurrentPage -3 : CurrentPage - 2;
+                var firstPage = CurrentPage == 0 || CurrentPage == 1 || calculateFirstPage  < 1 ? 1 : calculateFirstPage;
+                var lastPage = ((firstPage) + 4) > (CountPages +1) ? CountPages : ((firstPage) + 4) ;
+                for (int i = firstPage; i < lastPage; i++)
                 {
                     PaginationItem paginationItem = new PaginationItem();
                     if (i == CurrentPage || CurrentPage == 0)
@@ -151,7 +157,7 @@ public partial class PaginationComponent : ContentView
 
             if (PaginationItems?.Count > 0)
             {
-                if(CurrentPage == PaginationItems.Count)
+                if(CurrentPage == CountPages)
                     NextPageEnabledButton = false;
                 else
                     NextPageEnabledButton = true;
@@ -212,5 +218,21 @@ public partial class PaginationComponent : ContentView
             NextPageExecute?.Execute(new Tuple<int, int>(CurrentPage, NumberOfItemsPerPage));
         else
             PreviousPageExecute?.Execute(new Tuple<int, int>(CurrentPage, NumberOfItemsPerPage));
+    }
+
+    private void FilterOrderUpdated(object sender, string filter)
+    {
+        CurrentPage = 1;
+    }
+
+    private void FilterUpdated(object sender, List<GYPPropertyInfoItem> filterItems)
+    {
+        CurrentPage = 1;
+    }
+
+    public void Dispose()
+    { 
+        FilterManager.Instance.FilterUpdated -= FilterUpdated;
+        FilterManager.Instance.FilterChangeOrder -= FilterOrderUpdated;
     }
 }
