@@ -5,5 +5,7 @@ namespace GetYourPlaceApp.Repository.Properties
     internal interface IPropertiesRepository
     {
         Task<List<Property>> GetProperties();
+
+        Task<Property> GetPropertyInfo(Property property);
     }
 }

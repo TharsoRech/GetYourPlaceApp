@@ -17,7 +17,22 @@ namespace GetYourPlaceApp.Models
         public DateTime PuplishedAt { get; set; }
         public List<GYPPropertyInfoItem> PropertyInformations { get; set; }
         public ImageSource ImageSource => Base64Image.Base64ToImageSource();
+        public List<string> Base64Images { get; set; }
+        public List<ImageSource> Images
+        {
+            get
+            {
+                if (Base64Images != null && Base64Images.Count > 0)
+                {
+                    List<ImageSource> images = new List<ImageSource>();
+                    Base64Images.ForEach(im => images.Add(im.Base64ToImageSource()));
+                    return images;
+                }
+                return new List<ImageSource>();
+            }
+        }
 
+        public List<GYPReview> Reviews;
         public string PriceFormated => $"Price: {String.Format("{0:C}", Price)}";
         public string TypeOFRentFormated => $"type of acquisition: {TypeOfRent?.Description}";
         public string PublishedAtFormated => $"Published At: {PuplishedAt.ToShortDateString()}";

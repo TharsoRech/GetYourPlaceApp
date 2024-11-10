@@ -36,8 +36,8 @@
         <Grid
             ColumnDefinitions="auto,auto,auto"
             HorizontalOptions="StartAndExpand"
-            RowDefinitions="auto,auto"
             IsVisible="{Binding PreviousPageEnabledButton, Source={x:Reference paginationComponent}}"
+            RowDefinitions="auto,auto"
             VerticalOptions="StartAndExpand">
             <Image
                 BackgroundColor="Transparent"
@@ -107,8 +107,8 @@
             Grid.Column="2"
             ColumnDefinitions="*,*"
             HorizontalOptions="EndAndExpand"
-            RowDefinitions="auto,auto"
             IsVisible="{Binding NextPageEnabledButton, Source={x:Reference paginationComponent}}"
+            RowDefinitions="auto,auto"
             VerticalOptions="StartAndExpand">
             <Image
                 Grid.Column="2"

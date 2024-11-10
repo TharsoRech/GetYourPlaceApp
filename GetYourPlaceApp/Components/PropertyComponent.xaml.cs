@@ -1,4 +1,6 @@
+using GetYourPlaceApp.Helpers;
 using GetYourPlaceApp.Models;
+using System.Reflection;
 
 namespace GetYourPlaceApp.Components;
 
@@ -38,4 +40,10 @@ public partial class PropertyComponent : ContentView
     }
 
     #endregion
+
+    [RelayCommand]
+    public async Task GoToPropertyInfo(Property property)
+    {
+        Navigation.PushAsync(new PropertyDetail(property));
+    }
 }

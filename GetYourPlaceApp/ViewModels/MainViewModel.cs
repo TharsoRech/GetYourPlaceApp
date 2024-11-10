@@ -13,7 +13,6 @@ public partial class MainViewModel : BaseViewModel, IDisposable
     #region variables
     private static IPropertiesRepository _PropertiesRepository;
     BackgroundTaskRunner<List<Property>> _getPropertiesTask;
-    BackgroundTaskRunner<bool> _applyFilterTask; 
     #endregion
 
     #region Properties

@@ -33,6 +33,10 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<LoginViewModel>();
 
+        builder.Services.AddSingleton<PropertyDetail>();
+
+        builder.Services.AddSingleton<PropertyDetailViewModel>();
+
         builder.Services.AddScoped<ILoginRepository, LoginRepository>();
 
         builder.Services.AddScoped<IFilterRepository, FilterRepository>();

@@ -79,6 +79,8 @@
                 Grid.Row="1"
                 Grid.Column="1"
                 Margin="0,0,16,0"
+                Command="{Binding GoToPropertyInfoCommand, Source={x:Reference propertyComponent}}"
+                CommandParameter="{Binding Property, Source={x:Reference propertyComponent}}"
                 HeightRequest="50"
                 Text="More Information" />
         </Grid>
