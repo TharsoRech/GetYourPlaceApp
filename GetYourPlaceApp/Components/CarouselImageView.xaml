@@ -1,44 +1,49 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Name="carouselImageView"
-             BackgroundColor="DarkSlateGray"
-             x:Class="GetYourPlaceApp.Components.CarouselImageView">
-    <Grid RowDefinitions="auto,auto"
-          VerticalOptions="FillAndExpand"
-          RowSpacing="12"
-          HorizontalOptions="FillAndExpand">
+<ContentView
+    x:Class="GetYourPlaceApp.Components.CarouselImageView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="carouselImageView"
+    BackgroundColor="DarkSlateGray">
+    <Grid
+        BackgroundColor="{StaticResource GreenGYP}"
+        HorizontalOptions="FillAndExpand"
+        RowDefinitions="auto,auto"
+        RowSpacing="16"
+        VerticalOptions="FillAndExpand">
         <Image
-              Margin="16,16,16,0"
-              Aspect="AspectFit"
-              WidthRequest="350"
-              HeightRequest="200"
-              HorizontalOptions="FillAndExpand"
-              VerticalOptions="FillAndExpand"
-              Source="{Binding CurrentImage, Source={x:Reference carouselImageView}}" />
+            Margin="16,16,16,0"
+            Aspect="AspectFit"
+            HeightRequest="200"
+            HorizontalOptions="FillAndExpand"
+            Source="{Binding CurrentImageBase64, Source={x:Reference carouselImageView}}"
+            VerticalOptions="FillAndExpand"
+            WidthRequest="350" />
         <CollectionView
-           Grid.Row="1"
-           HorizontalOptions="CenterAndExpand"
-           ItemsSource="{Binding PaginationItems, Source={x:Reference carouselImageView}}"
-           VerticalOptions="FillAndExpand">
+            Grid.Row="1"
+            Margin="16,0,0,0"
+            HorizontalOptions="FillAndExpand"
+            ItemsSource="{Binding PaginationItems, Source={x:Reference carouselImageView}}"
+            VerticalOptions="FillAndExpand">
             <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Horizontal" />
+                <GridItemsLayout Orientation="Horizontal" Span="2" />
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Border
-                       Margin="4,2,0,0"
-                       HeightRequest="16"
-                       HorizontalOptions="FillAndExpand"
-                       Stroke="{StaticResource GreenGYP}"
-                       VerticalOptions="EndAndExpand"
-                       WidthRequest="16">
+                        Margin="4,2,0,0"
+                        BackgroundColor="Transparent"
+                        HeightRequest="16"
+                        HorizontalOptions="FillAndExpand"
+                        Stroke="{StaticResource GreenLightGYP}"
+                        VerticalOptions="FillAndExpand"
+                        WidthRequest="16">
                         <Border.Triggers>
                             <DataTrigger
-                               Binding="{Binding IsActive}"
-                               TargetType="Border"
-                               Value="True">
-                                <Setter Property="BackgroundColor" Value="{StaticResource GreenGYP}" />
+                                Binding="{Binding IsActive}"
+                                TargetType="Border"
+                                Value="True">
+                                <Setter Property="BackgroundColor" Value="{StaticResource GreenLightGYP}" />
                             </DataTrigger>
                         </Border.Triggers>
                         <Border.StrokeShape>

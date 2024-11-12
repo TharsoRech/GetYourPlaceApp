@@ -2,6 +2,6 @@
 {
     public class PaginationItemImage : PaginationItem
     {
-        public ImageSource Image { get; set; }
+        public string ImageBase64 { get; set; }
     }
 }

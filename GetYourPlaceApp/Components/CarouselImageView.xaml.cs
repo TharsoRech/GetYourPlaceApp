@@ -10,9 +10,9 @@ public partial class CarouselImageView : ContentView
 	}
 
     #region Bindable Properties
-    public static readonly BindableProperty ImagesProperty = BindableProperty.Create(
-      nameof(Images),
-      typeof(List<ImageSource>),
+    public static readonly BindableProperty ImagesBase64Property = BindableProperty.Create(
+      nameof(ImagesBase64),
+      typeof(List<string>),
       typeof(CarouselImageView),
       propertyChanged:PropertyUpdated
       );
@@ -25,19 +25,19 @@ public partial class CarouselImageView : ContentView
     defaultValue: new ObservableCollection<PaginationItemImage>()
     );
 
-    private static readonly BindableProperty CurrentImageProperty = BindableProperty.Create(
-    nameof(CurrentImage),
-    typeof(ImageSource),
+    private static readonly BindableProperty CurrentImageBase64Property = BindableProperty.Create(
+    nameof(CurrentImageBase64),
+    typeof(string),
     typeof(CarouselImageView)
     );
 
     #endregion
 
     #region [Properties]
-    public List<ImageSource> Images
+    public List<string> ImagesBase64
     {
-        get => (List<ImageSource>)this.GetValue(ImagesProperty);
-        set => this.SetValue(ImagesProperty, value);
+        get => (List<string>)this.GetValue(ImagesBase64Property);
+        set => this.SetValue(ImagesBase64Property, value);
     }
 
     public ObservableCollection<PaginationItemImage> PaginationItems
@@ -46,10 +46,10 @@ public partial class CarouselImageView : ContentView
         set => this.SetValue(PaginationItemsProperty, value);
     }
 
-    public ImageSource CurrentImage
+    public string CurrentImageBase64
     {
-        get => (ImageSource)this.GetValue(CurrentImageProperty);
-        set => this.SetValue(CurrentImageProperty, value);
+        get => (string)this.GetValue(CurrentImageBase64Property);
+        set => this.SetValue(CurrentImageBase64Property, value);
     }
     #endregion
 
@@ -63,14 +63,14 @@ public partial class CarouselImageView : ContentView
     {
         try
         {
-            if (Images?.Count > 0)
+            if (ImagesBase64?.Count > 0)
             {
                 PaginationItems?.Clear();
-                for (int i = 0; i < Images.Count; i++)
+                for (int i = 0; i < ImagesBase64.Count; i++)
                 {
                     PaginationItemImage paginationItem = new PaginationItemImage();
                     paginationItem.PageIndex = i;
-                    paginationItem.Image = Images[i];
+                    paginationItem.ImageBase64 = ImagesBase64[i];
 
                     if (i == 0)
                         paginationItem.IsActive = true;
@@ -78,7 +78,7 @@ public partial class CarouselImageView : ContentView
 
                     PaginationItems.Add(paginationItem);
                 }
-                CurrentImage = Images.FirstOrDefault();
+                CurrentImageBase64 = ImagesBase64[0];
             }
 
         }
@@ -94,8 +94,17 @@ public partial class CarouselImageView : ContentView
     {
         try
         {
-            paginationItem.IsActive = true;
-            CurrentImage = Images[paginationItem.PageIndex];
+            var pagItemList = PaginationItems.ToList();
+            var pgItem = pagItemList.FirstOrDefault(p => p.PageIndex == paginationItem.PageIndex);
+            if (pgItem != null)
+            {
+                foreach (var pagItem in pagItemList.Where(p => p.PageIndex != paginationItem.PageIndex))
+                    pagItem.IsActive = false;
+
+                pgItem.IsActive = true;
+                PaginationItems = new ObservableCollection<PaginationItemImage>(pagItemList);
+                CurrentImageBase64 = ImagesBase64[pgItem.PageIndex];
+            }
         }
         catch (Exception ex)
         {

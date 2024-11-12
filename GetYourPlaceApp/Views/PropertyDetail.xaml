@@ -6,14 +6,68 @@
              x:DataType="vm:PropertyDetailViewModel"
              xmlns:cm="clr-namespace:GetYourPlaceApp.Components"
              xmlns:sk="clr-namespace:Maui.Skeleton;assembly=Sharpnado.HorusSkeleton.Maui"
-             Title="PropertyDetail">
+             BackgroundColor="DarkSlateGray"
+             Title="Property Detail">
     <Grid
+          Padding="8,16,8,16"
+          RowDefinitions="auto,auto"
+          RowSpacing="16"
           sk:Skeleton.IsParent="True"
           sk:Skeleton.IsBusy="{Binding IsLoading}"
           sk:Skeleton.BackgroundColor="{StaticResource Gray100}"
           sk:Skeleton.Animation="{sk:DefaultAnimation Source=Beat, Interval='600', Parameter='1.03'}">
-        <cm:CarouselImageView
-            Images="{Binding Property.Images}">
-        </cm:CarouselImageView>
+        <Border
+              Margin="4,2,0,0"
+                Padding="8,16,8,16"
+               BackgroundColor="{StaticResource GreenGYP}"
+              HorizontalOptions="FillAndExpand"
+              Stroke="{StaticResource GreenGYP}"
+              VerticalOptions="StartAndExpand">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="28" />
+            </Border.StrokeShape>
+            <Grid
+             RowDefinitions="auto,*,auto,auto,auto"
+             RowSpacing="16">
+                <Label
+            VerticalTextAlignment="Center"
+            HorizontalTextAlignment="Center"
+            Text="{Binding Property.Description}"
+            FontSize="Large"
+            TextColor="{StaticResource White}">
+                </Label>
+            <cm:CarouselImageView
+            Grid.Row="1"
+            ImagesBase64="{Binding Property.Base64Images}">
+            </cm:CarouselImageView>
+            <Grid RowDefinitions="auto,auto,auto"
+                  RowSpacing="8"
+                 Grid.Row="2">
+                    <Label
+                    VerticalTextAlignment="Start"
+                    HorizontalTextAlignment="Start"
+                    Text="{Binding Property.AddressFormated}"
+                    FontSize="Small"
+                    TextColor="{StaticResource White}">
+                    </Label>
+                    <Label
+                        Grid.Row="3"
+                    VerticalTextAlignment="Start"
+                    HorizontalTextAlignment="Start"
+                     Text="{Binding Property.PublishedAtFormated}"
+                     FontSize="Small"
+                     TextColor="{StaticResource White}">
+                    </Label>
+                    <Label
+                        Grid.Row="4"
+                    VerticalTextAlignment="Start"
+                    HorizontalTextAlignment="Start"
+                    Text="{Binding Property.PriceFormated}"
+                    FontSize="Small"
+                    TextColor="{StaticResource White}">
+                    </Label>
+                </Grid>
+            </Grid>
+        </Border>
     </Grid>
 </ContentPage>
