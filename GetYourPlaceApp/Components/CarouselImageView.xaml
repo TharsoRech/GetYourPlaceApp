@@ -50,8 +50,7 @@
                             <RoundRectangle CornerRadius="28" />
                         </Border.StrokeShape>
                         <Border.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding OpenImageCommand, Source={x:Reference carouselImageView}}" 
-                                                  CommandParameter="{Binding .}" />
+                            <TapGestureRecognizer Command="{Binding OpenImageCommand, Source={x:Reference carouselImageView}}" CommandParameter="{Binding .}" />
                         </Border.GestureRecognizers>
                     </Border>
                 </DataTemplate>
