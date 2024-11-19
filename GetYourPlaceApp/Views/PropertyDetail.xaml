@@ -23,73 +23,90 @@
         RowSpacing="16">
         <ScrollView>
             <Border
-            Margin="4,2,0,0"
-            Padding="8,16,8,16"
-            BackgroundColor="{StaticResource GreenGYP}"
-            HorizontalOptions="FillAndExpand"
-            Stroke="{StaticResource GreenGYP}"
-            VerticalOptions="FillAndExpand">
+                Margin="4,2,0,0"
+                Padding="8,16,8,16"
+                BackgroundColor="{StaticResource GreenGYP}"
+                HorizontalOptions="FillAndExpand"
+                Stroke="{StaticResource GreenGYP}"
+                VerticalOptions="FillAndExpand">
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="28" />
                 </Border.StrokeShape>
                 <Grid RowDefinitions="auto">
-                    <Grid RowDefinitions="auto,auto,auto,*"
-                          RowSpacing="16">
+                    <Grid RowDefinitions="auto,auto,auto,*,*" RowSpacing="16">
                         <Label
-                    FontSize="Large"
-                    HorizontalTextAlignment="Center"
-                    Text="{Binding BindingContext.Property.Description, Source={x:Reference propertyDetail}}"
-                    TextColor="{StaticResource White}"
-                    VerticalTextAlignment="Center" />
+                            FontSize="Large"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding BindingContext.Property.Description, Source={x:Reference propertyDetail}}"
+                            TextColor="{StaticResource White}"
+                            VerticalTextAlignment="Center" />
                         <cm:CarouselImageView Grid.Row="1" ImagesBase64="{Binding BindingContext.Property.Base64Images, Source={x:Reference propertyDetail}}" />
                         <Grid
-                    Grid.Row="2"
-                    Margin="16"
-                    RowDefinitions="auto,auto,auto,auto"
-                    RowSpacing="6">
+                            Grid.Row="2"
+                            Margin="16"
+                            RowDefinitions="auto,auto,auto,auto"
+                            RowSpacing="6">
                             <Label
-                        FontSize="Small"
-                        HorizontalTextAlignment="Start"
-                        Text="{Binding BindingContext.Property.AddressFormated, Source={x:Reference propertyDetail}}"
-                        TextColor="{StaticResource White}"
-                        VerticalTextAlignment="Start" />
+                                FontSize="Small"
+                                HorizontalTextAlignment="Start"
+                                Text="{Binding BindingContext.Property.AddressFormated, Source={x:Reference propertyDetail}}"
+                                TextColor="{StaticResource White}"
+                                VerticalTextAlignment="Start" />
                             <CollectionView
-                        Grid.Row="1"
-                        HorizontalOptions="FillAndExpand"
-                        ItemsSource="{Binding BindingContext.Property.PropertyInformations, Source={x:Reference propertyDetail}}"
-                        VerticalOptions="FillAndExpand">
+                                Grid.Row="1"
+                                HorizontalOptions="FillAndExpand"
+                                ItemsSource="{Binding BindingContext.Property.PropertyInformations, Source={x:Reference propertyDetail}}"
+                                VerticalOptions="FillAndExpand">
                                 <CollectionView.ItemsLayout>
                                     <GridItemsLayout Orientation="Vertical" />
                                 </CollectionView.ItemsLayout>
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="models:GYPPropertyInfoItem">
                                         <Label
-                                    Grid.Row="1"
-                                    Padding="0,4,0,4"
-                                    FontSize="Small"
-                                    HorizontalTextAlignment="Start"
-                                    Text="{Binding FullDescription}"
-                                    TextColor="{StaticResource White}"
-                                    VerticalTextAlignment="Start" />
+                                            Grid.Row="1"
+                                            Padding="0,4,0,4"
+                                            FontSize="Small"
+                                            HorizontalTextAlignment="Start"
+                                            Text="{Binding FullDescription}"
+                                            TextColor="{StaticResource White}"
+                                            VerticalTextAlignment="Start" />
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
                             </CollectionView>
                             <Label
-                        Grid.Row="2"
-                        FontSize="Small"
-                        HorizontalTextAlignment="Start"
-                        Text="{Binding BindingContext.Property.PublishedAtFormated, Source={x:Reference propertyDetail}}"
-                        TextColor="{StaticResource White}"
-                        VerticalTextAlignment="Start" />
+                                Grid.Row="2"
+                                FontSize="Small"
+                                HorizontalTextAlignment="Start"
+                                Text="{Binding BindingContext.Property.PublishedAtFormated, Source={x:Reference propertyDetail}}"
+                                TextColor="{StaticResource White}"
+                                VerticalTextAlignment="Start" />
                             <Label
-                        Grid.Row="3"
-                        FontSize="Small"
-                        HorizontalTextAlignment="Start"
-                        Text="{Binding BindingContext.Property.PriceFormated, Source={x:Reference propertyDetail}}"
-                        TextColor="{StaticResource White}"
-                        VerticalTextAlignment="Start" />
+                                Grid.Row="3"
+                                FontSize="Small"
+                                HorizontalTextAlignment="Start"
+                                Text="{Binding BindingContext.Property.PriceFormated, Source={x:Reference propertyDetail}}"
+                                TextColor="{StaticResource White}"
+                                VerticalTextAlignment="Start" />
                         </Grid>
-                        <Button Grid.Row="3" Text="I'm interested" Margin="16" />
+                        <Button
+                            Grid.Row="3"
+                            Margin="16"
+                            Text="I'm interested" />
+                        <Grid Grid.Row="4" 
+                              RowDefinitions="auto,auto"
+                              RowSpacing="16">
+                            <Label
+                             FontSize="Large"
+                             HorizontalTextAlignment="Center"
+                             Text="Reviews"
+                             TextColor="{StaticResource White}"
+                             VerticalTextAlignment="Start" />
+                            <cm:ReviewList
+                            Grid.Row="1"
+                            Margin="16,0,0,16"
+                            Reviews="{Binding BindingContext.Property.Reviews, Source={x:Reference propertyDetail}}" />
+                        </Grid>
+
                     </Grid>
                 </Grid>
             </Border>

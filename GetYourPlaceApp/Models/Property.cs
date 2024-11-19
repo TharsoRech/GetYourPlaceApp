@@ -31,8 +31,7 @@ namespace GetYourPlaceApp.Models
                 return new List<ImageSource>();
             }
         }
-
-        public List<GYPReview> Reviews;
+        public ObservableCollection<GYPReview> Reviews{ get; set; }
         public string PriceFormated => $"Price: {String.Format("{0:C}", Price)}";
         public string TypeOFRentFormated => $"type of acquisition: {TypeOfRent?.Description}";
         public string PublishedAtFormated => $"Published At: {PuplishedAt.ToShortDateString()}";
