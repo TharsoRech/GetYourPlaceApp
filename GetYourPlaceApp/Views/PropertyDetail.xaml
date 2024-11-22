@@ -103,7 +103,7 @@
                              VerticalTextAlignment="Start" />
                             <cm:ReviewList
                             Grid.Row="1"
-                            Margin="16,0,0,16"
+                            Margin="4,0,0,16"
                             Reviews="{Binding BindingContext.Property.Reviews, Source={x:Reference propertyDetail}}" />
                         </Grid>
 
