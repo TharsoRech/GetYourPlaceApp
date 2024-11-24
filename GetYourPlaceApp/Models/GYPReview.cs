@@ -10,5 +10,6 @@
         public string Description { get; set; }
         public string Base64Image { get; set; }
         public int Stars { get; set; }
+        public DateTime PuplishedAt { get; set; }
     }
 }

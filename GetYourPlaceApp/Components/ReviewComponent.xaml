@@ -4,60 +4,69 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:cm="clr-namespace:GetYourPlaceApp.Components"
-    Padding="0,4,0,4"
-    x:Name="reviewComponent">
+    x:Name="reviewComponent"
+    Padding="0,4,0,4">
     <Border
-              Margin="4,2,0,0"
-              Padding="16,16,8,16"
-              BackgroundColor="{StaticResource GreenGYP}"
-              HorizontalOptions="FillAndExpand"
-              Stroke="{StaticResource GreenLightGYP}"
-              VerticalOptions="FillAndExpand">
+        Margin="4,2,0,0"
+        Padding="16,16,8,16"
+        BackgroundColor="{StaticResource GreenGYP}"
+        HorizontalOptions="FillAndExpand"
+        Stroke="{StaticResource GreenLightGYP}"
+        VerticalOptions="FillAndExpand">
         <Border.StrokeShape>
             <RoundRectangle CornerRadius="28" />
         </Border.StrokeShape>
-        <Grid RowDefinitions="auto"
-          Padding="0,4,0,4"
-          RowSpacing="8"
-          ColumnDefinitions="auto,*">
+        <Grid
+            Padding="0,0,0,4"
+            ColumnDefinitions="auto,*"
+            RowDefinitions="auto"
+            RowSpacing="8">
             <Image
-                    Margin="0,16,16,0"
-                    Aspect="AspectFit"
-                    HeightRequest="40"
-                    WidthRequest="40"
-                    HorizontalOptions="StartAndExpand"
-                    Source="{Binding Review.Base64Image, Source={x:Reference reviewComponent}}"
-                    VerticalOptions="Start" />
-            <Grid RowDefinitions="auto,auto,auto,auto"
-              Margin="0,12,0,0"
-              RowSpacing="8"
-              Grid.Column="1">
+                Margin="0,16,16,0"
+                Aspect="AspectFit"
+                HeightRequest="40"
+                HorizontalOptions="StartAndExpand"
+                Source="{Binding Review.Base64Image, Source={x:Reference reviewComponent}}"
+                VerticalOptions="Start"
+                WidthRequest="40" />
+            <Grid
+                Grid.Column="1"
+                Margin="0,12,0,0"
+                RowDefinitions="auto,auto,auto,auto,auto"
+                RowSpacing="8">
                 <Label
                     Grid.Column="1"
-                    VerticalTextAlignment="Start"
-                    VerticalOptions="Start"
                     HorizontalOptions="Start"
                     Text="{Binding Review.GYPUserName, Source={x:Reference reviewComponent}}"
-                    TextColor="White" />
+                    TextColor="White"
+                    VerticalOptions="Start"
+                    VerticalTextAlignment="Start" />
                 <Label
                     Grid.Row="1"
                     Grid.Column="1"
                     Text="{Binding Review.GYPUserDetails, Source={x:Reference reviewComponent}}"
                     TextColor="White" />
                 <Label
-                Grid.Row="2"
-                Grid.Column="1"
-                HorizontalTextAlignment="End"
-                Margin="0,16,16,0"
-                Text="{Binding Review.Description, Source={x:Reference reviewComponent}}"
-                TextColor="White" />
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Margin="0,16,16,0"
+                    HorizontalTextAlignment="End"
+                    Text="{Binding Review.Description, Source={x:Reference reviewComponent}}"
+                    TextColor="White" />
                 <cm:StarRatingComponent
-                Grid.Row="3"
-                Grid.Column="1"
-                HorizontalOptions="EndAndExpand"
-                CanChangeStars="False"
-                Rating="{Binding Review.Stars, Source={x:Reference reviewComponent}}"
-                StarCount="5" />
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    CanChangeStars="False"
+                    HorizontalOptions="EndAndExpand"
+                    Rating="{Binding Review.Stars, Source={x:Reference reviewComponent}}"
+                    StarCount="5" />
+                <Label
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Margin="0,16,16,0"
+                    HorizontalTextAlignment="End"
+                    Text="{Binding Review.PuplishedAt, Source={x:Reference reviewComponent}}"
+                    TextColor="White" />
             </Grid>
         </Grid>
     </Border>
