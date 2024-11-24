@@ -24,8 +24,8 @@
                 Margin="16"
                 IsVisible="{Binding Items, Source={x:Reference propetieList}, Converter={StaticResource isListNotNullOrEmptyConverter}}"
                 SelectedIndexChanged="OnPickerSelectedIndexChanged"
-                TextColor="{StaticResource White}"
-                TitleColor="{StaticResource White}">
+                TextColor="#FFF"
+                TitleColor="#FFFFFD">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>Most Recent (High to Low)</x:String>

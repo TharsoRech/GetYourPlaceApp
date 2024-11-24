@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui;
+using GetYourPlaceApp.Handlers;
 using GetYourPlaceApp.Helpers;
 using GetYourPlaceApp.Repository.Filter;
 using GetYourPlaceApp.Repository.Login;
@@ -42,6 +43,8 @@ public static class MauiProgram
         builder.Services.AddScoped<IFilterRepository, FilterRepository>();
 
         builder.Services.AddScoped<IPropertiesRepository, PropertiesRepository>();
+
+        FormHandler.AdjustBorders();
 
         var app = builder.Build();
         ServiceHelper.Initialize(app.Services);
