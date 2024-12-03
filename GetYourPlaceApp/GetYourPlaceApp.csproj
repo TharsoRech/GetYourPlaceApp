@@ -90,6 +90,9 @@
 	  <MauiXaml Update="Components\LoadingComponent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Components\LoadingPopUpPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Components\PaginationComponent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

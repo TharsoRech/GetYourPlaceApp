@@ -44,6 +44,9 @@ public partial class PropertyComponent : ContentView
     [RelayCommand]
     public async Task GoToPropertyInfo(Property property)
     {
-        Navigation.PushAsync(new PropertyDetail(property));
+        var loading = new LoadingPopUpPage();
+        loading.ShowLoading();
+        await Navigation.PushAsync(new PropertyDetail(property));
+        loading.HideLoading();
     }
 }

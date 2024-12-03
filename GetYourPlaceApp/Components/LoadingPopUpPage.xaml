@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cm="clr-namespace:GetYourPlaceApp.Components"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             x:Name="loadingPopUpPage"
+             CanBeDismissedByTappingOutsideOfPopup="true"
+             HorizontalOptions="Fill"
+             VerticalOptions="Fill"
+             Color="#80000000"
+             x:Class="GetYourPlaceApp.Components.LoadingPopUpPage">
+    <Grid
+        RowDefinitions="*"
+          VerticalOptions="FillAndExpand"
+          HorizontalOptions="FillAndExpand">
+        <cm:LoadingComponent
+           VerticalOptions="CenterAndExpand"
+           HorizontalOptions="CenterAndExpand"
+           IsLoading="{Binding IsLoading, Source={x:Reference loadingPopUpPage}}"
+           LoadingColor="{StaticResource GreenGYP}"
+           LoadingText="Loading..." />
+    </Grid>
+</mct:Popup>

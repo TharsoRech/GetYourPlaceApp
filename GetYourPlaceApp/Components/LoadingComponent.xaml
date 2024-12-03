@@ -16,6 +16,7 @@
         <Label
             Grid.Row="1"
             HorizontalOptions="CenterAndExpand"
+            FontSize="Medium"
             Text="{Binding LoadingText, Source={x:Reference loadingComponent}}"
             TextColor="{StaticResource White}"
             VerticalOptions="CenterAndExpand" />
