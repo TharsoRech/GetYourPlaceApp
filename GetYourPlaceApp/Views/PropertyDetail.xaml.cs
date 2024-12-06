@@ -8,7 +8,7 @@ public partial class PropertyDetail : ContentPage
     public PropertyDetail(Property property)
 	{
 		InitializeComponent();
-		BindingContext = _viewModel = new PropertyDetailViewModel(property);
+		BindingContext = _viewModel = new PropertyDetailViewModel(property,Navigation);
 
     }
 }

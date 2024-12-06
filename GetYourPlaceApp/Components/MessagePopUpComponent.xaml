@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup
+    x:Class="GetYourPlaceApp.Components.MessagePopUpComponent"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+    x:Name="messagePopUpComponent"
+    CanBeDismissedByTappingOutsideOfPopup="true"
+    HorizontalOptions="Fill"
+    VerticalOptions="Fill"
+    Color="#80000000">
+    <Grid
+        HorizontalOptions="FillAndExpand"
+        RowDefinitions="*"
+        VerticalOptions="End">
+        <Border
+            Margin="16"
+            Padding="0"
+            BackgroundColor="Transparent"
+            Stroke="Transparent"
+            StrokeThickness="0">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="28" />
+            </Border.StrokeShape>
+            <Grid
+                Padding="8"
+                BackgroundColor="{StaticResource GreenGYP}"
+                HorizontalOptions="FillAndExpand"
+                RowDefinitions="auto,auto,*"
+                RowSpacing="8"
+                VerticalOptions="EndAndExpand">
+                <Label
+                    Padding="8"
+                    FontSize="Medium"
+                    Text="{Binding BindingContext.Title, Source={x:Reference messagePopUpComponent}}"
+                    TextColor="{StaticResource White}" />
+                <Label
+                    Grid.Row="1"
+                    Padding="8"
+                    FontSize="Small"
+                    Text="{Binding BindingContext.SubTitle, Source={x:Reference messagePopUpComponent}}"
+                    TextColor="{StaticResource White}" />
+                <Label
+                    Grid.Row="2"
+                    Padding="8"
+                    FontSize="Large"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="{Binding BindingContext.Message, Source={x:Reference messagePopUpComponent}}"
+                    TextColor="{StaticResource White}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding MessageClickCommand, Source={x:Reference messagePopUpComponent}}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+        </Border>
+    </Grid>
+</mct:Popup>

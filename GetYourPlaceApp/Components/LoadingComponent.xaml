@@ -15,8 +15,8 @@
         <ActivityIndicator IsRunning="{Binding IsLoading, Source={x:Reference loadingComponent}}" Color="{Binding LoadingColor, Source={x:Reference loadingComponent}}" />
         <Label
             Grid.Row="1"
-            HorizontalOptions="CenterAndExpand"
             FontSize="Medium"
+            HorizontalOptions="CenterAndExpand"
             Text="{Binding LoadingText, Source={x:Reference loadingComponent}}"
             TextColor="{StaticResource White}"
             VerticalOptions="CenterAndExpand" />

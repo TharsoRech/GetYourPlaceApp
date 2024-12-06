@@ -6,11 +6,17 @@
     xmlns:cm="clr-namespace:GetYourPlaceApp.Components"
     xmlns:models="clr-namespace:GetYourPlaceApp.Models"
     xmlns:sk="clr-namespace:Maui.Skeleton;assembly=Sharpnado.HorusSkeleton.Maui"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:vm="clr-namespace:GetYourPlaceApp.ViewModels"
     x:Name="propertyDetail"
     Title="Property Detail"
     x:DataType="vm:PropertyDetailViewModel"
     BackgroundColor="DarkSlateGray">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <Grid
         Padding="8,16,8,16"
         sk:Skeleton.Animation="{sk:DefaultAnimation Source=Beat,
@@ -91,7 +97,18 @@
                         <Button
                             Grid.Row="3"
                             Margin="16"
-                            Text="I'm interested" />
+                            Command="{Binding BindingContext.SendInsterestedToOwnerCommand, Source={x:Reference propertyDetail}}"
+                            IsEnabled="{Binding BindingContext.InterestedButtonEnabled, Source={x:Reference propertyDetail}, Converter={StaticResource InvertedBoolConverter}}"
+                            Text="I'm interested">
+                            <Button.Triggers>
+                                <DataTrigger
+                                    Binding="{Binding BindingContext.InterestedButtonEnabled, Source={x:Reference propertyDetail}}"
+                                    TargetType="Button"
+                                    Value="True">
+                                    <Setter Property="Text" Value="Under Analysis" />
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
                         <Grid
                             Grid.Row="4"
                             RowDefinitions="auto,auto"

@@ -1,4 +1,6 @@
-﻿using GetYourPlaceApp.Helpers;
+﻿using CommunityToolkit.Maui.Views;
+using GetYourPlaceApp.Components;
+using GetYourPlaceApp.Helpers;
 using GetYourPlaceApp.Models;
 using GetYourPlaceApp.Repository.Properties;
 using GetYourPlaceApp.Services.BackGroundTask;
@@ -9,6 +11,7 @@ namespace GetYourPlaceApp.ViewModels
     {
         #region variables
         private static IPropertiesRepository _PropertiesRepository;
+        private static INavigation _Navigation;
         BackgroundTaskRunner<Property> _getPropertiesDetailsTask;
         #endregion
 
@@ -18,11 +21,15 @@ namespace GetYourPlaceApp.ViewModels
 
         [ObservableProperty]
         bool isLoading;
+
+        [ObservableProperty]
+        bool interestedButtonEnabled;
         #endregion
 
-        public PropertyDetailViewModel(Property property)
+        public PropertyDetailViewModel(Property property,INavigation navigation)
         {
             Property = property;
+            _Navigation = navigation;
 
             if (_PropertiesRepository is null)
                 _PropertiesRepository = ServiceHelper.GetService<IPropertiesRepository>();
@@ -71,6 +78,15 @@ namespace GetYourPlaceApp.ViewModels
             }
         }
 
+        [RelayCommand]
+        public async Task SendInsterestedToOwner()
+        {
+            Application.Current.MainPage.ShowPopupAsync(new MessagePopUpComponent(
+                "Message sent",
+                "We will make sure that the owner will receive the message",
+                "Ok",
+                new Command(() => MainThread.InvokeOnMainThreadAsync(() => InterestedButtonEnabled = false) )));
+        }
 
     }
 }
