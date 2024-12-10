@@ -22,8 +22,10 @@ namespace GetYourPlaceApp.ViewModels
         [ObservableProperty]
         bool isLoading;
 
+
         [ObservableProperty]
-        bool interestedButtonEnabled;
+        bool interestedButtonDisabled;
+
         #endregion
 
         public PropertyDetailViewModel(Property property,INavigation navigation)
@@ -35,6 +37,7 @@ namespace GetYourPlaceApp.ViewModels
                 _PropertiesRepository = ServiceHelper.GetService<IPropertiesRepository>();
 
             GetPropertyInfo();
+
         }
 
         public void GetPropertyInfo()
@@ -52,6 +55,7 @@ namespace GetYourPlaceApp.ViewModels
                         MainThread.BeginInvokeOnMainThread(() =>
                         {
                             Property = e.Result;
+                            CheckIsUnderAnalysis();
                             IsLoading = false;
                         });
                     }
@@ -85,8 +89,23 @@ namespace GetYourPlaceApp.ViewModels
                 "Message sent",
                 "We will make sure that the owner will receive the message",
                 "Ok",
-                new Command(() => MainThread.InvokeOnMainThreadAsync(() => InterestedButtonEnabled = false) )));
+                new Command(() => SetPropertyUnderAnalysis())));
         }
 
+        public void SetPropertyUnderAnalysis()
+        {
+            if (Property != null)
+            {
+                Property.UnderAnalysis = true;
+                CheckIsUnderAnalysis();
+            }
+
+        }
+
+        public void CheckIsUnderAnalysis()
+        {
+                if (Property != null)
+                    InterestedButtonDisabled = Property.UnderAnalysis;
+        }
     }
 }

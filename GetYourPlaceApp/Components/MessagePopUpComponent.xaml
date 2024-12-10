@@ -5,20 +5,24 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
     x:Name="messagePopUpComponent"
-    CanBeDismissedByTappingOutsideOfPopup="true"
+    CanBeDismissedByTappingOutsideOfPopup="False"
     HorizontalOptions="Fill"
-    VerticalOptions="Fill"
+    VerticalOptions="Fill"   
     Color="#80000000">
     <Grid
         HorizontalOptions="FillAndExpand"
-        RowDefinitions="*"
-        VerticalOptions="End">
+        VerticalOptions="Fill">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         <Border
             Margin="16"
             Padding="0"
             BackgroundColor="Transparent"
             Stroke="Transparent"
-            StrokeThickness="0">
+            StrokeThickness="0"
+            Grid.Row="1">
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="28" />
             </Border.StrokeShape>
@@ -27,8 +31,7 @@
                 BackgroundColor="{StaticResource GreenGYP}"
                 HorizontalOptions="FillAndExpand"
                 RowDefinitions="auto,auto,*"
-                RowSpacing="8"
-                VerticalOptions="EndAndExpand">
+                RowSpacing="8">
                 <Label
                     Padding="8"
                     FontSize="Medium"

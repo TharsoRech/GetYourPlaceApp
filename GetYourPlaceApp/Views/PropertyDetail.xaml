@@ -98,11 +98,11 @@
                             Grid.Row="3"
                             Margin="16"
                             Command="{Binding BindingContext.SendInsterestedToOwnerCommand, Source={x:Reference propertyDetail}}"
-                            IsEnabled="{Binding BindingContext.InterestedButtonEnabled, Source={x:Reference propertyDetail}, Converter={StaticResource InvertedBoolConverter}}"
+                            IsEnabled="{Binding BindingContext.InterestedButtonDisabled, Source={x:Reference propertyDetail}, Converter={StaticResource InvertedBoolConverter}}"
                             Text="I'm interested">
                             <Button.Triggers>
                                 <DataTrigger
-                                    Binding="{Binding BindingContext.InterestedButtonEnabled, Source={x:Reference propertyDetail}}"
+                                    Binding="{Binding BindingContext.InterestedButtonDisabled, Source={x:Reference propertyDetail}}"
                                     TargetType="Button"
                                     Value="True">
                                     <Setter Property="Text" Value="Under Analysis" />
