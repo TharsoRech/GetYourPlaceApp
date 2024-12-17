@@ -6,6 +6,7 @@ public partial class HeartView : ContentView
     public HeartView()
     {
         InitializeComponent();
+        BindingContext = this;
     }
 
     #region Bindable Properties

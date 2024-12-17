@@ -7,8 +7,13 @@
     HeightRequest="32"
     WidthRequest="32"
     x:Name="heartView">
+    <ContentView.GestureRecognizers>
+        <TapGestureRecognizer
+               Command="{Binding HeartClickedCommand}">
+        </TapGestureRecognizer>
+    </ContentView.GestureRecognizers>
     <Image
-         VerticalOptions="StartAndExpand"
+         VerticalOptions="FillAndExpand"
          HorizontalOptions="StartAndExpand"
          HeightRequest="32"
          WidthRequest="32"
@@ -24,10 +29,5 @@
                 <Setter Property="Source" Value="unfavorite.svg" />
             </DataTrigger>
         </Image.Triggers>
-        <Image.GestureRecognizers>
-            <TapGestureRecognizer
-               Command="{Binding HeartClickedCommand, Source={x:Reference heartView}}">
-            </TapGestureRecognizer>
-        </Image.GestureRecognizers>
     </Image>
 </ContentView>
