@@ -68,15 +68,21 @@
                     Text="{Binding Property.PriceFormated, Source={x:Reference propertyComponent}}"
                     TextColor="{StaticResource White}" />
             </Grid>
-            <Label
+            <cm:HeartView
                 Grid.Row="1"
+                Padding="16"
+                HorizontalOptions="StartAndExpand"
+                Liked="{Binding Property.Liked, Source={x:Reference propertyComponent}}"
+                VerticalOptions="StartAndExpand" />
+            <Label
+                Grid.Row="2"
                 Margin="16,0,0,0"
                 FontSize="Small"
                 Text="{Binding Property.PublishedAtFormated, Source={x:Reference propertyComponent}}"
                 TextColor="{StaticResource White}"
                 VerticalOptions="EndAndExpand" />
             <Button
-                Grid.Row="1"
+                Grid.Row="2"
                 Grid.Column="1"
                 Margin="0,0,16,0"
                 Command="{Binding GoToPropertyInfoCommand, Source={x:Reference propertyComponent}}"

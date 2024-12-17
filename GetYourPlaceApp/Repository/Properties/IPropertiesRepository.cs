@@ -7,5 +7,7 @@ namespace GetYourPlaceApp.Repository.Properties
         Task<List<Property>> GetProperties();
 
         Task<Property> GetPropertyInfo(Property property);
+
+        Task<List<Property>> GetLikedProperties();
     }
 }

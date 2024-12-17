@@ -19,6 +19,7 @@ namespace GetYourPlaceApp.Models
         public ImageSource ImageSource => Base64Image.Base64ToImageSource();
         public List<string> Base64Images { get; set; }
         public bool UnderAnalysis { get;set; }
+        public bool Liked { get; set; }
         public List<ImageSource> Images
         {
             get

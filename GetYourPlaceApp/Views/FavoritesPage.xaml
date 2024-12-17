@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GetYourPlaceApp.Views.FavoritesPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cm="clr-namespace:GetYourPlaceApp.Components"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Name="favoritePage"
+    BackgroundColor="DarkSlateGray"
+    Title="Favorite Places">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:IsListNullOrEmptyConverter x:Key="isListNullOrEmptyConverter" />
+            <toolkit:IsListNotNullOrEmptyConverter x:Key="isListNotNullOrEmptyConverter" />
+            <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout>
+        <ScrollView
+            BackgroundColor="Transparent"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
+            <CollectionView ItemsSource="{Binding BindingContext.LikedProperties, Source={x:Reference favoritePage}}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <cm:PropertyComponent Property="{Binding .}" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </ScrollView>
+        <cm:LoadingComponent
+            IsLoading="{Binding BindingContext.PropertiesLoading, Source={x:Reference favoritePage}}"
+            IsVisible="{Binding BindingContext.PropertiesLoading, Source={x:Reference favoritePage}}"
+            LoadingColor="{StaticResource GreenGYP}"
+            LoadingText="Loading Properties..." />
+        <Label
+          HorizontalOptions="CenterAndExpand"
+          Padding="16"
+          FontSize="Medium"
+          IsVisible="{Binding BindingContext.LikedProperties, Source={x:Reference favoritePage}, Converter={StaticResource isListNullOrEmptyConverter}}"
+          Text="No Favorite Added as favorite,you can add by clicking on heart in the properties"
+          TextColor="{StaticResource White}"
+          VerticalOptions="CenterAndExpand">
+            <Label.Triggers>
+                <DataTrigger
+                  Binding="{Binding BindingContext.PropertiesLoading, Source={x:Reference favoritePage}}"
+                  TargetType="Label"
+                  Value="True">
+                    <Setter Property="IsVisible" Value="false" />
+                </DataTrigger>
+            </Label.Triggers>
+        </Label>
+    </StackLayout>
+</ContentPage>

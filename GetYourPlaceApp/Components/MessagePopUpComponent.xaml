@@ -7,22 +7,20 @@
     x:Name="messagePopUpComponent"
     CanBeDismissedByTappingOutsideOfPopup="False"
     HorizontalOptions="Fill"
-    VerticalOptions="Fill"   
+    VerticalOptions="Fill"
     Color="#80000000">
-    <Grid
-        HorizontalOptions="FillAndExpand"
-        VerticalOptions="Fill">
+    <Grid HorizontalOptions="FillAndExpand" VerticalOptions="Fill">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Border
+            Grid.Row="1"
             Margin="16"
             Padding="0"
             BackgroundColor="Transparent"
             Stroke="Transparent"
-            StrokeThickness="0"
-            Grid.Row="1">
+            StrokeThickness="0">
             <Border.StrokeShape>
                 <RoundRectangle CornerRadius="28" />
             </Border.StrokeShape>

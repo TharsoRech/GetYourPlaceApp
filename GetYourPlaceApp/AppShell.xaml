@@ -77,7 +77,7 @@
         IsVisible="{Binding IsLogged}">
         <ShellContent
             Title="Favorites"
-            ContentTemplate="{DataTemplate views:BlankPage}"
+            ContentTemplate="{DataTemplate views:FavoritesPage}"
             Icon="favorite.png"
             Route="BlankPage"
             Shell.NavBarIsVisible="true" />
