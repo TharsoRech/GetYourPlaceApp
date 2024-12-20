@@ -1,6 +1,7 @@
 using GetYourPlaceApp.Helpers;
 using GetYourPlaceApp.Models;
 using System.Reflection;
+using System.Windows.Input;
 
 namespace GetYourPlaceApp.Components;
 
@@ -24,6 +25,13 @@ public partial class PropertyComponent : ContentView
     typeof(PropertyComponent)
     );
 
+
+    public static readonly BindableProperty HeartClickCommandProperty = BindableProperty.Create(
+    nameof(HeartClickCommand),
+    typeof(ICommand),
+    typeof(PropertyComponent)
+    );
+
     #endregion
 
     #region [Properties]
@@ -31,6 +39,12 @@ public partial class PropertyComponent : ContentView
     { 
         get => (Property)this.GetValue(PropertyProperty);
         set => this.SetValue(PropertyProperty, value);
+    }
+
+    public ICommand HeartClickCommand
+    {
+        get => (ICommand)this.GetValue(HeartClickCommandProperty);
+        set => this.SetValue(HeartClickCommandProperty, value);
     }
 
     public bool IsLoading

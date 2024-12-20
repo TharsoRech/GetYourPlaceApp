@@ -1,3 +1,5 @@
+using System.Windows.Input;
+
 namespace GetYourPlaceApp.Components;
 
 public partial class HeartView : ContentView
@@ -15,6 +17,18 @@ public partial class HeartView : ContentView
       typeof(bool),
       typeof(HeartView)
       );
+
+    public static readonly BindableProperty HeartClickCommandProperty = BindableProperty.Create(
+    nameof(HeartClickCommand),
+    typeof(ICommand),
+    typeof(HeartView)
+    );
+
+    public static readonly BindableProperty PropertyIdProperty = BindableProperty.Create(
+    nameof(PropertyId),
+    typeof(int),
+    typeof(HeartView)
+    );
     #endregion
 
 
@@ -25,11 +39,24 @@ public partial class HeartView : ContentView
         set => this.SetValue(LikedProperty, value);
     }
 
+    public int PropertyId
+    {
+        get => (int)this.GetValue(PropertyIdProperty);
+        set => this.SetValue(PropertyIdProperty, value);
+    }
+
+    public ICommand HeartClickCommand
+    {
+        get => (ICommand)this.GetValue(HeartClickCommandProperty);
+        set => this.SetValue(HeartClickCommandProperty, value);
+    }
+
     #endregion
 
     [RelayCommand]
     public async Task HeartClicked()
     {
         Liked = !Liked;
+        HeartClickCommand?.Execute(new Tuple<bool,int>(Liked,PropertyId));
     }
 }

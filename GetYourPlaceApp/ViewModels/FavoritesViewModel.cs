@@ -1,4 +1,5 @@
-﻿using GetYourPlaceApp.Helpers;
+﻿using GetYourPlaceApp.Components;
+using GetYourPlaceApp.Helpers;
 using GetYourPlaceApp.Models;
 using GetYourPlaceApp.Repository.Properties;
 using GetYourPlaceApp.Services.BackGroundTask;
@@ -68,6 +69,15 @@ namespace GetYourPlaceApp.ViewModels
                 });
             }
 
+        }
+
+
+        [RelayCommand]
+        public async Task HeartClick(Tuple<bool, int> tuple)
+        {
+           LikedProperties = new ObservableCollection<Property>
+                (LikedProperties.Where(p => p.Id != tuple.Item2)
+                .ToList());
         }
     }
 }

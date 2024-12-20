@@ -194,4 +194,10 @@ public partial class MainViewModel : BaseViewModel, IDisposable
 
         return true;
     }
+
+    [RelayCommand]
+    public async Task HeartClick(Tuple<bool, int> tuple)
+    {
+        //Logic to set propertie as a favorite
+    }
 }

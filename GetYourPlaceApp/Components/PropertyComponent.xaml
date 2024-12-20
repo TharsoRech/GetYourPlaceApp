@@ -71,8 +71,10 @@
             <cm:HeartView
                 Grid.Row="1"
                 Padding="16"
+                HeartClickCommand="{Binding HeartClickCommand, Source={x:Reference propertyComponent}}"
                 HorizontalOptions="StartAndExpand"
                 Liked="{Binding Property.Liked, Source={x:Reference propertyComponent}}"
+                PropertyId="{Binding Property.Id, Source={x:Reference propertyComponent}}"
                 VerticalOptions="StartAndExpand" />
             <Label
                 Grid.Row="2"

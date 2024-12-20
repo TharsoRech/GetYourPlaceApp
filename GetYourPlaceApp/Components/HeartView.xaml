@@ -4,28 +4,26 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Name="heartView"
     HeightRequest="32"
-    WidthRequest="32"
-    x:Name="heartView">
+    WidthRequest="32">
     <ContentView.GestureRecognizers>
-        <TapGestureRecognizer
-               Command="{Binding HeartClickedCommand}">
-        </TapGestureRecognizer>
+        <TapGestureRecognizer Command="{Binding HeartClickedCommand}" />
     </ContentView.GestureRecognizers>
     <Image
-         VerticalOptions="FillAndExpand"
-         HorizontalOptions="StartAndExpand"
-         HeightRequest="32"
-         WidthRequest="32"
-         Source="favorite.png">
+        HeightRequest="32"
+        HorizontalOptions="StartAndExpand"
+        Source="favorite.png"
+        VerticalOptions="FillAndExpand"
+        WidthRequest="32">
         <Image.Behaviors>
             <toolkit:IconTintColorBehavior TintColor="#ff2c2c" />
         </Image.Behaviors>
         <Image.Triggers>
             <DataTrigger
-                 Binding="{Binding Liked, Source={x:Reference heartView}}"
-                 TargetType="Image"
-                 Value="True">
+                Binding="{Binding Liked, Source={x:Reference heartView}}"
+                TargetType="Image"
+                Value="True">
                 <Setter Property="Source" Value="unfavorite.svg" />
             </DataTrigger>
         </Image.Triggers>
