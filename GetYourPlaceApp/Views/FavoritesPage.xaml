@@ -40,9 +40,9 @@
             VerticalOptions="StartAndExpand">
             <Label.Triggers>
                 <DataTrigger
-                  Binding="{Binding BindingContext.LikedProperties, Source={x:Reference favoritePage},Converter={StaticResource ObservableCollectionIsNotEmptyOrNotNullConverter}}"
-                  TargetType="Label"
-                  Value="True">
+                    Binding="{Binding BindingContext.LikedProperties, Source={x:Reference favoritePage}, Converter={StaticResource ObservableCollectionIsNotEmptyOrNotNullConverter}}"
+                    TargetType="Label"
+                    Value="True">
                     <Setter Property="IsVisible" Value="false" />
                 </DataTrigger>
             </Label.Triggers>

@@ -40,7 +40,7 @@ namespace GetYourPlaceApp.Helpers
                     _loginRepository = ServiceHelper.GetService<ILoginRepository>();
 
                user = await _loginRepository.LoginAsync(loginRequest);
-
+                await Task.Delay(5000);
                 Preferences.Set("token", User?.Token);
                 Preferences.Set("ExpireDateTimeKey", User?.RefreshToken);
 

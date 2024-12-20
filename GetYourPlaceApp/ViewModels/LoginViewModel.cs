@@ -1,8 +1,10 @@
 ﻿using CommunityToolkit.Maui.Alerts;
+using GetYourPlaceApp.Components;
 using GetYourPlaceApp.Contracts;
 using GetYourPlaceApp.Helpers;
 using GetYourPlaceApp.Models.Requests;
 using GetYourPlaceApp.Repository.Login;
+using Microsoft.Maui.Controls;
 using System.Text;
 
 namespace GetYourPlaceApp.ViewModels
@@ -33,35 +35,50 @@ namespace GetYourPlaceApp.ViewModels
         [RelayCommand]
         public async Task Login()
         {
-            var loginRequest = new LoginRequest(Email,Password);
+            LoadingPopUpPage loadingPopUpPage = new LoadingPopUpPage();
 
-            var contract = new LoginContract(loginRequest);
-            
-            if (!contract.IsValid)
+            try
             {
-                var messages = contract.Notifications.Select(x => x.Message);
-                var sb = new StringBuilder();
+                loadingPopUpPage.ShowLoading();
+                var loginRequest = new LoginRequest(Email, Password);
 
-                foreach (var message in messages)
-                    sb.Append($"{message}\n");
+                var contract = new LoginContract(loginRequest);
 
-                await Shell.Current.DisplayAlert("Atenção", sb.ToString(), "OK");
-                return;
+                if (!contract.IsValid)
+                {
+                    var messages = contract.Notifications.Select(x => x.Message);
+                    var sb = new StringBuilder();
+
+                    foreach (var message in messages)
+                        sb.Append($"{message}\n");
+
+                    await Shell.Current.DisplayAlert("Atenção", sb.ToString(), "OK");
+                    return;
+                }
+
+                var result = await SessionHelper.Instance.LoginAsync(loginRequest);
+
+                if (result is null || string.IsNullOrEmpty(result.Token))
+                {
+                    var toast = Toast.Make("Falha ao realizar login, tenta novamente!", CommunityToolkit.Maui.Core.ToastDuration.Long);
+                    await toast.Show();
+                    return;
+                }
+
+                SessionHelper.Instance.User = result;
+                SessionHelper.Instance.SaveToken();
+
+                await RouteHelpers.GoToPage($"//{nameof(MainPage)}");
             }
-
-            var result = await SessionHelper.Instance.LoginAsync(loginRequest);
-
-            if (result is null || string.IsNullOrEmpty(result.Token))
+            catch (Exception ex)
             {
-                var toast = Toast.Make("Falha ao realizar login, tenta novamente!", CommunityToolkit.Maui.Core.ToastDuration.Long);
-                await toast.Show();
-                return;
+
+               Console.WriteLine(ex.ToString());    
             }
-
-            SessionHelper.Instance.User = result;
-            SessionHelper.Instance.SaveToken();
-
-            await RouteHelpers.GoToPage($"//{nameof(MainPage)}");
+            finally
+            {
+                loadingPopUpPage.HideLoading();
+            }
 
         }
     }

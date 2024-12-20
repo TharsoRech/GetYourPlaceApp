@@ -8,6 +8,11 @@
     xmlns:views="clr-namespace:GetYourPlaceApp.Views"
     FlyoutBackgroundColor="{StaticResource GreenGYP}"
     FlyoutBehavior="Flyout">
+    <Shell.Resources>
+        <ResourceDictionary>
+            <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </Shell.Resources>
     <Shell.ItemTemplate>
         <DataTemplate>
             <Grid Padding="0,10" ColumnDefinitions="0.25*,0.75*">
@@ -68,6 +73,7 @@
             Title="Account"
             ContentTemplate="{DataTemplate views:LoginPage}"
             Icon="login.png"
+            IsVisible="{Binding IsLogged, Converter={StaticResource InvertedBoolConverter}}"
             Route="LoginPage"
             Shell.NavBarIsVisible="true" />
     </FlyoutItem>

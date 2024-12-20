@@ -1,4 +1,6 @@
-﻿namespace GetYourPlaceApp.Views;
+﻿using GetYourPlaceApp.Components;
+
+namespace GetYourPlaceApp.Views;
 
 public partial class MainPage : ContentPage
 {
