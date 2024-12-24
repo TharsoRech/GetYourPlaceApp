@@ -23,7 +23,11 @@ public static class MauiProgram
 
 		builder.Services.AddSingleton<MainPage>();
 
+
 		builder.Services.AddSingleton<BlankViewModel>();
+
+        builder.Services.AddSingleton<MyProperties>();
+        builder.Services.AddSingleton<MyPropertiesViewModel>();
 
         builder.Services.AddSingleton<AppShell>();
         builder.Services.AddSingleton<AppShellViewModel>();

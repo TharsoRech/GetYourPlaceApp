@@ -88,14 +88,25 @@
             Route="BlankPage"
             Shell.NavBarIsVisible="true" />
     </FlyoutItem>
-    <FlyoutItem Title="Configuration" Icon="config.png">
+    <FlyoutItem
+        Title="My Properties"
+        Icon="myproperties.svg"
+        IsVisible="{Binding IsLogged}">
+        <ShellContent
+            Title="Favorites"
+            ContentTemplate="{DataTemplate views:MyProperties}"
+            Icon="myproperties.svg"
+            Route="MyProperties"
+            Shell.NavBarIsVisible="true" />
+    </FlyoutItem>
+    <!--<FlyoutItem Title="Configuration" Icon="config.png">
         <ShellContent
             Title="Configuration"
             ContentTemplate="{DataTemplate views:BlankPage}"
             Icon="config.png"
             Route="BlankPage"
             Shell.NavBarIsVisible="true" />
-    </FlyoutItem>
+    </FlyoutItem>-->
     <Shell.FlyoutFooter>
         <StackLayout
             Padding="0,0,0,8"

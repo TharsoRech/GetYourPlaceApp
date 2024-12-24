@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cm="clr-namespace:GetYourPlaceApp.Components"
+             x:Name="accordionComponent"
+             x:Class="GetYourPlaceApp.Components.AccordionComponent">
+    <Grid RowDefinitions="*,*">
+        <Grid ColumnDefinitions="auto,auto">
+            <Label 
+                TextColor="White"
+                Text="{Binding Title, Source={x:Reference accordionComponent}}"
+                FontSize="Medium">
+            </Label>
+            <Image
+                 Grid.Column="1"
+                 Margin="16,16,16,0"
+                 Aspect="AspectFit"
+                 HeightRequest="30"
+                 WidthRequest="30"
+                 HorizontalOptions="CenterAndExpand"
+                 Source="expanddown.svg"
+                 VerticalOptions="Start">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ExpandClickedCommand, Source={x:Reference accordionComponent}}" />
+                </Image.GestureRecognizers>
+                <Image.Triggers>
+                    <DataTrigger
+                        Binding="{Binding Expanded, Source={x:Reference accordionComponent}}"
+                        TargetType="Image"
+                        Value="True">
+                        <Setter Property="Source" Value="expandup.svg" />
+                    </DataTrigger>
+                </Image.Triggers>
+            </Image>
+        </Grid>
+        <Grid 
+            IsVisible="{Binding Expanded, Source={x:Reference accordionComponent}}"
+            Grid.Row="1"
+            RowDefinitions="auto">
+            <cm:LoadingComponent
+                 IsLoading="{Binding IsLoading, Source={x:Reference accordionComponent}}"
+                 IsVisible="{Binding IsLoading, Source={x:Reference accordionComponent}}"
+                 LoadingColor="{StaticResource GreenGYP}"
+                 LoadingText="Loading Properties..." />
+            <StackLayout x:Name="customContent">
+            </StackLayout>
+        </Grid>
+        
+    </Grid>
+</ContentView>

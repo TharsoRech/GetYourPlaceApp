@@ -56,11 +56,14 @@
 	  <None Remove="Resources\Images\close.svg" />
 	  <None Remove="Resources\Images\config.png" />
 	  <None Remove="Resources\Images\exit.png" />
+	  <None Remove="Resources\Images\expanddown.svg" />
+	  <None Remove="Resources\Images\expandup.svg" />
 	  <None Remove="Resources\Images\favorite.png" />
 	  <None Remove="Resources\Images\GetYourPlaceIcon.png" />
 	  <None Remove="Resources\Images\home.png" />
 	  <None Remove="Resources\Images\leftarrow.svg" />
 	  <None Remove="Resources\Images\login.png" />
+	  <None Remove="Resources\Images\MyProperties.svg" />
 	  <None Remove="Resources\Images\rightarrow.svg" />
 	  <None Remove="Resources\Images\search.png" />
 	  <None Remove="Resources\Images\unfavorite.svg" />
@@ -79,6 +82,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Components\AccordionComponent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Components\CarouselImageView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -125,6 +131,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MyProperties.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\PropertyDetail.xaml">
