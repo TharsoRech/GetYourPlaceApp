@@ -86,7 +86,7 @@
             <Button
                 Grid.Row="2"
                 Grid.Column="1"
-                Margin="0,0,16,0"
+                Margin="8,0,16,0"
                 Command="{Binding GoToPropertyInfoCommand, Source={x:Reference propertyComponent}}"
                 CommandParameter="{Binding Property, Source={x:Reference propertyComponent}}"
                 HeightRequest="50"

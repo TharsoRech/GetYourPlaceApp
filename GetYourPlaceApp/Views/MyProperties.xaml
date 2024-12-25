@@ -4,9 +4,120 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:cm="clr-namespace:GetYourPlaceApp.Components"
+    xmlns:converters="clr-namespace:GetYourPlaceApp.Services.Converters"
     BackgroundColor="DarkSlateGray"
+    x:Name="myProperties"
     Title="My Properties">
-    <Grid RowDefinitions="auto,auto,auto">
-        
-    </Grid>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ObservableCollectionIsNotEmptyOrNotNullConverter x:Key="ObservableCollectionIsNotEmptyOrNotNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView>
+        <Grid RowDefinitions="auto,auto,auto,auto,auto,auto">
+            <Button Text="Publish New Propertie"
+                    Margin="16">
+            </Button>
+            <cm:AccordionComponent 
+            Grid.Row="1"
+            Title="Published Properties"
+            IsVisible="{Binding BindingContext.PropertiesPublished, Source={x:Reference favoritePage}, Converter={StaticResource ObservableCollectionIsNotEmptyOrNotNullConverter}}"
+            ExpandCommand="{Binding BindingContext.GetPublishedPropertiesCommand, Source={x:Reference myProperties}}">
+                <cm:AccordionComponent.CustomContent>
+                    <ScrollView
+                     BackgroundColor="Transparent"
+                     HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand">
+                        <CollectionView ItemsSource="{Binding BindingContext.PropertiesPublished, Source={x:Reference myProperties}}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <cm:PropertyComponent Property="{Binding .}" />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </ScrollView>
+                </cm:AccordionComponent.CustomContent>
+            </cm:AccordionComponent>
+            <cm:AccordionComponent 
+            Grid.Row="2"
+            Title="Unpublished Properties"
+            IsVisible="{Binding BindingContext.PropertiesUnPublished, Source={x:Reference favoritePage}, Converter={StaticResource ObservableCollectionIsNotEmptyOrNotNullConverter}}"
+            ExpandCommand="{Binding BindingContext.GetUnPublishedPropertiesCommand, Source={x:Reference myProperties}}">
+                <cm:AccordionComponent.CustomContent>
+                    <ScrollView
+                     BackgroundColor="Transparent"
+                     HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand">
+                        <CollectionView ItemsSource="{Binding BindingContext.PropertiesUnPublished, Source={x:Reference myProperties}}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <cm:PropertyComponent Property="{Binding .}" />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </ScrollView>
+                </cm:AccordionComponent.CustomContent>
+            </cm:AccordionComponent>
+            <cm:AccordionComponent 
+            Grid.Row="3"
+            Title="Under Analysis Properties"
+            IsVisible="{Binding BindingContext.PropertiesUnderAnalysis, Source={x:Reference favoritePage}, Converter={StaticResource ObservableCollectionIsNotEmptyOrNotNullConverter}}"
+            ExpandCommand="{Binding BindingContext.GetUnderAnalysisPropertiesCommand, Source={x:Reference myProperties}}">
+                <cm:AccordionComponent.CustomContent>
+                    <ScrollView
+                     BackgroundColor="Transparent"
+                     HorizontalOptions="FillAndExpand"
+                     VerticalOptions="FillAndExpand">
+                        <CollectionView ItemsSource="{Binding BindingContext.PropertiesUnderAnalysis, Source={x:Reference myProperties}}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <cm:PropertyComponent Property="{Binding .}" />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </ScrollView>
+                </cm:AccordionComponent.CustomContent>
+            </cm:AccordionComponent>
+            <cm:AccordionComponent 
+            Grid.Row="4"
+            Title="Matched Properties"
+            IsVisible="{Binding BindingContext.PropertiesMatched, Source={x:Reference favoritePage}, Converter={StaticResource ObservableCollectionIsNotEmptyOrNotNullConverter}}"
+            ExpandCommand="{Binding BindingContext.GetMatchedPropertiesCommand, Source={x:Reference myProperties}}">
+                <cm:AccordionComponent.CustomContent>
+                    <ScrollView
+                 BackgroundColor="Transparent"
+                 HorizontalOptions="FillAndExpand"
+                 VerticalOptions="FillAndExpand">
+                        <CollectionView ItemsSource="{Binding BindingContext.PropertiesMatched, Source={x:Reference myProperties}}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <cm:PropertyComponent Property="{Binding .}" />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </ScrollView>
+                </cm:AccordionComponent.CustomContent>
+            </cm:AccordionComponent>
+            <cm:AccordionComponent 
+            Grid.Row="5"
+            Title="UnMatched Properties"
+            IsVisible="{Binding BindingContext.PropertiesUnMatched, Source={x:Reference favoritePage}, Converter={StaticResource ObservableCollectionIsNotEmptyOrNotNullConverter}}"
+            ExpandCommand="{Binding BindingContext.GetUnMatchedPropertiesCommand, Source={x:Reference myProperties}}">
+                <cm:AccordionComponent.CustomContent>
+                    <ScrollView
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                        <CollectionView ItemsSource="{Binding BindingContext.PropertiesUnMatched, Source={x:Reference myProperties}}">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <cm:PropertyComponent Property="{Binding .}" />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </ScrollView>
+                </cm:AccordionComponent.CustomContent>
+            </cm:AccordionComponent>
+        </Grid>
+    </ScrollView>
 </ContentPage>

@@ -11,7 +11,7 @@ public partial class AccordionComponent : ContentView
 
     #region Bindable Properties
 
-    public static readonly BindableProperty IsLoadingProperty = BindableProperty.Create(
+    private static readonly BindableProperty IsLoadingProperty = BindableProperty.Create(
     nameof(IsLoading),
     typeof(bool),
     typeof(AccordionComponent)
@@ -91,12 +91,9 @@ public partial class AccordionComponent : ContentView
     public async Task ExpandClicked()
     {
         Expanded = !Expanded;
-        if(ExpandCommand != null)
-        {
-            IsLoading = true;
-            ExpandCommand.Execute(null);
-            IsLoading = false;
-        }
+        IsLoading = true;
+        ExpandCommand?.Execute(null);
+        IsLoading = false;
     }
 
     private void UpdateContent(View newContent)

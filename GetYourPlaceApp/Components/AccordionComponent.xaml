@@ -1,50 +1,66 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:cm="clr-namespace:GetYourPlaceApp.Components"
-             x:Name="accordionComponent"
-             x:Class="GetYourPlaceApp.Components.AccordionComponent">
-    <Grid RowDefinitions="*,*">
-        <Grid ColumnDefinitions="auto,auto">
-            <Label 
-                TextColor="White"
+<ContentView
+    x:Class="GetYourPlaceApp.Components.AccordionComponent"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:cm="clr-namespace:GetYourPlaceApp.Components"
+    x:Name="accordionComponent"
+    Padding="8,16,8,16">
+    <Border
+        Padding="0"
+        BackgroundColor="Transparent"
+        Stroke="Transparent"
+        StrokeThickness="0">
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="28" />
+        </Border.StrokeShape>
+        <Grid
+        Padding="8"
+        BackgroundColor="{StaticResource GreenGYP}"
+        RowDefinitions="auto,auto">
+         <Grid ColumnDefinitions="auto,*">
+                <Label
+                    Margin="16,0,0,0"
+                FontSize="Medium"
                 Text="{Binding Title, Source={x:Reference accordionComponent}}"
-                FontSize="Medium">
-            </Label>
-            <Image
-                 Grid.Column="1"
-                 Margin="16,16,16,0"
-                 Aspect="AspectFit"
-                 HeightRequest="30"
-                 WidthRequest="30"
-                 HorizontalOptions="CenterAndExpand"
-                 Source="expanddown.svg"
-                 VerticalOptions="Start">
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding ExpandClickedCommand, Source={x:Reference accordionComponent}}" />
-                </Image.GestureRecognizers>
-                <Image.Triggers>
-                    <DataTrigger
+                TextColor="White" />
+                <Image
+                Grid.Column="1"
+                Margin="16,0,16,0"
+                Aspect="AspectFit"
+                HeightRequest="30"
+                HorizontalOptions="End"
+                Source="expanddown.svg"
+                VerticalOptions="End"
+                WidthRequest="30">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource White}" />
+                    </Image.Behaviors>
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ExpandClickedCommand, Source={x:Reference accordionComponent}}" />
+                    </Image.GestureRecognizers>
+                    <Image.Triggers>
+                        <DataTrigger
                         Binding="{Binding Expanded, Source={x:Reference accordionComponent}}"
                         TargetType="Image"
                         Value="True">
-                        <Setter Property="Source" Value="expandup.svg" />
-                    </DataTrigger>
-                </Image.Triggers>
-            </Image>
-        </Grid>
-        <Grid 
-            IsVisible="{Binding Expanded, Source={x:Reference accordionComponent}}"
+                            <Setter Property="Source" Value="expandup.svg" />
+                        </DataTrigger>
+                    </Image.Triggers>
+                </Image>
+            </Grid>
+         <Grid
             Grid.Row="1"
+            IsVisible="{Binding Expanded, Source={x:Reference accordionComponent}}"
             RowDefinitions="auto">
-            <cm:LoadingComponent
-                 IsLoading="{Binding IsLoading, Source={x:Reference accordionComponent}}"
-                 IsVisible="{Binding IsLoading, Source={x:Reference accordionComponent}}"
-                 LoadingColor="{StaticResource GreenGYP}"
-                 LoadingText="Loading Properties..." />
-            <StackLayout x:Name="customContent">
-            </StackLayout>
+                <cm:LoadingComponent
+                IsLoading="{Binding IsLoading, Source={x:Reference accordionComponent}}"
+                IsVisible="{Binding IsLoading, Source={x:Reference accordionComponent}}"
+                LoadingColor="{StaticResource GreenLightGYP}"
+                LoadingText="Loading..." />
+                <StackLayout x:Name="customContent" />
+            </Grid>
         </Grid>
-        
-    </Grid>
+    </Border>
 </ContentView>

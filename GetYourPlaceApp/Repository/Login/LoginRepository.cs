@@ -16,6 +16,7 @@ namespace GetYourPlaceApp.Repository.Login
                 PersonRegisterNumber = "03029666093",
                 Token = Guid.NewGuid().ToString(),
                 RefreshToken = Guid.NewGuid().ToString(),
+                Id = 1,
                 Address = new GYPAddress
                 {
                     Address = "test",
