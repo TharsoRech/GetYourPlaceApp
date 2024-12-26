@@ -1,3 +1,4 @@
+using GetYourPlaceApp.Services.BackGroundTask;
 using System.Windows.Input;
 
 namespace GetYourPlaceApp.Components;
@@ -92,16 +93,24 @@ public partial class AccordionComponent : ContentView
     {
         Expanded = !Expanded;
         IsLoading = true;
-        ExpandCommand?.Execute(null);
-        IsLoading = false;
+        Task.Factory.StartNew(async () =>
+        {
+            await Application.Current.Dispatcher.DispatchAsync(async () =>
+            {
+                ExpandCommand?.Execute(null);
+            });
+        });
+
     }
+
 
     private void UpdateContent(View newContent)
     {
        customContent.Children.Clear();
 
        if (newContent != null)
-         customContent.Children.Add(newContent); 
+         customContent.Children.Add(newContent);
 
+        IsLoading = false;
     }
 }

@@ -100,7 +100,7 @@
             </cm:AccordionComponent>
             <cm:AccordionComponent 
             Grid.Row="5"
-            Title="UnMatched Properties"
+            Title="Unmatched Properties"
             IsVisible="{Binding BindingContext.PropertiesUnMatched, Source={x:Reference favoritePage}, Converter={StaticResource ObservableCollectionIsNotEmptyOrNotNullConverter}}"
             ExpandCommand="{Binding BindingContext.GetUnMatchedPropertiesCommand, Source={x:Reference myProperties}}">
                 <cm:AccordionComponent.CustomContent>

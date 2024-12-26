@@ -68,7 +68,6 @@ namespace GetYourPlaceApp.ViewModels
         [RelayCommand]
         public async Task GetPublishedProperties()
         {
-            await Task.Delay(2000);
             PropertiesPublished = new ObservableCollection<Property>
                 (AllProperties.Where(p=> 
                 p.GYPUserProfileId == SessionHelper.Instance.User.Id
@@ -79,7 +78,6 @@ namespace GetYourPlaceApp.ViewModels
         [RelayCommand]
         public async Task GetUnPublishedProperties()
         {
-            await Task.Delay(2000);
             PropertiesUnPublished = new ObservableCollection<Property>
                 (AllProperties.Where(p =>
                 p.GYPUserProfileId == SessionHelper.Instance.User.Id
@@ -89,7 +87,6 @@ namespace GetYourPlaceApp.ViewModels
         [RelayCommand]
         public async Task GetUnderAnalysisProperties()
         {
-            await Task.Delay(2000);
             PropertiesUnderAnalysis = new ObservableCollection<Property>
                 (AllProperties.Where(p => p.UnderAnalysis));
         }
@@ -97,7 +94,6 @@ namespace GetYourPlaceApp.ViewModels
         [RelayCommand]
         public async Task GetMatchedProperties()
         {
-            await Task.Delay(2000);
             PropertiesMatched = new ObservableCollection<Property>
                 (AllProperties.Where(p => p.Accepted));
         }
@@ -105,7 +101,6 @@ namespace GetYourPlaceApp.ViewModels
         [RelayCommand]
         public async Task GetUnMatchedProperties()
         {
-            await Task.Delay(2000);
             PropertiesUnMatched = new ObservableCollection<Property>
                 (AllProperties.Where(p => p.Rejected));
         }
