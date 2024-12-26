@@ -40,11 +40,12 @@ namespace GetYourPlaceApp.ViewModels
             if (_PropertiesRepository is null)
                 _PropertiesRepository = ServiceHelper.GetService<IPropertiesRepository>();
 
-            GetPropertiesInBackground();
         }
 
         public async Task GetPropertiesInBackground()
         {
+            if (allProperties != null)
+                return;
 
             try
             {
@@ -68,6 +69,7 @@ namespace GetYourPlaceApp.ViewModels
         [RelayCommand]
         public async Task GetPublishedProperties()
         {
+            GetPropertiesInBackground();
             PropertiesPublished = new ObservableCollection<Property>
                 (AllProperties.Where(p=> 
                 p.GYPUserProfileId == SessionHelper.Instance.User.Id
@@ -78,6 +80,7 @@ namespace GetYourPlaceApp.ViewModels
         [RelayCommand]
         public async Task GetUnPublishedProperties()
         {
+            await GetPropertiesInBackground();
             PropertiesUnPublished = new ObservableCollection<Property>
                 (AllProperties.Where(p =>
                 p.GYPUserProfileId == SessionHelper.Instance.User.Id
@@ -87,6 +90,7 @@ namespace GetYourPlaceApp.ViewModels
         [RelayCommand]
         public async Task GetUnderAnalysisProperties()
         {
+            await GetPropertiesInBackground();
             PropertiesUnderAnalysis = new ObservableCollection<Property>
                 (AllProperties.Where(p => p.UnderAnalysis));
         }
@@ -94,6 +98,7 @@ namespace GetYourPlaceApp.ViewModels
         [RelayCommand]
         public async Task GetMatchedProperties()
         {
+            await GetPropertiesInBackground();
             PropertiesMatched = new ObservableCollection<Property>
                 (AllProperties.Where(p => p.Accepted));
         }
@@ -101,6 +106,7 @@ namespace GetYourPlaceApp.ViewModels
         [RelayCommand]
         public async Task GetUnMatchedProperties()
         {
+            await GetPropertiesInBackground();
             PropertiesUnMatched = new ObservableCollection<Property>
                 (AllProperties.Where(p => p.Rejected));
         }
