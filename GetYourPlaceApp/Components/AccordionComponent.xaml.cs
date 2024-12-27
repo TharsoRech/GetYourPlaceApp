@@ -99,6 +99,7 @@ public partial class AccordionComponent : ContentView
             {
                 ExpandCommand?.Execute(null);
             });
+            IsLoading = false;
         });
 
     }

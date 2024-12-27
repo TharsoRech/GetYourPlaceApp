@@ -89,8 +89,9 @@ namespace GetYourPlaceApp.ViewModels
         {
             PropertiesUnPublished = new ObservableCollection<Property>
                 (AllProperties?.Where(p =>
-                p.GYPUserProfileId == SessionHelper.Instance.User.Id
+                p.GYPUserProfileId ==2 
                 && !p.Published));
+
         }
 
         [RelayCommand]

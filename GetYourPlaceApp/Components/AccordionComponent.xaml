@@ -3,10 +3,15 @@
     x:Class="GetYourPlaceApp.Components.AccordionComponent"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:cm="clr-namespace:GetYourPlaceApp.Components"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:Name="accordionComponent"
     Padding="8,16,8,16">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <toolkit:IsNullConverter x:Key="isNullConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
     <Border
         Padding="0"
         BackgroundColor="Transparent"
@@ -16,24 +21,24 @@
             <RoundRectangle CornerRadius="28" />
         </Border.StrokeShape>
         <Grid
-        Padding="8"
-        BackgroundColor="{StaticResource GreenGYP}"
-        RowDefinitions="auto,auto">
-         <Grid ColumnDefinitions="auto,*">
+            Padding="8"
+            BackgroundColor="{StaticResource GreenGYP}"
+            RowDefinitions="auto,auto">
+            <Grid ColumnDefinitions="auto,*">
                 <Label
                     Margin="16,0,0,0"
-                FontSize="Medium"
-                Text="{Binding Title, Source={x:Reference accordionComponent}}"
-                TextColor="White" />
+                    FontSize="Medium"
+                    Text="{Binding Title, Source={x:Reference accordionComponent}}"
+                    TextColor="White" />
                 <Image
-                Grid.Column="1"
-                Margin="16,0,16,0"
-                Aspect="AspectFit"
-                HeightRequest="30"
-                HorizontalOptions="End"
-                Source="expanddown.svg"
-                VerticalOptions="End"
-                WidthRequest="30">
+                    Grid.Column="1"
+                    Margin="16,0,16,0"
+                    Aspect="AspectFit"
+                    HeightRequest="30"
+                    HorizontalOptions="End"
+                    Source="expanddown.svg"
+                    VerticalOptions="End"
+                    WidthRequest="30">
                     <Image.Behaviors>
                         <toolkit:IconTintColorBehavior TintColor="{StaticResource White}" />
                     </Image.Behaviors>
@@ -42,24 +47,45 @@
                     </Image.GestureRecognizers>
                     <Image.Triggers>
                         <DataTrigger
-                        Binding="{Binding Expanded, Source={x:Reference accordionComponent}}"
-                        TargetType="Image"
-                        Value="True">
+                            Binding="{Binding Expanded, Source={x:Reference accordionComponent}}"
+                            TargetType="Image"
+                            Value="True">
                             <Setter Property="Source" Value="expandup.svg" />
                         </DataTrigger>
                     </Image.Triggers>
                 </Image>
             </Grid>
-         <Grid
-            Grid.Row="1"
-            IsVisible="{Binding Expanded, Source={x:Reference accordionComponent}}"
-            RowDefinitions="auto">
+            <Grid
+                Grid.Row="1"
+                IsVisible="{Binding Expanded, Source={x:Reference accordionComponent}}"
+                RowDefinitions="auto">
                 <cm:LoadingComponent
-                IsLoading="{Binding IsLoading, Source={x:Reference accordionComponent}}"
-                IsVisible="{Binding IsLoading, Source={x:Reference accordionComponent}}"
-                LoadingColor="{StaticResource GreenLightGYP}"
-                LoadingText="Loading..." />
+                    IsLoading="{Binding IsLoading, Source={x:Reference accordionComponent}}"
+                    IsVisible="{Binding IsLoading, Source={x:Reference accordionComponent}}"
+                    LoadingColor="{StaticResource GreenLightGYP}"
+                    LoadingText="Loading..." />
                 <StackLayout x:Name="customContent" />
+                <Label
+                    Padding="16"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="No properties found"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="CenterAndExpand">
+                    <Label.Triggers>
+                        <DataTrigger
+                            Binding="{Binding IsLoading, Source={x:Reference accordionComponent}}"
+                            TargetType="Label"
+                            Value="True">
+                            <Setter Property="IsVisible" Value="false" />
+                        </DataTrigger>
+                        <DataTrigger
+                            Binding="{Binding CustomContent, Source={x:Reference accordionComponent}, Converter={StaticResource isNullConverter}}"
+                            TargetType="Label"
+                            Value="True">
+                            <Setter Property="IsVisible" Value="True" />
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
             </Grid>
         </Grid>
     </Border>
