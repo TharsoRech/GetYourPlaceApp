@@ -40,6 +40,14 @@ namespace GetYourPlaceApp.ViewModels
             if (_PropertiesRepository is null)
                 _PropertiesRepository = ServiceHelper.GetService<IPropertiesRepository>();
 
+            Task.Factory.StartNew(async () =>
+            {
+                await Application.Current.Dispatcher.DispatchAsync(async () =>
+                {
+                    await GetPropertiesInBackground();
+                });
+            });
+
         }
 
         public async Task GetPropertiesInBackground()
@@ -69,9 +77,8 @@ namespace GetYourPlaceApp.ViewModels
         [RelayCommand]
         public async Task GetPublishedProperties()
         {
-            GetPropertiesInBackground();
             PropertiesPublished = new ObservableCollection<Property>
-                (AllProperties.Where(p=> 
+                (AllProperties?.Where(p=> 
                 p.GYPUserProfileId == SessionHelper.Instance.User.Id
                 && p.Published));
         }
@@ -80,9 +87,8 @@ namespace GetYourPlaceApp.ViewModels
         [RelayCommand]
         public async Task GetUnPublishedProperties()
         {
-            await GetPropertiesInBackground();
             PropertiesUnPublished = new ObservableCollection<Property>
-                (AllProperties.Where(p =>
+                (AllProperties?.Where(p =>
                 p.GYPUserProfileId == SessionHelper.Instance.User.Id
                 && !p.Published));
         }
@@ -90,25 +96,22 @@ namespace GetYourPlaceApp.ViewModels
         [RelayCommand]
         public async Task GetUnderAnalysisProperties()
         {
-            await GetPropertiesInBackground();
             PropertiesUnderAnalysis = new ObservableCollection<Property>
-                (AllProperties.Where(p => p.UnderAnalysis));
+                (AllProperties?.Where(p => p.UnderAnalysis));
         }
 
         [RelayCommand]
         public async Task GetMatchedProperties()
         {
-            await GetPropertiesInBackground();
             PropertiesMatched = new ObservableCollection<Property>
-                (AllProperties.Where(p => p.Accepted));
+                (AllProperties?.Where(p => p.Accepted));
         }
 
         [RelayCommand]
         public async Task GetUnMatchedProperties()
         {
-            await GetPropertiesInBackground();
             PropertiesUnMatched = new ObservableCollection<Property>
-                (AllProperties.Where(p => p.Rejected));
+                (AllProperties?.Where(p => p.Rejected));
         }
 
     }

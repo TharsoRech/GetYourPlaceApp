@@ -21,7 +21,6 @@
             <cm:AccordionComponent 
             Grid.Row="1"
             Title="Published Properties"
-            IsVisible="{Binding BindingContext.PropertiesPublished, Source={x:Reference myProperties}, Converter={StaticResource ObservableCollectionIsNotEmptyOrNotNullConverter}}"
             ExpandCommand="{Binding BindingContext.GetPublishedPropertiesCommand, Source={x:Reference myProperties}}">
                 <cm:AccordionComponent.CustomContent>
                     <ScrollView
@@ -41,7 +40,6 @@
             <cm:AccordionComponent 
             Grid.Row="2"
             Title="Unpublished Properties"
-            IsVisible="{Binding BindingContext.PropertiesUnPublished, Source={x:Reference myProperties}, Converter={StaticResource ObservableCollectionIsNotEmptyOrNotNullConverter}}"
             ExpandCommand="{Binding BindingContext.GetUnPublishedPropertiesCommand, Source={x:Reference myProperties}}">
                 <cm:AccordionComponent.CustomContent>
                     <ScrollView
@@ -61,7 +59,6 @@
             <cm:AccordionComponent 
             Grid.Row="3"
             Title="Under Analysis Properties"
-            IsVisible="{Binding BindingContext.PropertiesUnderAnalysis, Source={x:Reference myProperties}, Converter={StaticResource ObservableCollectionIsNotEmptyOrNotNullConverter}}"
             ExpandCommand="{Binding BindingContext.GetUnderAnalysisPropertiesCommand, Source={x:Reference myProperties}}">
                 <cm:AccordionComponent.CustomContent>
                     <ScrollView
@@ -81,7 +78,6 @@
             <cm:AccordionComponent 
             Grid.Row="4"
             Title="Matched Properties"
-            IsVisible="{Binding BindingContext.PropertiesMatched, Source={x:Reference myProperties}, Converter={StaticResource ObservableCollectionIsNotEmptyOrNotNullConverter}}"
             ExpandCommand="{Binding BindingContext.GetMatchedPropertiesCommand, Source={x:Reference myProperties}}">
                 <cm:AccordionComponent.CustomContent>
                     <ScrollView
@@ -101,7 +97,6 @@
             <cm:AccordionComponent 
             Grid.Row="5"
             Title="Unmatched Properties"
-            IsVisible="{Binding BindingContext.PropertiesUnMatched, Source={x:Reference myProperties}, Converter={StaticResource ObservableCollectionIsNotEmptyOrNotNullConverter}}"
             ExpandCommand="{Binding BindingContext.GetUnMatchedPropertiesCommand, Source={x:Reference myProperties}}">
                 <cm:AccordionComponent.CustomContent>
                     <ScrollView

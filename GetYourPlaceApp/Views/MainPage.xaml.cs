@@ -14,7 +14,14 @@ public partial class MainPage : ContentPage
 
     protected override void OnAppearing()
     {
-        _mainViewModel?.GetPropertiesInBackground();
+        Task.Factory.StartNew(() =>
+        {
+            Application.Current.Dispatcher.DispatchAsync(() =>
+            {
+                _mainViewModel?.GetPropertiesInBackground();
+            });
+        });
+
         base.OnAppearing();
     }
 }
