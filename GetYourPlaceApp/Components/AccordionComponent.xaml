@@ -69,6 +69,7 @@
                     Padding="16"
                     HorizontalOptions="CenterAndExpand"
                     Text="No properties found"
+                    FontSize="Medium"
                     TextColor="{StaticResource White}"
                     VerticalOptions="CenterAndExpand">
                     <Label.Triggers>
