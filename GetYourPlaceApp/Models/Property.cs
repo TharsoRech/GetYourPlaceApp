@@ -9,6 +9,7 @@ namespace GetYourPlaceApp.Models
         public GYPTypeOfRent TypeOfRent { get; set; }
         public string Address { get; set; }
         public string Description { get; set; }
+        public string Title { get; set; }
         public decimal Price { get; set; } // Use decimal for currency
         public bool IsVisibleForUsers { get; set; }
         public bool IsAvailable { get; set; }
@@ -49,6 +50,7 @@ namespace GetYourPlaceApp.Models
         public string TypeOFRentFormated => $"type of acquisition: {TypeOfRent?.Description}";
         public string PublishedAtFormated => $"Published At: {PuplishedAt.ToShortDateString()}";
         public string AddressFormated => $"Address: {Address}";
+        public string DescriptionFormated => $"Description: {Description}";
         public string Type => $"Type: {PropertyInformations.FirstOrDefault(p => p.GYPPropertyInfo 
         == Enums.GYPPropertyInfo.PropertyType)?.Description}";
 

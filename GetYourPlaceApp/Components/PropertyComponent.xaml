@@ -49,7 +49,7 @@
                 VerticalOptions="CenterAndExpand">
                 <Label
                     FontSize="Subtitle"
-                    Text="{Binding Property.Description, Source={x:Reference propertyComponent}}"
+                    Text="{Binding Property.Title, Source={x:Reference propertyComponent}}"
                     TextColor="{StaticResource White}" />
                 <Label
                     Grid.Row="1"
