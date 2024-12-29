@@ -96,5 +96,10 @@ namespace GetYourPlaceApp.Helpers
             }
         }
 
+        public bool UserIsLogged()
+        {
+            return User != null && User.Id > 0;
+        }
+
     }
 }

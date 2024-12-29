@@ -23,6 +23,14 @@ namespace GetYourPlaceApp.Models
         public bool Rejected { get; set; }
         public bool Liked { get; set; }
         public bool Published { get; set; }
+        public bool IsMine
+        {
+            get
+            {
+                return SessionHelper.Instance.UserIsLogged() &&
+                 SessionHelper.Instance.User.Id == GYPUserProfileId;
+            }
+        }
         public List<ImageSource> Images
         {
             get

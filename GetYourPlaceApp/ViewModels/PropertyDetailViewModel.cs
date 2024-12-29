@@ -85,11 +85,31 @@ namespace GetYourPlaceApp.ViewModels
         [RelayCommand]
         public async Task SendInsterestedToOwner()
         {
-            Application.Current.MainPage.ShowPopupAsync(new MessagePopUpComponent(
-                "Message sent",
-                "We will make sure that the owner will receive the message",
-                "Ok",
-                new Command(() => SetPropertyUnderAnalysis())));
+            if (SessionHelper.Instance.UserIsLogged())
+            {
+                if (Property.IsMine)
+                {
+
+                }
+                else
+                {
+                    Application.Current.MainPage.ShowPopupAsync(new MessagePopUpComponent(
+                        "Message sent",
+                        "We will make sure that the owner will receive the message",
+                        "Ok",
+                        new Command(() => SetPropertyUnderAnalysis())));
+                }
+
+            }
+            else
+            {
+                Application.Current.MainPage.ShowPopupAsync(new MessagePopUpComponent(
+                        "No message send",
+                        "You need to do the login in your account to be able to send a message to the owner",
+                        "Ok",
+                        new Command(() => SetPropertyUnderAnalysis())));
+            }
+
         }
 
         public void SetPropertyUnderAnalysis()
@@ -105,7 +125,8 @@ namespace GetYourPlaceApp.ViewModels
         public void CheckIsUnderAnalysis()
         {
                 if (Property != null)
-                    InterestedButtonDisabled = Property.UnderAnalysis;
+                    InterestedButtonDisabled = Property.UnderAnalysis ||
+                    Property.Accepted || Property.Rejected;
         }
     }
 }

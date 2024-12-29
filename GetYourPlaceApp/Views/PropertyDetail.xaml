@@ -102,10 +102,28 @@
                             Text="I'm interested">
                             <Button.Triggers>
                                 <DataTrigger
-                                    Binding="{Binding BindingContext.InterestedButtonDisabled, Source={x:Reference propertyDetail}}"
+                                    Binding="{Binding BindingContext.Property.UnderAnalysis, Source={x:Reference propertyDetail}}"
                                     TargetType="Button"
                                     Value="True">
                                     <Setter Property="Text" Value="Under Analysis" />
+                                </DataTrigger>
+                                <DataTrigger
+                                    Binding="{Binding BindingContext.Property.Accepted, Source={x:Reference propertyDetail}}"
+                                    TargetType="Button"
+                                    Value="True">
+                                    <Setter Property="Text" Value="Matched" />
+                                </DataTrigger>
+                                <DataTrigger
+                                      Binding="{Binding BindingContext.Property.Rejected, Source={x:Reference propertyDetail}}"
+                                      TargetType="Button"
+                                      Value="True">
+                                    <Setter Property="Text" Value="Unmatched" />
+                                </DataTrigger>
+                                <DataTrigger
+                                     Binding="{Binding BindingContext.Property.IsMine, Source={x:Reference propertyDetail}}"
+                                     TargetType="Button"
+                                     Value="True">
+                                    <Setter Property="Text" Value="Edit Propertie" />
                                 </DataTrigger>
                             </Button.Triggers>
                         </Button>
