@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8" ?>
-    <ContentPage
+<ContentPage
     x:Class="GetYourPlaceApp.Views.MyProperties"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:cm="clr-namespace:GetYourPlaceApp.Components"
     xmlns:converters="clr-namespace:GetYourPlaceApp.Services.Converters"
-    BackgroundColor="DarkSlateGray"
     x:Name="myProperties"
-    Title="My Properties">
+    Title="My Properties"
+    BackgroundColor="DarkSlateGray">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <converters:ObservableCollectionIsEmptyOrNullConverter x:Key="observableCollectionIsEmptyOrNullConverter" />
             <converters:ObservableCollectionIsNotEmptyOrNotNullConverter x:Key="ObservableCollectionIsNotEmptyOrNotNullConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ScrollView>
         <Grid RowDefinitions="auto,auto,auto,auto,auto,auto">
-            <Button Text="Publish New Propertie"
-                    Margin="16">
-            </Button>
-            <cm:AccordionComponent 
-            Grid.Row="1"
-            Title="Published Properties"
-            ExpandCommand="{Binding BindingContext.GetPublishedPropertiesCommand, Source={x:Reference myProperties}}">
+            <Button Margin="16" Text="Publish New Propertie" />
+            <cm:AccordionComponent
+                Title="Published Properties"
+                Grid.Row="1"
+                HasContent="{Binding BindingContext.PropertiesPublished, Source={x:Reference myProperties}, Converter={StaticResource ObservableCollectionIsNotEmptyOrNotNullConverter}}"
+                ExpandCommand="{Binding BindingContext.GetPublishedPropertiesCommand, Source={x:Reference myProperties}}">
                 <cm:AccordionComponent.CustomContent>
                     <ScrollView
-                     BackgroundColor="Transparent"
-                     HorizontalOptions="FillAndExpand"
-                     VerticalOptions="FillAndExpand">
+                        BackgroundColor="Transparent"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
                         <CollectionView ItemsSource="{Binding BindingContext.PropertiesPublished, Source={x:Reference myProperties}}">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
@@ -37,15 +37,16 @@
                     </ScrollView>
                 </cm:AccordionComponent.CustomContent>
             </cm:AccordionComponent>
-            <cm:AccordionComponent 
-            Grid.Row="2"
-            Title="Unpublished Properties"
-            ExpandCommand="{Binding BindingContext.GetUnPublishedPropertiesCommand, Source={x:Reference myProperties}}">
+            <cm:AccordionComponent
+                Title="Unpublished Properties"
+                Grid.Row="2"
+                HasContent="{Binding BindingContext.PropertiesUnPublished, Source={x:Reference myProperties}, Converter={StaticResource ObservableCollectionIsNotEmptyOrNotNullConverter}}"
+                ExpandCommand="{Binding BindingContext.GetUnPublishedPropertiesCommand, Source={x:Reference myProperties}}">
                 <cm:AccordionComponent.CustomContent>
                     <ScrollView
-                     BackgroundColor="Transparent"
-                     HorizontalOptions="FillAndExpand"
-                     VerticalOptions="FillAndExpand">
+                        BackgroundColor="Transparent"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
                         <CollectionView ItemsSource="{Binding BindingContext.PropertiesUnPublished, Source={x:Reference myProperties}}">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
@@ -56,15 +57,16 @@
                     </ScrollView>
                 </cm:AccordionComponent.CustomContent>
             </cm:AccordionComponent>
-            <cm:AccordionComponent 
-            Grid.Row="3"
-            Title="Under Analysis Properties"
-            ExpandCommand="{Binding BindingContext.GetUnderAnalysisPropertiesCommand, Source={x:Reference myProperties}}">
+            <cm:AccordionComponent
+                Title="Under Analysis Properties"
+                Grid.Row="3"
+                HasContent="{Binding BindingContext.PropertiesUnderAnalysis, Source={x:Reference myProperties}, Converter={StaticResource ObservableCollectionIsNotEmptyOrNotNullConverter}}"
+                ExpandCommand="{Binding BindingContext.GetUnderAnalysisPropertiesCommand, Source={x:Reference myProperties}}">
                 <cm:AccordionComponent.CustomContent>
                     <ScrollView
-                     BackgroundColor="Transparent"
-                     HorizontalOptions="FillAndExpand"
-                     VerticalOptions="FillAndExpand">
+                        BackgroundColor="Transparent"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
                         <CollectionView ItemsSource="{Binding BindingContext.PropertiesUnderAnalysis, Source={x:Reference myProperties}}">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
@@ -75,15 +77,16 @@
                     </ScrollView>
                 </cm:AccordionComponent.CustomContent>
             </cm:AccordionComponent>
-            <cm:AccordionComponent 
-            Grid.Row="4"
-            Title="Matched Properties"
-            ExpandCommand="{Binding BindingContext.GetMatchedPropertiesCommand, Source={x:Reference myProperties}}">
+            <cm:AccordionComponent
+                Title="Matched Properties"
+                Grid.Row="4"
+                HasContent="{Binding BindingContext.PropertiesMatched, Source={x:Reference myProperties}, Converter={StaticResource ObservableCollectionIsNotEmptyOrNotNullConverter}}"
+                ExpandCommand="{Binding BindingContext.GetMatchedPropertiesCommand, Source={x:Reference myProperties}}">
                 <cm:AccordionComponent.CustomContent>
                     <ScrollView
-                 BackgroundColor="Transparent"
-                 HorizontalOptions="FillAndExpand"
-                 VerticalOptions="FillAndExpand">
+                        BackgroundColor="Transparent"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
                         <CollectionView ItemsSource="{Binding BindingContext.PropertiesMatched, Source={x:Reference myProperties}}">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
@@ -94,15 +97,16 @@
                     </ScrollView>
                 </cm:AccordionComponent.CustomContent>
             </cm:AccordionComponent>
-            <cm:AccordionComponent 
-            Grid.Row="5"
-            Title="Unmatched Properties"
-            ExpandCommand="{Binding BindingContext.GetUnMatchedPropertiesCommand, Source={x:Reference myProperties}}">
+            <cm:AccordionComponent
+                Title="Unmatched Properties"
+                Grid.Row="5"
+                HasContent="{Binding BindingContext.PropertiesUnMatched, Source={x:Reference myProperties}, Converter={StaticResource ObservableCollectionIsNotEmptyOrNotNullConverter}}"
+                ExpandCommand="{Binding BindingContext.GetUnMatchedPropertiesCommand, Source={x:Reference myProperties}}">
                 <cm:AccordionComponent.CustomContent>
                     <ScrollView
-                    BackgroundColor="Transparent"
-                    HorizontalOptions="FillAndExpand"
-                    VerticalOptions="FillAndExpand">
+                        BackgroundColor="Transparent"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand">
                         <CollectionView ItemsSource="{Binding BindingContext.PropertiesUnMatched, Source={x:Reference myProperties}}">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>

@@ -9,7 +9,7 @@
     Padding="8,16,8,16">
     <ContentView.Resources>
         <ResourceDictionary>
-            <toolkit:IsNullConverter x:Key="isNullConverter" />
+            <toolkit:InvertedBoolConverter x:Key="invertedBoolConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
     <Border
@@ -59,34 +59,25 @@
                 Grid.Row="1"
                 IsVisible="{Binding Expanded, Source={x:Reference accordionComponent}}"
                 RowDefinitions="auto">
-                <cm:LoadingComponent
+                <Grid>
+                    <cm:LoadingComponent
                     IsLoading="{Binding IsLoading, Source={x:Reference accordionComponent}}"
                     IsVisible="{Binding IsLoading, Source={x:Reference accordionComponent}}"
                     LoadingColor="{StaticResource GreenLightGYP}"
                     LoadingText="Loading..." />
-                <StackLayout x:Name="customContent" />
-                <Label
-                    Padding="16"
-                    HorizontalOptions="CenterAndExpand"
-                    Text="No properties found"
-                    FontSize="Medium"
-                    TextColor="{StaticResource White}"
-                    VerticalOptions="CenterAndExpand">
-                    <Label.Triggers>
-                        <DataTrigger
-                            Binding="{Binding IsLoading, Source={x:Reference accordionComponent}}"
-                            TargetType="Label"
-                            Value="True">
-                            <Setter Property="IsVisible" Value="false" />
-                        </DataTrigger>
-                        <DataTrigger
-                            Binding="{Binding CustomContent, Source={x:Reference accordionComponent}, Converter={StaticResource isNullConverter}}"
-                            TargetType="Label"
-                            Value="True">
-                            <Setter Property="IsVisible" Value="True" />
-                        </DataTrigger>
-                    </Label.Triggers>
-                </Label>
+                    <Grid IsVisible="{Binding IsLoading, Source={x:Reference accordionComponent},Converter={StaticResource invertedBoolConverter}}">
+                        <StackLayout x:Name="customContent" />
+                        <Label
+                         Padding="16"
+                         IsVisible ="{Binding HasContent, Source={x:Reference accordionComponent},Converter={StaticResource invertedBoolConverter}}}"
+                         HorizontalOptions="CenterAndExpand"
+                         Text="No properties found"
+                         FontSize="Medium"
+                         TextColor="{StaticResource White}"
+                         VerticalOptions="CenterAndExpand">
+                        </Label>
+                    </Grid>
+                </Grid>
             </Grid>
         </Grid>
     </Border>

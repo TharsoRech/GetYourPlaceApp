@@ -5,6 +5,7 @@ namespace GetYourPlaceApp.Components;
 
 public partial class AccordionComponent : ContentView
 {
+
 	public AccordionComponent()
 	{
 		InitializeComponent();
@@ -46,6 +47,12 @@ public partial class AccordionComponent : ContentView
     propertyChanged: OnCustomContentChanged
     );
 
+    public static readonly BindableProperty HasContentProperty = BindableProperty.Create(
+    nameof(HasContent),
+    typeof(bool),
+    typeof(AccordionComponent)
+    );
+
     #endregion
 
     #region [Properties]
@@ -74,6 +81,12 @@ public partial class AccordionComponent : ContentView
         set => this.SetValue(TitleProperty, value);
     }
 
+    public bool HasContent
+    {
+        get => (bool)this.GetValue(HasContentProperty);
+        set => this.SetValue(HasContentProperty, value);
+    }
+
     public View CustomContent
     {
         get => (View)this.GetValue(CustomContentProperty);
@@ -97,7 +110,7 @@ public partial class AccordionComponent : ContentView
         {
             await Application.Current.Dispatcher.DispatchAsync(async () =>
             {
-                ExpandCommand?.Execute(null);
+                ExpandCommand?.Execute(this);
             });
             IsLoading = false;
         });
@@ -110,7 +123,7 @@ public partial class AccordionComponent : ContentView
        customContent.Children.Clear();
 
        if (newContent != null)
-         customContent.Children.Add(newContent);
+            customContent.Children.Add(newContent);
 
         IsLoading = false;
     }
