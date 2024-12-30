@@ -139,6 +139,12 @@
 	  <MauiXaml Update="Views\MyProperties.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\NewAccountPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ProfilePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\PropertyDetail.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

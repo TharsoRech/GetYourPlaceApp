@@ -4,7 +4,7 @@ namespace GetYourPlaceApp.ViewModels
 {
     public partial class EditPropertyViewModel:BaseViewModel
     {
-        public EditPropertyViewModel(Property property)
+        public EditPropertyViewModel(Property property = null)
         {
                 
         }
