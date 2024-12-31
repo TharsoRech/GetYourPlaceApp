@@ -20,8 +20,8 @@
             <cm:AccordionComponent
                 Title="Published Properties"
                 Grid.Row="1"
-                HasContent="{Binding BindingContext.PropertiesPublished, Source={x:Reference myProperties}, Converter={StaticResource ObservableCollectionIsNotEmptyOrNotNullConverter}}"
-                ExpandCommand="{Binding BindingContext.GetPublishedPropertiesCommand, Source={x:Reference myProperties}}">
+                ExpandCommand="{Binding BindingContext.GetPublishedPropertiesCommand, Source={x:Reference myProperties}}"
+                HasContent="{Binding BindingContext.PropertiesPublished, Source={x:Reference myProperties}, Converter={StaticResource ObservableCollectionIsNotEmptyOrNotNullConverter}}">
                 <cm:AccordionComponent.CustomContent>
                     <ScrollView
                         BackgroundColor="Transparent"
@@ -40,8 +40,8 @@
             <cm:AccordionComponent
                 Title="Unpublished Properties"
                 Grid.Row="2"
-                HasContent="{Binding BindingContext.PropertiesUnPublished, Source={x:Reference myProperties}, Converter={StaticResource ObservableCollectionIsNotEmptyOrNotNullConverter}}"
-                ExpandCommand="{Binding BindingContext.GetUnPublishedPropertiesCommand, Source={x:Reference myProperties}}">
+                ExpandCommand="{Binding BindingContext.GetUnPublishedPropertiesCommand, Source={x:Reference myProperties}}"
+                HasContent="{Binding BindingContext.PropertiesUnPublished, Source={x:Reference myProperties}, Converter={StaticResource ObservableCollectionIsNotEmptyOrNotNullConverter}}">
                 <cm:AccordionComponent.CustomContent>
                     <ScrollView
                         BackgroundColor="Transparent"
@@ -60,8 +60,8 @@
             <cm:AccordionComponent
                 Title="Under Analysis Properties"
                 Grid.Row="3"
-                HasContent="{Binding BindingContext.PropertiesUnderAnalysis, Source={x:Reference myProperties}, Converter={StaticResource ObservableCollectionIsNotEmptyOrNotNullConverter}}"
-                ExpandCommand="{Binding BindingContext.GetUnderAnalysisPropertiesCommand, Source={x:Reference myProperties}}">
+                ExpandCommand="{Binding BindingContext.GetUnderAnalysisPropertiesCommand, Source={x:Reference myProperties}}"
+                HasContent="{Binding BindingContext.PropertiesUnderAnalysis, Source={x:Reference myProperties}, Converter={StaticResource ObservableCollectionIsNotEmptyOrNotNullConverter}}">
                 <cm:AccordionComponent.CustomContent>
                     <ScrollView
                         BackgroundColor="Transparent"
@@ -80,8 +80,8 @@
             <cm:AccordionComponent
                 Title="Matched Properties"
                 Grid.Row="4"
-                HasContent="{Binding BindingContext.PropertiesMatched, Source={x:Reference myProperties}, Converter={StaticResource ObservableCollectionIsNotEmptyOrNotNullConverter}}"
-                ExpandCommand="{Binding BindingContext.GetMatchedPropertiesCommand, Source={x:Reference myProperties}}">
+                ExpandCommand="{Binding BindingContext.GetMatchedPropertiesCommand, Source={x:Reference myProperties}}"
+                HasContent="{Binding BindingContext.PropertiesMatched, Source={x:Reference myProperties}, Converter={StaticResource ObservableCollectionIsNotEmptyOrNotNullConverter}}">
                 <cm:AccordionComponent.CustomContent>
                     <ScrollView
                         BackgroundColor="Transparent"
@@ -100,8 +100,8 @@
             <cm:AccordionComponent
                 Title="Unmatched Properties"
                 Grid.Row="5"
-                HasContent="{Binding BindingContext.PropertiesUnMatched, Source={x:Reference myProperties}, Converter={StaticResource ObservableCollectionIsNotEmptyOrNotNullConverter}}"
-                ExpandCommand="{Binding BindingContext.GetUnMatchedPropertiesCommand, Source={x:Reference myProperties}}">
+                ExpandCommand="{Binding BindingContext.GetUnMatchedPropertiesCommand, Source={x:Reference myProperties}}"
+                HasContent="{Binding BindingContext.PropertiesUnMatched, Source={x:Reference myProperties}, Converter={StaticResource ObservableCollectionIsNotEmptyOrNotNullConverter}}">
                 <cm:AccordionComponent.CustomContent>
                     <ScrollView
                         BackgroundColor="Transparent"

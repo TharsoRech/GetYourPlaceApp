@@ -3,10 +3,16 @@
     x:Class="GetYourPlaceApp.Views.NewAccountPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="Create account">
+    Title="Create account"
+    BackgroundColor="DarkSlateGray">
     <VerticalStackLayout>
-        <Grid RowDefinitions="auto,auto">
-            <Grid ColumnDefinitions="auto,*" RowDefinitions="auto,auto,auto,auto">
+        <Grid RowDefinitions="*,*">
+            <Grid
+                ColumnDefinitions="auto,*"
+                Margin="16"
+                RowDefinitions="auto,auto,auto,auto,auto,auto,auto,auto,auto"
+                RowSpacing="16"
+                VerticalOptions="StartAndExpand">
                 <Label
                     HorizontalOptions="Center"
                     Text="Full Name:"
@@ -15,7 +21,9 @@
                 <Entry
                     Grid.Column="1"
                     HorizontalOptions="Center"
-                    Text="Welcome to .NET MAUI!"
+                    Text="{Binding FullName}"
+                    Placeholder="Full Name"
+                    MinimumWidthRequest="240"
                     TextColor="{StaticResource White}"
                     VerticalOptions="CenterAndExpand" />
                 <Label
@@ -28,42 +36,110 @@
                     Grid.Row="1"
                     Grid.Column="1"
                     HorizontalOptions="Center"
-                    Text="Welcome to .NET MAUI!"
+                    Text="{Binding Email}"
+                    MinimumWidthRequest="240"
+                    Placeholder="Email"
                     TextColor="{StaticResource White}"
                     VerticalOptions="CenterAndExpand" />
                 <Label
-                    Grid.Row="2"
+                   Grid.Row="2"
+                   HorizontalOptions="Center"
+                   Text="Registration Number:"
+                   TextColor="{StaticResource White}"
+                   VerticalOptions="CenterAndExpand" />
+                <Entry
+                   Grid.Row="2"
+                   Grid.Column="1"
+                   HorizontalOptions="Center"
+                   Text="{Binding RegistrationNumber}"
+                   MinimumWidthRequest="240"
+                   Placeholder="Registration Number"
+                   TextColor="{StaticResource White}"
+                   VerticalOptions="CenterAndExpand" />
+                <Label
+                   Grid.Row="3"
+                   HorizontalOptions="Center"
+                   Text="Country:"
+                   TextColor="{StaticResource White}"
+                   VerticalOptions="CenterAndExpand" />
+                <Entry
+                   Grid.Row="3"
+                   Grid.Column="1"
+                   HorizontalOptions="Center"
+                   Text="{Binding Country}"
+                   MinimumWidthRequest="240"
+                   Placeholder="Country"
+                   TextColor="{StaticResource White}"
+                   VerticalOptions="CenterAndExpand" />
+                <Label
+                   Grid.Row="4"
+                   HorizontalOptions="Center"
+                   Text="City:"
+                   TextColor="{StaticResource White}"
+                   VerticalOptions="CenterAndExpand" />
+                <Entry
+                   Grid.Row="4"
+                   Grid.Column="1"
+                   HorizontalOptions="Center"
+                   Text="{Binding City}"
+                   MinimumWidthRequest="240"
+                   Placeholder="City"
+                   TextColor="{StaticResource White}"
+                   VerticalOptions="CenterAndExpand" />
+                <Label
+                    Grid.Row="5"
+                    HorizontalOptions="Center"
+                    Text="Street Adress:"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="CenterAndExpand" />
+                <Entry
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    HorizontalOptions="Center"
+                    Text="{Binding StreeAdress}"
+                    MinimumWidthRequest="240"
+                    Placeholder="Street Adress"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="CenterAndExpand" />
+                <Label
+                    Grid.Row="6"
                     HorizontalOptions="Center"
                     Text="Password:"
                     TextColor="{StaticResource White}"
                     VerticalOptions="CenterAndExpand" />
                 <Entry
-                    Grid.Row="2"
-                    IsPassword="True"
+                    Grid.Row="6"
                     Grid.Column="1"
+                    MinimumWidthRequest="240"
                     HorizontalOptions="Center"
-                    Text="Welcome to .NET MAUI!"
+                    IsPassword="True"
+                    Placeholder="Your password"
+                    Text="{Binding Password}"
                     TextColor="{StaticResource White}"
                     VerticalOptions="CenterAndExpand" />
                 <Label
-                 Grid.Row="3"
-                 HorizontalOptions="Center"
-                 Text="Repeat Password:"
-                 TextColor="{StaticResource White}"
-                 VerticalOptions="CenterAndExpand" />
+                    Grid.Row="7"
+                    HorizontalOptions="Center"
+                    Text="Repeat Password:"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="CenterAndExpand" />
                 <Entry
-                 Grid.Row="3"
-                 IsPassword="True"
-                 Grid.Column="1"
-                 HorizontalOptions="Center"
-                 Text="Welcome to .NET MAUI!"
-                 TextColor="{StaticResource White}"
-                 VerticalOptions="CenterAndExpand" />
+                    Grid.Row="7"
+                    Grid.Column="1"
+                    Placeholder="Repeat Your password"
+                    MinimumWidthRequest="240"
+                    HorizontalOptions="Center"
+                    IsPassword="True"
+                    Text="{Binding RepeatPassword}"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="CenterAndExpand" />
             </Grid>
             <Button
                 Grid.Row="1"
+                Margin="16"
                 Command="{Binding CreateAccountCommand}"
-                Text="Create account" />
+                Text="Create account"
+                VerticalOptions="EndAndExpand" />
         </Grid>
     </VerticalStackLayout>
 </ContentPage>
