@@ -3,14 +3,16 @@ using GetYourPlaceApp.Components;
 using GetYourPlaceApp.Contracts;
 using GetYourPlaceApp.Helpers;
 using GetYourPlaceApp.Models.Requests;
-using GetYourPlaceApp.Repository.Login;
-using Microsoft.Maui.Controls;
 using System.Text;
 
 namespace GetYourPlaceApp.ViewModels
 {
     public partial class LoginViewModel : BaseViewModel, IDisposable
     {
+
+        #region variables
+        private static INavigation _Navigation;
+        #endregion
 
         #region Properties
         [ObservableProperty]
@@ -22,9 +24,9 @@ namespace GetYourPlaceApp.ViewModels
         #endregion
 
 
-        public LoginViewModel()
+        public LoginViewModel(INavigation navigation)
         {
-         
+            _Navigation = navigation;
         }
         public void Dispose()
         {
@@ -80,6 +82,21 @@ namespace GetYourPlaceApp.ViewModels
                 loadingPopUpPage.HideLoading();
             }
 
+        }
+
+        [RelayCommand]
+        public async Task RecoverPassword()
+        {
+
+        }
+
+        [RelayCommand]
+        public async Task CreateAccount()
+        {
+            var loading = new LoadingPopUpPage();
+            loading.ShowLoading();
+            await _Navigation.PushAsync(new NewAccountPage());
+            loading.HideLoading();
         }
     }
 }

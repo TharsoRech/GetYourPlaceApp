@@ -29,7 +29,7 @@
         <Grid
             Grid.Row="1"
             Margin="0,16,0,0"
-            RowDefinitions="auto,auto,auto"
+            RowDefinitions="auto,auto,auto,auto"
             RowSpacing="16"
             VerticalOptions="EndAndExpand">
             <Entry
@@ -52,6 +52,32 @@
                 Grid.Row="2"
                 Command="{Binding LoginCommand}"
                 Text="Login" />
+            <Grid Grid.Row="3"
+                  Padding="32"
+                  RowDefinitions="auto,auto"
+                  VerticalOptions="EndAndExpand"
+                  HorizontalOptions="CenterAndExpand"
+                  RowSpacing="16">
+                <Label
+                 Text="Forget your password?"
+                 TextColor="White">
+                 <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Command="{Binding RecoverPasswordCommand}">
+                        </TapGestureRecognizer>
+                  </Label.GestureRecognizers>
+                </Label>
+                <Label
+                 Grid.Row="1"
+                 Text="Doesn't have an account?"
+                 TextColor="White">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                         Command="{Binding CreateAccountCommand}" >
+                        </TapGestureRecognizer>
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
         </Grid>
     </Grid>
 </ContentPage>

@@ -6,6 +6,6 @@ public partial class NewAccountPage : ContentPage
     public NewAccountPage()
 	{
 		InitializeComponent();
-		BindingContext = _vm= new NewAccountViewModel();
+		BindingContext = _vm= new NewAccountViewModel(Navigation);
 	}
 }
