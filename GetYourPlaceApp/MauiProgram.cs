@@ -2,6 +2,7 @@
 using GetYourPlaceApp.Handlers;
 using GetYourPlaceApp.Helpers;
 using GetYourPlaceApp.Repository.Filter;
+using GetYourPlaceApp.Repository.Location;
 using GetYourPlaceApp.Repository.Login;
 using GetYourPlaceApp.Repository.Properties;
 namespace GetYourPlaceApp;
@@ -59,6 +60,9 @@ public static class MauiProgram
         builder.Services.AddScoped<IFilterRepository, FilterRepository>();
 
         builder.Services.AddScoped<IPropertiesRepository, PropertiesRepository>();
+
+        builder.Services.AddScoped<ILocationRepository,LocationRepository>();
+
 
         FormHandler.AdjustBorders();
 

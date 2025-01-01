@@ -8,9 +8,9 @@
     <VerticalStackLayout>
         <Grid RowDefinitions="*,*">
             <Grid
-                ColumnDefinitions="auto,*"
                 Margin="16"
-                RowDefinitions="auto,auto,auto,auto,auto,auto,auto,auto,auto"
+                ColumnDefinitions="auto,*"
+                RowDefinitions="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto"
                 RowSpacing="16"
                 VerticalOptions="StartAndExpand">
                 <Label
@@ -21,9 +21,9 @@
                 <Entry
                     Grid.Column="1"
                     HorizontalOptions="Center"
-                    Text="{Binding FullName}"
-                    Placeholder="Full Name"
                     MinimumWidthRequest="240"
+                    Placeholder="Full Name"
+                    Text="{Binding FullName}"
                     TextColor="{StaticResource White}"
                     VerticalOptions="CenterAndExpand" />
                 <Label
@@ -36,56 +36,56 @@
                     Grid.Row="1"
                     Grid.Column="1"
                     HorizontalOptions="Center"
-                    Text="{Binding Email}"
                     MinimumWidthRequest="240"
                     Placeholder="Email"
+                    Text="{Binding Email}"
                     TextColor="{StaticResource White}"
                     VerticalOptions="CenterAndExpand" />
                 <Label
-                   Grid.Row="2"
-                   HorizontalOptions="Center"
-                   Text="Registration Number:"
-                   TextColor="{StaticResource White}"
-                   VerticalOptions="CenterAndExpand" />
+                    Grid.Row="2"
+                    HorizontalOptions="Center"
+                    Text="Registration Number:"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="CenterAndExpand" />
                 <Entry
-                   Grid.Row="2"
-                   Grid.Column="1"
-                   HorizontalOptions="Center"
-                   Text="{Binding RegistrationNumber}"
-                   MinimumWidthRequest="240"
-                   Placeholder="Registration Number"
-                   TextColor="{StaticResource White}"
-                   VerticalOptions="CenterAndExpand" />
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    HorizontalOptions="Center"
+                    MinimumWidthRequest="240"
+                    Placeholder="Registration Number"
+                    Text="{Binding RegistrationNumber}"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="CenterAndExpand" />
                 <Label
-                   Grid.Row="3"
-                   HorizontalOptions="Center"
-                   Text="Country:"
-                   TextColor="{StaticResource White}"
-                   VerticalOptions="CenterAndExpand" />
+                    Grid.Row="3"
+                    HorizontalOptions="Center"
+                    Text="Country:"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="CenterAndExpand" />
                 <Entry
-                   Grid.Row="3"
-                   Grid.Column="1"
-                   HorizontalOptions="Center"
-                   Text="{Binding Country}"
-                   MinimumWidthRequest="240"
-                   Placeholder="Country"
-                   TextColor="{StaticResource White}"
-                   VerticalOptions="CenterAndExpand" />
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    HorizontalOptions="Center"
+                    MinimumWidthRequest="240"
+                    Placeholder="Country"
+                    Text="{Binding Country}"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="CenterAndExpand" />
                 <Label
-                   Grid.Row="4"
-                   HorizontalOptions="Center"
-                   Text="City:"
-                   TextColor="{StaticResource White}"
-                   VerticalOptions="CenterAndExpand" />
+                    Grid.Row="4"
+                    HorizontalOptions="Center"
+                    Text="City:"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="CenterAndExpand" />
                 <Entry
-                   Grid.Row="4"
-                   Grid.Column="1"
-                   HorizontalOptions="Center"
-                   Text="{Binding City}"
-                   MinimumWidthRequest="240"
-                   Placeholder="City"
-                   TextColor="{StaticResource White}"
-                   VerticalOptions="CenterAndExpand" />
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    HorizontalOptions="Center"
+                    MinimumWidthRequest="240"
+                    Placeholder="City"
+                    Text="{Binding City}"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="CenterAndExpand" />
                 <Label
                     Grid.Row="5"
                     HorizontalOptions="Center"
@@ -96,40 +96,70 @@
                     Grid.Row="5"
                     Grid.Column="1"
                     HorizontalOptions="Center"
-                    Text="{Binding StreeAdress}"
                     MinimumWidthRequest="240"
                     Placeholder="Street Adress"
+                    Text="{Binding StreeAdress}"
                     TextColor="{StaticResource White}"
                     VerticalOptions="CenterAndExpand" />
                 <Label
                     Grid.Row="6"
+                    HorizontalOptions="Center"
+                    Text="Zip Code:"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="CenterAndExpand" />
+                <Entry
+                    Grid.Row="6"
+                    Grid.Column="1"
+                    HorizontalOptions="Center"
+                    MinimumWidthRequest="240"
+                    Placeholder="Zip Code"
+                    Text="{Binding ZipCode}"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="CenterAndExpand" />
+                <Label
+                    Grid.Row="7"
+                    HorizontalOptions="Center"
+                    Text="Address Complement:"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="CenterAndExpand" />
+                <Entry
+                    Grid.Row="7"
+                    Grid.Column="1"
+                    HorizontalOptions="Center"
+                    MinimumWidthRequest="240"
+                    Placeholder="Address Complement"
+                    Text="{Binding AddressComplement}"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="CenterAndExpand" />
+                <Label
+                    Grid.Row="8"
                     HorizontalOptions="Center"
                     Text="Password:"
                     TextColor="{StaticResource White}"
                     VerticalOptions="CenterAndExpand" />
                 <Entry
-                    Grid.Row="6"
+                    Grid.Row="8"
                     Grid.Column="1"
-                    MinimumWidthRequest="240"
                     HorizontalOptions="Center"
                     IsPassword="True"
+                    MinimumWidthRequest="240"
                     Placeholder="Your password"
                     Text="{Binding Password}"
                     TextColor="{StaticResource White}"
                     VerticalOptions="CenterAndExpand" />
                 <Label
-                    Grid.Row="7"
+                    Grid.Row="9"
                     HorizontalOptions="Center"
                     Text="Repeat Password:"
                     TextColor="{StaticResource White}"
                     VerticalOptions="CenterAndExpand" />
                 <Entry
-                    Grid.Row="7"
+                    Grid.Row="9"
                     Grid.Column="1"
-                    Placeholder="Repeat Your password"
-                    MinimumWidthRequest="240"
                     HorizontalOptions="Center"
                     IsPassword="True"
+                    MinimumWidthRequest="240"
+                    Placeholder="Repeat Your password"
                     Text="{Binding RepeatPassword}"
                     TextColor="{StaticResource White}"
                     VerticalOptions="CenterAndExpand" />

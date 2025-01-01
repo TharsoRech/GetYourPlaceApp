@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Maui.Views;
 using GetYourPlaceApp.Components;
+using GetYourPlaceApp.Helpers;
+using GetYourPlaceApp.Repository.Location;
 
 namespace GetYourPlaceApp.ViewModels
 {
@@ -7,6 +9,7 @@ namespace GetYourPlaceApp.ViewModels
     {
         #region variables
         private static INavigation _Navigation;
+        private static ILocationRepository _locationRepository;
         #endregion
 
         #region Properties
@@ -41,10 +44,16 @@ namespace GetYourPlaceApp.ViewModels
         [ObservableProperty]
         string addressComplement;
 
+        [ObservableProperty]
+        string state;
+
         #endregion
         public NewAccountViewModel(INavigation navigation)
         {
             _Navigation = navigation;
+
+            if (_locationRepository is null)
+                _locationRepository = ServiceHelper.GetService<ILocationRepository>();
         }
 
         [RelayCommand]
