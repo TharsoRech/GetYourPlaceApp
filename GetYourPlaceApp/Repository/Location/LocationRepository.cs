@@ -1,15 +1,17 @@
-﻿using GetYourPlaceApp.Models.Requests;
+﻿using GetYourPlaceApp.Models;
+using GetYourPlaceApp.Models.Requests;
 using GetYourPlaceApp.Models.Responses;
 using RestSharp;
+using System.Collections.Generic;
 
 namespace GetYourPlaceApp.Repository.Location
 {
     public class LocationRepository: ILocationRepository
     {
 
-        public async Task<List<CountryAndStateResponse>> GetCountriesAndStates()
+        public async Task<List<Country>> GetCountriesAndStates()
         {
-			try
+            try
 			{
                 var options = new RestClientOptions("https://countriesnow.space/api/v0.1/countries/states");
                 var client = new RestClient(options);
@@ -18,7 +20,9 @@ namespace GetYourPlaceApp.Repository.Location
 
                 Console.WriteLine("{0}", response.Content);
 
-                return Newtonsoft.Json.JsonConvert.DeserializeObject<List<CountryAndStateResponse>>(response.Content);
+                var result = Newtonsoft.Json.JsonConvert.DeserializeObject<CountryAndStateResponse>(response.Content);
+
+                return result?.data;
             }
 			catch (Exception ex)
 			{
@@ -28,7 +32,7 @@ namespace GetYourPlaceApp.Repository.Location
         }
 
 
-        public async Task<List<CityResponse>> GetCityByState(CityRequest cityRequest)
+        public async Task<List<string>> GetCityByState(CityRequest cityRequest)
         {
             try
             {
@@ -40,7 +44,9 @@ namespace GetYourPlaceApp.Repository.Location
 
                 Console.WriteLine("{0}", response.Content);
 
-                return Newtonsoft.Json.JsonConvert.DeserializeObject<List<CityResponse>>(response.Content);
+                var result = Newtonsoft.Json.JsonConvert.DeserializeObject<CityResponse>(response.Content);
+
+                return result?.data;
             }
             catch (Exception ex)
             {

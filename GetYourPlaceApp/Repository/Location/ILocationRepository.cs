@@ -1,12 +1,13 @@
-﻿using GetYourPlaceApp.Models.Requests;
+﻿using GetYourPlaceApp.Models;
+using GetYourPlaceApp.Models.Requests;
 using GetYourPlaceApp.Models.Responses;
 
 namespace GetYourPlaceApp.Repository.Location
 {
     public interface ILocationRepository
     {
-        Task<List<CountryAndStateResponse>> GetCountriesAndStates();
+        Task<List<Country>> GetCountriesAndStates();
 
-        Task<List<CityResponse>> GetCityByState(CityRequest cityRequest);
+        Task<List<string>> GetCityByState(CityRequest cityRequest);
     }
 }

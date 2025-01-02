@@ -1,6 +1,10 @@
-﻿using CommunityToolkit.Maui.Views;
+﻿using CommunityToolkit.Maui.Core.Extensions;
+using CommunityToolkit.Maui.Views;
 using GetYourPlaceApp.Components;
 using GetYourPlaceApp.Helpers;
+using GetYourPlaceApp.Models;
+using GetYourPlaceApp.Models.Requests;
+using GetYourPlaceApp.Models.Responses;
 using GetYourPlaceApp.Repository.Location;
 
 namespace GetYourPlaceApp.ViewModels
@@ -10,6 +14,7 @@ namespace GetYourPlaceApp.ViewModels
         #region variables
         private static INavigation _Navigation;
         private static ILocationRepository _locationRepository;
+        private CountryAndStateResponse _countryAndStateResponse;
         #endregion
 
         #region Properties
@@ -47,6 +52,15 @@ namespace GetYourPlaceApp.ViewModels
         [ObservableProperty]
         string state;
 
+        [ObservableProperty]
+        ObservableCollection<string> citys;
+
+        [ObservableProperty]
+        ObservableCollection<Country> countrys;
+
+        [ObservableProperty]
+        ObservableCollection<State> states;
+
         #endregion
         public NewAccountViewModel(INavigation navigation)
         {
@@ -54,6 +68,11 @@ namespace GetYourPlaceApp.ViewModels
 
             if (_locationRepository is null)
                 _locationRepository = ServiceHelper.GetService<ILocationRepository>();
+
+            Task.Run(async () => {
+                Countrys = new ObservableCollection<Country>(await _locationRepository.GetCountriesAndStates());
+            }).Wait();
+
         }
 
         [RelayCommand]
@@ -71,6 +90,25 @@ namespace GetYourPlaceApp.ViewModels
             var loading = new LoadingPopUpPage();
             loading.ShowLoading();
             await _Navigation.PushAsync(new LoginPage());
+            loading.HideLoading();
+        }
+
+        public async Task LoadState()
+        {
+            States = Countrys?.FirstOrDefault(c => c.name == Country)?.states?.ToObservableCollection();
+        }
+
+        public async Task LoadCitys()
+        {
+            var loading = new LoadingPopUpPage();
+            loading.ShowLoading();
+            var cityRequest = new CityRequest
+            {
+                country = Country,
+                state = State,
+            };
+            var citys = await _locationRepository.GetCityByState(cityRequest);
+            Citys = citys?.ToObservableCollection();
             loading.HideLoading();
         }
     }

@@ -1,4 +1,5 @@
-﻿namespace GetYourPlaceApp.Models.Responses
+﻿
+namespace GetYourPlaceApp.Models.Responses
 {
     public class CountryAndStateResponse: Result
     {

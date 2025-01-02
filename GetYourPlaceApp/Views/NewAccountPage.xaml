@@ -62,38 +62,48 @@
                     Text="Country:"
                     TextColor="{StaticResource White}"
                     VerticalOptions="CenterAndExpand" />
-                <Entry
-                    Grid.Row="3"
+                <Picker
                     Grid.Column="1"
-                    HorizontalOptions="Center"
-                    MinimumWidthRequest="240"
-                    Placeholder="Country"
-                    Text="{Binding Country}"
-                    TextColor="{StaticResource White}"
-                    VerticalOptions="CenterAndExpand" />
+                    Title="{Binding name}"
+                    Grid.Row="3"
+                    ItemDisplayBinding="{Binding name}"
+                    ItemsSource="{Binding Countrys}"
+                    SelectedIndexChanged="OnPickerCountrySelected"
+                    TextColor="{StaticResource White}" />
                 <Label
                     Grid.Row="4"
+                    HorizontalOptions="Center"
+                    Text="State:"
+                    TextColor="{StaticResource White}"
+                    VerticalOptions="CenterAndExpand" />
+                <Picker
+                    Grid.Column="1"
+                    Title="{Binding name}"
+                    Grid.Row="4"
+                    ItemDisplayBinding="{Binding name}"
+                    ItemsSource="{Binding States}"
+                    SelectedIndexChanged="OnPickerStateSelected"
+                    TextColor="{StaticResource White}" />
+                <Label
+                    Grid.Row="5"
                     HorizontalOptions="Center"
                     Text="City:"
                     TextColor="{StaticResource White}"
                     VerticalOptions="CenterAndExpand" />
-                <Entry
-                    Grid.Row="4"
+                <Picker
                     Grid.Column="1"
-                    HorizontalOptions="Center"
-                    MinimumWidthRequest="240"
-                    Placeholder="City"
-                    Text="{Binding City}"
-                    TextColor="{StaticResource White}"
-                    VerticalOptions="CenterAndExpand" />
-                <Label
                     Grid.Row="5"
+                    ItemsSource="{Binding States}"
+                    SelectedIndexChanged="OnPickerStateSelected"
+                    TextColor="{StaticResource White}" />
+                <Label
+                    Grid.Row="6"
                     HorizontalOptions="Center"
                     Text="Street Adress:"
                     TextColor="{StaticResource White}"
                     VerticalOptions="CenterAndExpand" />
                 <Entry
-                    Grid.Row="5"
+                    Grid.Row="6"
                     Grid.Column="1"
                     HorizontalOptions="Center"
                     MinimumWidthRequest="240"
@@ -102,13 +112,13 @@
                     TextColor="{StaticResource White}"
                     VerticalOptions="CenterAndExpand" />
                 <Label
-                    Grid.Row="6"
+                    Grid.Row="7"
                     HorizontalOptions="Center"
                     Text="Zip Code:"
                     TextColor="{StaticResource White}"
                     VerticalOptions="CenterAndExpand" />
                 <Entry
-                    Grid.Row="6"
+                    Grid.Row="7"
                     Grid.Column="1"
                     HorizontalOptions="Center"
                     MinimumWidthRequest="240"
@@ -117,13 +127,13 @@
                     TextColor="{StaticResource White}"
                     VerticalOptions="CenterAndExpand" />
                 <Label
-                    Grid.Row="7"
+                    Grid.Row="8"
                     HorizontalOptions="Center"
                     Text="Address Complement:"
                     TextColor="{StaticResource White}"
                     VerticalOptions="CenterAndExpand" />
                 <Entry
-                    Grid.Row="7"
+                    Grid.Row="8"
                     Grid.Column="1"
                     HorizontalOptions="Center"
                     MinimumWidthRequest="240"
@@ -132,13 +142,13 @@
                     TextColor="{StaticResource White}"
                     VerticalOptions="CenterAndExpand" />
                 <Label
-                    Grid.Row="8"
+                    Grid.Row="9"
                     HorizontalOptions="Center"
                     Text="Password:"
                     TextColor="{StaticResource White}"
                     VerticalOptions="CenterAndExpand" />
                 <Entry
-                    Grid.Row="8"
+                    Grid.Row="9"
                     Grid.Column="1"
                     HorizontalOptions="Center"
                     IsPassword="True"
@@ -148,13 +158,13 @@
                     TextColor="{StaticResource White}"
                     VerticalOptions="CenterAndExpand" />
                 <Label
-                    Grid.Row="9"
+                    Grid.Row="10"
                     HorizontalOptions="Center"
                     Text="Repeat Password:"
                     TextColor="{StaticResource White}"
                     VerticalOptions="CenterAndExpand" />
                 <Entry
-                    Grid.Row="9"
+                    Grid.Row="10"
                     Grid.Column="1"
                     HorizontalOptions="Center"
                     IsPassword="True"
