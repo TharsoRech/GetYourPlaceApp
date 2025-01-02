@@ -93,7 +93,7 @@
                 <Picker
                     Grid.Column="1"
                     Grid.Row="5"
-                    ItemsSource="{Binding States}"
+                    ItemsSource="{Binding Citys}"
                     SelectedIndexChanged="OnPickerStateSelected"
                     TextColor="{StaticResource White}" />
                 <Label

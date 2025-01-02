@@ -1,3 +1,5 @@
+using GetYourPlaceApp.Models;
+
 namespace GetYourPlaceApp.Views;
 
 public partial class NewAccountPage : ContentPage
@@ -18,11 +20,11 @@ public partial class NewAccountPage : ContentPage
 
             if (selectedIndex != -1)
             {
-                var filterItem = (string)picker.ItemsSource[selectedIndex];
+                var filterItem = (Country)picker.ItemsSource[selectedIndex];
 
                 if (filterItem != null)
                 {
-                    _vm.Country = filterItem;
+                    _vm.Country = filterItem.name;
                     _vm.LoadState();
                 }
  
@@ -44,11 +46,11 @@ public partial class NewAccountPage : ContentPage
 
             if (selectedIndex != -1)
             {
-                var filterItem = (string)picker.ItemsSource[selectedIndex];
+                var filterItem = (State)picker.ItemsSource[selectedIndex];
 
                 if (filterItem != null)
                 {
-                    _vm.State = filterItem;
+                    _vm.State = filterItem.name;
                     _vm.LoadCitys();
                 }
             }
