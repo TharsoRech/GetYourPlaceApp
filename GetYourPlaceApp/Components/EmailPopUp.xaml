@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mct:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GetYourPlaceApp.Components.EmailPopUp"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
+             x:Name="emailPopUp"
+             CanBeDismissedByTappingOutsideOfPopup="True"
+             HorizontalOptions="Fill"
+             VerticalOptions="Fill"
+             Color="#80000000">
+    <mct:Popup.Resources>
+        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Red" />
+        </Style>
+        <Style x:Key="ValidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Green" />
+        </Style>
+    </mct:Popup.Resources>
+    <Grid HorizontalOptions="FillAndExpand" 
+          Padding="16"
+          VerticalOptions="Fill">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Border
+            Grid.Row="1"
+            Margin="8"
+            Padding="0"
+            BackgroundColor="Transparent"
+            Stroke="Transparent"
+            StrokeThickness="0">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="28" />
+            </Border.StrokeShape>
+            <Grid
+                Padding="16"
+                BackgroundColor="{StaticResource GreenGYP}"
+                HorizontalOptions="FillAndExpand"
+                RowDefinitions="*,*,*"
+                RowSpacing="8">
+                <Grid 
+                    ColumnDefinitions="*,*"
+                    RowDefinitions="*,*"
+                    RowSpacing="8">
+                    <Label Text="Recover your password:"
+                        VerticalOptions="CenterAndExpand"
+                        TextColor="White">
+                    </Label>
+                    <Label Text="Email:"
+                           Grid.Row="1"
+                           VerticalOptions="CenterAndExpand"
+                           TextColor="White">
+                    </Label>
+                    <Entry Grid.Column="1"
+                           Grid.Row="1"
+                           Placeholder="Email">
+                    </Entry>
+                </Grid>
+                <Grid Grid.Row="1" 
+                      ColumnSpacing="8"
+                      ColumnDefinitions="*,*">
+                    <Button Text="Cancel"
+                            Command="{Binding CloseCommand, Source={x:Reference emailPopUp}}">
+                    </Button>
+                    <Button Text="Send"
+                            Command="{Binding SendCommand, Source={x:Reference emailPopUp}}"
+                            Grid.Column="1">
+                    </Button>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</mct:Popup>

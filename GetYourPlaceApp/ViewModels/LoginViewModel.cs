@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Views;
 using GetYourPlaceApp.Components;
 using GetYourPlaceApp.Contracts;
 using GetYourPlaceApp.Helpers;
@@ -87,7 +88,7 @@ namespace GetYourPlaceApp.ViewModels
         [RelayCommand]
         public async Task RecoverPassword()
         {
-
+            Application.Current.MainPage.ShowPopupAsync(new EmailPopUp());
         }
 
         [RelayCommand]
