@@ -80,7 +80,7 @@ namespace GetYourPlaceApp.ViewModels
         {
             Application.Current.MainPage.ShowPopupAsync(new MessagePopUpComponent(
               "Account Created",
-              "Thanks for create a account , now you can login in your account",
+              "Thanks for creating a account , now you can login in your account",
               "Ok",
               new Command(() => GoToLoginAsync())));
         }
