@@ -11,5 +11,9 @@
         public string State { get; set; }
         public string PostalCode { get; set; }
         public string Country { get; set; }
+        public string ZipCode { get; set; }
+        public string AddressComplement { get; set; }
+
+        public string ImageProfileBase64 { get; set; }
     }
 }

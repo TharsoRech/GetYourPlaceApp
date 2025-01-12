@@ -61,21 +61,20 @@
                 RowDefinitions="auto">
                 <Grid>
                     <cm:LoadingComponent
-                    IsLoading="{Binding IsLoading, Source={x:Reference accordionComponent}}"
-                    IsVisible="{Binding IsLoading, Source={x:Reference accordionComponent}}"
-                    LoadingColor="{StaticResource GreenLightGYP}"
-                    LoadingText="Loading..." />
-                    <Grid IsVisible="{Binding IsLoading, Source={x:Reference accordionComponent},Converter={StaticResource invertedBoolConverter}}">
+                        IsLoading="{Binding IsLoading, Source={x:Reference accordionComponent}}"
+                        IsVisible="{Binding IsLoading, Source={x:Reference accordionComponent}}"
+                        LoadingColor="{StaticResource GreenLightGYP}"
+                        LoadingText="Loading..." />
+                    <Grid IsVisible="{Binding IsLoading, Source={x:Reference accordionComponent}, Converter={StaticResource invertedBoolConverter}}">
                         <StackLayout x:Name="customContent" />
                         <Label
-                         Padding="16"
-                         IsVisible ="{Binding HasContent, Source={x:Reference accordionComponent},Converter={StaticResource invertedBoolConverter}}}"
-                         HorizontalOptions="CenterAndExpand"
-                         Text="No properties found"
-                         FontSize="Medium"
-                         TextColor="{StaticResource White}"
-                         VerticalOptions="CenterAndExpand">
-                        </Label>
+                            Padding="16"
+                            FontSize="Medium"
+                            HorizontalOptions="CenterAndExpand"
+                            IsVisible="{Binding HasContent, Source={x:Reference accordionComponent},Converter={StaticResource invertedBoolConverter}}}"
+                            Text="No properties found"
+                            TextColor="{StaticResource White}"
+                            VerticalOptions="CenterAndExpand" />
                     </Grid>
                 </Grid>
             </Grid>

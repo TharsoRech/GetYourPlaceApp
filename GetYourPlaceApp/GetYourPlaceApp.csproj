@@ -64,6 +64,7 @@
 	  <None Remove="Resources\Images\leftarrow.svg" />
 	  <None Remove="Resources\Images\login.png" />
 	  <None Remove="Resources\Images\MyProperties.svg" />
+	  <None Remove="Resources\Images\profile.svg" />
 	  <None Remove="Resources\Images\rightarrow.svg" />
 	  <None Remove="Resources\Images\search.png" />
 	  <None Remove="Resources\Images\unfavorite.svg" />

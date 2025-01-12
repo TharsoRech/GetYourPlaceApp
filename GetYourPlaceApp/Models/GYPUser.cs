@@ -9,5 +9,7 @@
         public string PersonRegisterNumber { get; set; }
         public GYPAddress Address { get; set; }
         public bool IsLogged { get; set; }
+        public string FullName { get; set; }
+
     }
 }

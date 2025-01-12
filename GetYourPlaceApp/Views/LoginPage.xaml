@@ -16,63 +16,65 @@
             <Setter Property="TextColor" Value="{StaticResource White}" />
         </Style>
     </ContentPage.Resources>
-    <Grid
-        Padding="16,64,16,16"
-        RowDefinitions="auto,auto"
-        RowSpacing="128"
-        VerticalOptions="StartAndExpand">
-        <Image
-            HeightRequest="120"
-            Source="getyourplaceicon.svg"
-            VerticalOptions="StartAndExpand"
-            WidthRequest="120" />
+    <ScrollView>
         <Grid
-            Grid.Row="1"
-            Margin="0,16,0,0"
-            RowDefinitions="auto,auto,auto,auto"
-            RowSpacing="16"
-            VerticalOptions="EndAndExpand">
-            <Entry
-                Placeholder="Email"
-                Text="{Binding Email}"
-                TextColor="{StaticResource White}">
-                <Entry.Behaviors>
-                    <toolkit:EmailValidationBehavior
-                        Flags="ValidateOnValueChanged"
-                        InvalidStyle="{StaticResource InvalidEntryStyle}"
-                        ValidStyle="{StaticResource ValidEntryStyle}" />
-                </Entry.Behaviors>
-            </Entry>
-            <Entry
-                Grid.Row="1"
-                IsPassword="True"
-                Placeholder="Password"
-                Text="{Binding Password}" />
-            <Button
-                Grid.Row="2"
-                Command="{Binding LoginCommand}"
-                Text="Login" />
+            Padding="16,64,16,16"
+            RowDefinitions="auto,auto"
+            RowSpacing="128"
+            VerticalOptions="StartAndExpand">
+            <Image
+                HeightRequest="120"
+                Source="getyourplaceicon.svg"
+                VerticalOptions="StartAndExpand"
+                WidthRequest="120" />
             <Grid
-                Grid.Row="3"
-                Padding="32"
-                HorizontalOptions="CenterAndExpand"
-                RowDefinitions="auto,auto"
+                Grid.Row="1"
+                Margin="0,16,0,0"
+                RowDefinitions="auto,auto,auto,auto"
                 RowSpacing="16"
                 VerticalOptions="EndAndExpand">
-                <Label Text="Forget your password?" TextColor="White">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding RecoverPasswordCommand}" />
-                    </Label.GestureRecognizers>
-                </Label>
-                <Label
+                <Entry
+                    Placeholder="Email"
+                    Text="{Binding Email}"
+                    TextColor="{StaticResource White}">
+                    <Entry.Behaviors>
+                        <toolkit:EmailValidationBehavior
+                            Flags="ValidateOnValueChanged"
+                            InvalidStyle="{StaticResource InvalidEntryStyle}"
+                            ValidStyle="{StaticResource ValidEntryStyle}" />
+                    </Entry.Behaviors>
+                </Entry>
+                <Entry
                     Grid.Row="1"
-                    Text="Doesn't have an account?"
-                    TextColor="White">
-                    <Label.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding CreateAccountCommand}" />
-                    </Label.GestureRecognizers>
-                </Label>
+                    IsPassword="True"
+                    Placeholder="Password"
+                    Text="{Binding Password}" />
+                <Button
+                    Grid.Row="2"
+                    Command="{Binding LoginCommand}"
+                    Text="Login" />
+                <Grid
+                    Grid.Row="3"
+                    Padding="32"
+                    HorizontalOptions="CenterAndExpand"
+                    RowDefinitions="auto,auto"
+                    RowSpacing="16"
+                    VerticalOptions="EndAndExpand">
+                    <Label Text="Forget your password?" TextColor="White">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding RecoverPasswordCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                    <Label
+                        Grid.Row="1"
+                        Text="Doesn't have an account?"
+                        TextColor="White">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CreateAccountCommand}" />
+                        </Label.GestureRecognizers>
+                    </Label>
+                </Grid>
             </Grid>
         </Grid>
-    </Grid>
+    </ScrollView>
 </ContentPage>

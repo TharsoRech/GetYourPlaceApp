@@ -19,16 +19,19 @@ namespace GetYourPlaceApp.Repository.Login
                 Id = 1,
                 Address = new GYPAddress
                 {
-                    Address = "test",
-                    City = "test",
-                    Country = "test",
+                    Address = "Rua Cristiano Ramos Oliveira",
+                    City = "Caxias do sul",
+                    Country = "Brazil",
                     Id = 1,
-                    PostalCode = "test",
-                    State = "test",
+                    PostalCode = "95110252",
+                    State = "Rio Grande do sul",
                     Street = "test",
                     GYPProfilePlaceHistoryId = 1,
                     GYPUserProfileId = 1,
-                }
+                    ZipCode="95110252",
+                    AddressComplement = "Ap 303"
+                },
+                FullName = "Tharso Francisco Rech Curia"
             };
             try
             {

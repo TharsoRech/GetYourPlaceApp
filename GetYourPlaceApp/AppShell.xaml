@@ -99,6 +99,16 @@
             Route="MyProperties"
             Shell.NavBarIsVisible="true" />
     </FlyoutItem>
+    <FlyoutItem Title="My Profile" 
+                IsVisible="{Binding IsLogged}"
+                Icon="profile.svg">
+        <ShellContent
+            Title="Profile"
+            ContentTemplate="{DataTemplate views:ProfilePage}"
+            Icon="profile.svg"
+            Route="ProfilePage"
+            Shell.NavBarIsVisible="true" />
+    </FlyoutItem>
     <!--<FlyoutItem Title="Configuration" Icon="config.png">
         <ShellContent
             Title="Configuration"
