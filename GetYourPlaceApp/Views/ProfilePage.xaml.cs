@@ -25,7 +25,7 @@ public partial class ProfilePage : ContentPage
                 if (filterItem != null)
                 {
                     _vm.Country = filterItem.name;
-                    _vm.LoadState();
+                    _vm.LoadState(false);
                 }
 
             }
@@ -51,7 +51,7 @@ public partial class ProfilePage : ContentPage
                 if (filterItem != null)
                 {
                     _vm.State = filterItem.name;
-                    _vm.LoadCitys();
+                    _vm.LoadCitys(false);
                 }
             }
         }

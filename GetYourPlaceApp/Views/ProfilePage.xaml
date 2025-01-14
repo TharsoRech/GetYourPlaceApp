@@ -16,9 +16,6 @@
                     VerticalOptions="StartAndExpand"
                     HorizontalOptions="CenterAndExpand"
                     Source="{Binding ImageProfile}">
-                    <Image.Behaviors>
-                        <toolkit:IconTintColorBehavior TintColor="{StaticResource White}" />
-                    </Image.Behaviors>
                 </Image>
                 <Label
                     Grid.Row="1"
@@ -96,6 +93,7 @@
                     Grid.Column="1"
                     ItemDisplayBinding="{Binding name}"
                     ItemsSource="{Binding Countrys}"
+                    SelectedItem="{Binding CountrySelected}"
                     SelectedIndexChanged="OnPickerCountrySelected"
                     TextColor="{StaticResource White}" />
                 <Label
@@ -110,6 +108,7 @@
                     Grid.Column="1"
                     ItemDisplayBinding="{Binding name}"
                     ItemsSource="{Binding States}"
+                    SelectedItem="{Binding StateSelected}"
                     SelectedIndexChanged="OnPickerStateSelected"
                     TextColor="{StaticResource White}" />
                 <Label
@@ -122,7 +121,8 @@
                     Grid.Row="5"
                     Grid.Column="1"
                     ItemsSource="{Binding Citys}"
-                    SelectedIndexChanged="OnPickerStateSelected"
+                    SelectedItem="{Binding CitySelected}"
+                    SelectedIndexChanged="OnPickerCitySelected"
                     TextColor="{StaticResource White}" />
                 <Label
                     Grid.Row="6"
@@ -136,7 +136,7 @@
                     HorizontalOptions="Center"
                     MinimumWidthRequest="240"
                     Placeholder="Street Adress"
-                    Text="{Binding StreeAdress}"
+                    Text="{Binding StreetAdress}"
                     TextColor="{StaticResource White}"
                     VerticalOptions="CenterAndExpand" />
                 <Label

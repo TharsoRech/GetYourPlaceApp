@@ -56,6 +56,15 @@ namespace GetYourPlaceApp.ViewModels
         string imageProfile;
 
         [ObservableProperty]
+        Country countrySelected;
+
+        [ObservableProperty]
+        State stateSelected;
+
+        [ObservableProperty]
+        string citySelected;
+
+        [ObservableProperty]
         ObservableCollection<string> citys;
 
         [ObservableProperty]
@@ -74,17 +83,19 @@ namespace GetYourPlaceApp.ViewModels
 
             Task.Run(async () => {
                 Countrys = new ObservableCollection<Country>(await _locationRepository.GetCountriesAndStates());
+                Country = SessionHelper.Instance.User.Address.Country;
+                CountrySelected = Countrys?.FirstOrDefault(c => c.name == SessionHelper.Instance.User.Address.Country);
+
+                await LoadState(false);
+
             });
 
             FullName = SessionHelper.Instance.User.FullName;
             Email = SessionHelper.Instance.User.Email;
             StreetAdress = SessionHelper.Instance.User.Address.Street;
-            City = SessionHelper.Instance.User.Address.City;
-            Country = SessionHelper.Instance.User.Address.Country;
             RegistrationNumber = SessionHelper.Instance.User.PersonRegisterNumber;
             ZipCode = SessionHelper.Instance.User.Address.ZipCode;
             AddressComplement = SessionHelper.Instance.User.Address.AddressComplement;
-            State = SessionHelper.Instance.User.Address.State;
             ImageProfile = SessionHelper.Instance.User.Address.ImageProfileBase64 ?? "profile.svg";
 
         }
@@ -130,7 +141,7 @@ namespace GetYourPlaceApp.ViewModels
 
                     // Convert image to Base64
                     var base64String = await ConvertImageToBase64(stream);
-                    ImageProfile = base64String; // Display the Base64 string
+                    ImageProfile = $"data:image/png;base64,{base64String}"; ; // Display the Base64 string
                 }
             }
             catch(Exception ex)
@@ -147,12 +158,20 @@ namespace GetYourPlaceApp.ViewModels
             return Convert.ToBase64String(imageBytes);
         }
 
-        public async Task LoadState()
+        public async Task LoadState(bool userSelected = true)
         {
             States = Countrys?.FirstOrDefault(c => c.name == Country)?.states?.ToObservableCollection();
+
+            if (!userSelected)
+            {
+                State = SessionHelper.Instance.User.Address.State;
+                StateSelected = States?.FirstOrDefault(states => states.name == State);
+            }
+
+
         }
 
-        public async Task LoadCitys()
+        public async Task LoadCitys(bool userSelected = true)
         {
             var loading = new LoadingPopUpPage();
             loading.ShowLoading();
@@ -163,6 +182,10 @@ namespace GetYourPlaceApp.ViewModels
             };
             var citys = await _locationRepository.GetCityByState(cityRequest);
             Citys = citys?.ToObservableCollection();
+
+            if (!userSelected)
+                CitySelected = SessionHelper.Instance.User.Address.City;
+
             loading.HideLoading();
         }
     }

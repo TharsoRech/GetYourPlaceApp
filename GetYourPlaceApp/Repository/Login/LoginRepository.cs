@@ -20,11 +20,11 @@ namespace GetYourPlaceApp.Repository.Login
                 Address = new GYPAddress
                 {
                     Address = "Rua Cristiano Ramos Oliveira",
-                    City = "Caxias do sul",
+                    City = "Caxias do Sul",
                     Country = "Brazil",
                     Id = 1,
                     PostalCode = "95110252",
-                    State = "Rio Grande do sul",
+                    State = "Rio Grande do Sul",
                     Street = "test",
                     GYPProfilePlaceHistoryId = 1,
                     GYPUserProfileId = 1,
