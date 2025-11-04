@@ -432,5 +432,79 @@ ublic class ToastMessage: IToastMessage
     }
 }
 
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:local="clr-namespace:Tke.Gta.Maui.UserControls.DesignSystem.Toast"
+       x:DataType="local:DsToastMessage"
+       BackgroundColor="{Binding ToastType, Converter={StaticResource DsToastTypeConverterColor}}"
+       x:Name="DsToast"
+       VerticalOptions="Start"
+       x:Class="Tke.Gta.Maui.UserControls.DesignSystem.Toast.DsToastMessage">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <local:DsToastTypeConverterColor x:Key="DsToastTypeConverterColor" />
+            <local:DsToastTypeConverterImage x:Key="DsToastTypeConverterImage" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <Grid
+          VerticalOptions="Start"
+          HorizontalOptions="Fill"
+          ColumnSpacing="{DynamicResource DsSpacingLarge}"
+          ColumnDefinitions="*,Auto">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="{OnPlatform Android='*', iOS='Auto'}"  />
+        </Grid.RowDefinitions>
+        <Grid.Padding>
+            <OnPlatform x:TypeArguments="Thickness">
+                <On Platform="Android"  Value="{StaticResource DsSizingX3}" />
+                <On Platform="iOS" Value="{StaticResource DsSizingX4}" />
+            </OnPlatform>
+        </Grid.Padding>
+        <HorizontalStackLayout
+            Spacing="{DynamicResource DsSpacingSmall}"
+            Grid.Row="0">
+            <Image
+                   WidthRequest="20"
+                   HeightRequest="20"
+                   Source="{Binding ToastType, Converter={StaticResource DsToastTypeConverterImage}}">
+            </Image>
+            <Label
+                TextColor="{Binding TextColor}"
+                FontAttributes="Bold"
+                LineBreakMode="WordWrap"
+                FontSize="{StaticResource DsFontSize500}"
+                Text="{Binding Title}">
+            </Label>
+        </HorizontalStackLayout>
+        <Label
+              Grid.Column="0"
+              Grid.Row="1"
+              HorizontalOptions="Fill"
+              LineBreakMode="WordWrap"
+              VerticalOptions="Start"
+              FontSize="{StaticResource DsFontSize400}"
+              TextColor="{Binding TextColor}"
+              Text="{Binding Message}">
+            <Label.Padding>
+                <Thickness
+                    Left="{StaticResource DsSizingX7}"/>
+            </Label.Padding>
+        </Label>
+        <Image Grid.Row="0"
+               IsVisible="{Binding ShowCloseButton}"
+               Grid.Column="1"
+               WidthRequest="24"
+               HorizontalOptions="End"
+               HeightRequest="24"
+               Source="{Binding CloseImage}">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding CloseCommand }"/>
+            </Image.GestureRecognizers>
+        </Image>
+    </Grid>
+</ContentView>
 
 
