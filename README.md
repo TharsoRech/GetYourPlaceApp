@@ -1,5 +1,7 @@
 Mobile Application in .NET Maui for get publish and get in touch with people that want to rent apartments and houses.
 
+unfortunately the back end is mocked up for now.
+
 <img width="449" height="900" alt="Captura de Tela 2025-12-01 às 19 04 17" src="https://github.com/user-attachments/assets/6d47b113-cd7c-4ca7-a3d8-d44e69d1d45c" />
 
 
